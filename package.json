@@ -1,0 +1,12 @@
+{
+  "name": "xr-unions",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cache": "node scripts/cache-airtable.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "airtable": "^0.12.2"
+  }
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "red-squadron",
+    "name": "Red Squadron",
+    "intro": "A veteran PvP clan known for tight squad tactics and aerial dominance.",
+    "activities": ["PvP", "Raids", "Training"],
+    "documents": ["[Strategy Guide](/docs/red-squadron-strategy.md)", "[Recruitment](/docs/red-squadron-recruit.md)"],
+    "additionalInfo": "Formed in 2010, Red Squadron holds weekly scrims and mentors new pilots.",
+    "iconUrl": "https://via.placeholder.com/48/cc3333/ffffff?text=R"
+  },
+  {
+    "id": "night-wolves",
+    "name": "Night Wolves",
+    "intro": "Stealth specialists who prefer night ops and objective sabotage.",
+    "activities": ["Stealth Ops", "Infiltration", "PvE"],
+    "documents": ["[Night Ops Playbook](/docs/night-wolves-playbook.md)"],
+    "additionalInfo": "Tight-knit community; voice comms required for most ops.",
+    "iconUrl": "https://via.placeholder.com/48/222222/ffffff?text=N"
+  },
+  {
+    "id": "silver-serpents",
+    "name": "Silver Serpents",
+    "intro": "Competitive clan focused on ladder play and tournaments.",
+    "activities": ["Tournaments", "Ladder", "Coaching"],
+    "documents": ["[Tournament Roster](/docs/silver-serpents-roster.md)", "[Tryout Process](/docs/tryouts.md)"],
+    "additionalInfo": "Multiple alumni have gone on to pro teams.",
+    "iconUrl": "https://via.placeholder.com/48/9fb8c6/0b3a66?text=S"
+  },
+  {
+    "id": "iron-legion",
+    "name": "Iron Legion",
+    "intro": "A massive community clan that organizes large-scale raids and sieges.",
+    "activities": ["Raids", "Crafting", "Community Events"],
+    "documents": ["[Raid Calendar](/docs/iron-legion-raids.md)"],
+    "additionalInfo": "Open recruitment and seasonal events for new members.",
+    "iconUrl": "https://via.placeholder.com/48/666666/ffffff?text=I"
+  },
+  {
+    "id": "voidwalkers",
+    "name": "Voidwalkers",
+    "intro": "Explorers and speedrunners who push the limits of map traversal.",
+    "activities": ["Speedruns", "Exploration", "Mods"],
+    "documents": ["[Route Notes](/docs/voidwalkers-routes.md)"],
+    "additionalInfo": "Hosts biweekly community races and world-record attempts.",
+    "iconUrl": "https://via.placeholder.com/48/2b2f77/ffffff?text=V"
+  },
+  {
+    "id": "crimson-dawn",
+    "name": "Crimson Dawn",
+    "intro": "Roleplaying clan with a persistent in-game narrative and lore.",
+    "activities": ["RP", "Events", "Storytelling"],
+    "documents": ["[Lore Compendium](/docs/crimson-dawn-lore.md)"],
+    "additionalInfo": "Maintains an in-universe wiki and weekly roleplay sessions.",
+    "iconUrl": "https://via.placeholder.com/48/8b0000/ffffff?text=C"
+  },
+  {
+    "id": "obsidian-order",
+    "name": "Obsidian Order",
+    "intro": "A clandestine group focused on high-skill objective play and intel.",
+    "activities": ["Recon", "Assassinations", "Strategy"],
+    "documents": ["[Intel Briefs](/docs/obsidian-intel.md)"],
+    "additionalInfo": "Invite-only membership; emphasis on disciplined operations.",
+    "iconUrl": "https://via.placeholder.com/48/0b3a66/ffffff?text=O"
+  },
+  {
+    "id": "echo-company",
+    "name": "Echo Company",
+    "intro": "Friendly co-op clan that welcomes casual and new players.",
+    "activities": ["Co-op", "Help Desk", "Social"],
+    "documents": ["[New Member Guide](/docs/echo-new.md)"],
+    "additionalInfo": "Weekly mentor sessions and open play nights.",
+    "iconUrl": "https://via.placeholder.com/48/3a9f5b/ffffff?text=E"
+  },
+  {
+    "id": "phantom-guild",
+    "name": "Phantom Guild",
+    "intro": "Speed and precision: a small team excelling at objective control.",
+    "activities": ["Objective Control", "Tactics", "Scrims"],
+    "documents": ["[Tactics Manual](/docs/phantom-tactics.md)"],
+    "additionalInfo": "Selective recruitment; focus on synergy and communication.",
+    "iconUrl": "https://via.placeholder.com/48/4b0082/ffffff?text=P"
+  },
+  {
+    "id": "dragonfall-collective",
+    "name": "Dragonfall Collective",
+    "intro": "Community builders who host modded servers and creative projects.",
+    "activities": ["Modding", "Server Hosting", "Community Art"],
+    "documents": ["[Server Rules](/docs/dragonfall-servers.md)"],
+    "additionalInfo": "Known for long-running collaborative builds and mod packs.",
+    "iconUrl": "https://via.placeholder.com/48/d2691e/ffffff?text=D"
+  },
+  {
+    "id": "nova-assembly",
+    "name": "Nova Assembly",
+    "intro": "Innovators and toolmakers: they focus on analytics and tooling for clans.",
+    "activities": ["Tools", "Analytics", "Bot Dev"],
+    "documents": ["[Tooling Repo](/docs/nova-tools.md)"],
+    "additionalInfo": "Publishes community tools and dashboards for performance tracking.",
+    "iconUrl": "https://via.placeholder.com/48/0a74da/ffffff?text=N"
+  }
+]

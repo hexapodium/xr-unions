@@ -1,0 +1,90 @@
+:root {
+  color: #202122;
+  background: #f8f9fa;
+  font: 16px/1.55 system-ui, sans-serif;
+}
+
+body { margin: 0; }
+
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+h1 {
+  margin-bottom: 0;
+  border-bottom: 1px solid #a2a9b1;
+  font: 2.2rem Georgia, serif;
+}
+
+.lede {
+  margin-top: .35rem;
+  color: #54595d;
+}
+
+.filter {
+  display: grid;
+  gap: .35rem;
+  max-width: 32rem;
+  margin: 2rem 0 1rem;
+  font-weight: 600;
+}
+
+input {
+  padding: .65rem .75rem;
+  border: 1px solid #72777d;
+  border-radius: 2px;
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid #36c;
+  outline-offset: 1px;
+}
+
+.table-scroll { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: .9rem;
+}
+
+th, td {
+  min-width: 10rem;
+  padding: .65rem;
+  border: 1px solid #a2a9b1;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: #eaecf0; }
+
+td.name {
+  min-width: 9rem;
+  font-weight: 700;
+}
+
+td.intro { min-width: 13rem; }
+
+ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+a, summary { color: #36c; }
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.less, details[open] .more { display: none; }
+details[open] .less { display: inline; }
+.error { color: #b32424; }
+
+@media (max-width: 600px) {
+  main { padding: 1.5rem .75rem; }
+}
