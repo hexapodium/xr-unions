@@ -3,7 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const fields = {
-  name: "Group / org name",
+  name: "Group / Org name",
   documents: "Relevant docs & articles",
   intro: "Group intro",
   activities: "Key activities",
