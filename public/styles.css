@@ -23,6 +23,22 @@ h1 {
   color: #54595d;
 }
 
+h2 {
+  margin-top: 2.5rem;
+  border-bottom: 1px solid #a2a9b1;
+  font: 1.6rem Georgia, serif;
+}
+
+.tag {
+  display: inline-block;
+  background: #eaecf0;
+  color: #202122;
+  border-radius: 999px;
+  padding: .15rem .55rem;
+  font-size: .8rem;
+  margin: 0 .25rem .25rem 0;
+}
+
 .filter {
   display: grid;
   gap: .35rem;

@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "cache": "node scripts/cache-airtable.js",
-    "test": "node --test"
+    "cache": "nvs exec krypton node --env-file=.env scripts/cache-airtable.js",
+    "debug": "nvs exec krypton node --env-file=.env scripts/cache-airtable.js",
+    "test": "nvs exec krypton node --test"
   },
   "dependencies": {
     "airtable": "^0.12.2"

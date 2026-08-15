@@ -13,7 +13,9 @@
     updateStatus('expando.js loaded');
   const ROOT = document.getElementById('expando-root') || document.body;
   const GROUPS_URL = ROOT.getAttribute('data-groups-url') || '/groups.json';
+  const CASESTUDIES_URL = ROOT.getAttribute('data-casestudies-url') || '/casestudies.json';
   let groupsCache = null;
+  let caseStudiesCache = null;
 
   async function loadGroups() {
     if (groupsCache) return groupsCache;
@@ -41,6 +43,34 @@
     groupsCache = null;
     return null;
   }
+
+  async function loadCaseStudies() {
+    if (caseStudiesCache) return caseStudiesCache;
+    const attempts = [];
+    const candidates = [CASESTUDIES_URL, '/public/casestudies.json', 'public/casestudies.json', '/casestudies.json', 'casestudies.json'];
+
+    for (const url of candidates) {
+      if (!url) continue;
+      try {
+        attempts.push(url);
+        const res = await fetch(url, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('Failed to load case studies JSON: ' + url + ' (' + res.status + ')');
+        caseStudiesCache = await res.json();
+        console.info('Loaded casestudies.json from', url);
+        updateStatus('Loaded casestudies.json (' + caseStudiesCache.length + ' case studies) from ' + url);
+        return caseStudiesCache;
+      } catch (err) {
+        console.warn('casestudies.json load attempt failed for', url, err && err.message);
+        // try next
+      }
+    }
+
+    console.error('All attempts to load casestudies.json failed. Tried:', attempts.join(', '));
+    updateStatus('Failed to load casestudies.json. See console for details.');
+    caseStudiesCache = null;
+    return null;
+  }
+
 
   function findBlockParent(el) {
     let p = el.parentElement;
@@ -78,6 +108,26 @@
       .replace(/>/g,'&gt;')
       .replace(/"/g,'&quot;')
       .replace(/'/g,'&#39;');
+  }
+
+  function buildCaseStudyCard(item) {
+    const tags = (item.tags || []).map(t => `<span>${escapeHtml(t)}</span>`).join('');
+    const links = (item.links || []).map(d => {
+      const md = d.match(/^\s*\[(.+?)\]\((.+?)\)/);
+      if (md) return `<li><a href="${md[2]}" target="_blank" rel="noopener noreferrer">${md[1]}</a></li>`;
+      return `<li>${d}</li>`;
+    }).join('');
+
+    return `
+      <div class="expando-card" data-casestudy-id="${escapeHtml(item.id || '')}">
+        <h3>${escapeHtml(item.title || 'Untitled')}</h3>
+        ${item.org ? `<div class="meta">${escapeHtml(item.org)}</div>` : ''}
+        <div class="intro">${escapeHtml(item.summary || '')}</div>
+        ${item.story ? `<div class="story">${escapeHtml(item.story)}</div>` : ''}
+        ${tags ? `<div class="activities">${tags}</div>` : ''}
+        ${links ? `<ul class="docs">${links}</ul>` : ''}
+      </div>
+    `;
   }
 
   /* Build a small info panel used by the gallery expando */
@@ -174,7 +224,8 @@
   async function onExpandoClick(e) {
     e.preventDefault();
     const link = e.currentTarget;
-    const idsRaw = (link.getAttribute('data-group-id') || '').trim();
+    const isCaseStudy = link.hasAttribute('data-casestudy-id');
+    const idsRaw = (link.getAttribute(isCaseStudy ? 'data-casestudy-id' : 'data-group-id') || '').trim();
     if (!idsRaw) return;
 
     const ids = idsRaw.split(/[\s,]+/).filter(Boolean);
@@ -189,15 +240,17 @@
 
     block.classList.add('expando-container');
 
-    const groups = await loadGroups();
+    const dataset = isCaseStudy ? await loadCaseStudies() : await loadGroups();
+    const buildFn = isCaseStudy ? buildCaseStudyCard : buildCard;
+    const label = isCaseStudy ? 'title' : 'name';
 
     const items = ids.map(id => {
-      return groups.find(g => String(g.id) === String(id)) || { id, name: id, intro: 'Not found' };
+      return (dataset || []).find(x => String(x.id) === String(id)) || { id, [label]: id, intro: 'Not found' };
     });
 
     const panel = document.createElement('div');
     panel.className = 'expando-panel';
-    panel.innerHTML = items.map(buildCard).join('<hr style="border:none;border-top:1px solid #eee;margin: .75rem 0;">');
+    panel.innerHTML = items.map(buildFn).join('<hr style="border:none;border-top:1px solid #eee;margin: .75rem 0;">');
 
     const closeBtn = document.createElement('button');
     closeBtn.className = 'expando-close';
@@ -243,6 +296,7 @@
     try {
       init();
       loadGroups();
+      loadCaseStudies();
     } catch (err) {
       console.error('init error', err);
     }

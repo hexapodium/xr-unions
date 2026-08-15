@@ -17,23 +17,34 @@ Basic usage
    - In your page content, add the wrapper and inline link example:
 
 ```html
-<div id="expando-root" data-groups-url="/groups.json">
+<div id="expando-root" data-groups-url="/groups.json" data-casestudies-url="/casestudies.json">
   <p>
     Read more about the work of <a class="expando-link" data-group-id="example">Example XR Group</a> in our research.
+  </p>
+  <p>
+    See how somewhere else did it in this <a class="expando-link" data-casestudy-id="example">case study</a>.
   </p>
 </div>
 ```
 
+Case studies also have a searchable list view, similar to the groups table:
+
+```html
+<script type="module" src="/casestudies-table.js"></script>
+<casestudies-table src="/casestudies.json"></casestudies-table>
+```
+
 Customization
-- To point to a different JSON file, set `data-groups-url` on the `#expando-root` element, e.g. `data-groups-url="https://cdn.example.com/groups.json"`.
+- To point to a different JSON file, set `data-groups-url` or `data-casestudies-url` on the `#expando-root` element, e.g. `data-groups-url="https://cdn.example.com/groups.json"`.
 - For a fixed-width right column instead of a 50/50 split, change `grid-template-columns` in the CSS, e.g. `1fr 380px`.
 - To preserve existing link href behavior, the script stores an existing `href` as `data-href-fallback` before removing it.
 
 Notes
 - The snippet expects your `groups.json` to be an array of group objects with fields like `id`, `name`, `intro`, `documents`, `activities`, and `additionalInfo`. The repository includes `public/groups.json` as an example.
-- If your JSON is behind authentication or not publicly accessible, host a public copy (Squarespace file storage, CDN, or GitHub Pages) or modify the script to inline the data.
+- The `casestudies.json` file is an array of case study objects with fields like `id`, `title`, `org`, `summary`, `story`, `tags`, and `links`. Links with `data-casestudy-id="<id>"` open the matching case study inline instead of a group card.
+
 
 Accessibility
 - Links are keyboard-focusable. The panel contains a close button for keyboard users.
 
-If you want me to adapt styles to match your `public/styles.css`, say so and I'll make a tailored version.
+

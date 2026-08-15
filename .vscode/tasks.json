@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "nvs",
+			"args": [
+				"exec",
+				"krypton",
+				"node",
+				"scripts/cache-airtable.js"
+			],
+			"problemMatcher": [
+				"$nvcc"
+			],
+			"label": "cache: run (nvs)",
+			"detail": "nvs exec krypton node scripts/cache-airtable.js", 
+		}
+	]
+}
