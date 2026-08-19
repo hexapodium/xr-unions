@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  isAirtablePermissionError,
   normalizeRecord,
   normalizeCaseStudy,
   normalizeSource,
@@ -99,4 +100,25 @@ test("normalizes Movement Assessment case study fields", () => {
   assert.equal(result.notes, "Some notes.");
   assert.equal(result.startDate, "2026-02-01");
   assert.equal(result.endDate, "2026-03-01");
+});
+
+test("detects Airtable authorization errors", () => {
+  assert.equal(
+    isAirtablePermissionError(
+      new Error("You are not authorized to perform this operation"),
+    ),
+    true,
+  );
+  assert.equal(
+    isAirtablePermissionError("You are not authorized to perform this operation"),
+    true,
+  );
+  assert.equal(isAirtablePermissionError(null), false);
+  assert.equal(isAirtablePermissionError(new Error("Network timeout")), false);
+  assert.equal(
+    isAirtablePermissionError({ message: "UNAUTHORIZED" }),
+    true,
+  );
+  assert.equal(isAirtablePermissionError({ status: 401 }), true);
+  assert.equal(isAirtablePermissionError({ statusCode: 403 }), true);
 });

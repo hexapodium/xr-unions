@@ -160,6 +160,14 @@ const parseIdList = (value) =>
     .map((id) => id.trim())
     .filter(Boolean);
 
+export const isAirtablePermissionError = (error) => {
+  const message =
+    typeof error === "string" ? error : String(error?.message ?? "");
+  if (/not authorized|unauthorized/i.test(message)) return true;
+  const status = error?.status ?? error?.statusCode;
+  return status === 401 || status === 403;
+};
+
 // Generic fallback: given just an API key + base ID (no table name), discover
 // every table in the base via the Metadata API and cache each one verbatim
 // (record id + raw field values) to public/<slugified-table-name>.json.
@@ -277,7 +285,21 @@ async function cacheAirtable() {
   // Falls back to AIRTABLE_BASE_ID if a dedicated base isn't configured.
   const maBaseId = AIRTABLE_MA_BASE_ID || AIRTABLE_BASE_ID;
 
-  await fetchAndCache({
+  const optionalFetchAndCache = async (options) => {
+    try {
+      await fetchAndCache(options);
+    } catch (error) {
+      if (isAirtablePermissionError(error)) {
+        console.warn(
+          `Skipping ${options.label} cache (table: ${options.tableName}) because Airtable access is not authorized`,
+        );
+        return;
+      }
+      throw error;
+    }
+  };
+
+  await optionalFetchAndCache({
     apiKey: AIRTABLE_API_KEY,
     baseId: maBaseId,
     tableName: AIRTABLE_SOURCES_TABLE_NAME || "Sources",
@@ -289,7 +311,7 @@ async function cacheAirtable() {
     label: "sources",
   });
 
-  await fetchAndCache({
+  await optionalFetchAndCache({
     apiKey: AIRTABLE_API_KEY,
     baseId: maBaseId,
     tableName: AIRTABLE_ARTICLES_TABLE_NAME || "Articles",
@@ -301,7 +323,7 @@ async function cacheAirtable() {
     label: "articles",
   });
 
-  await fetchAndCache({
+  await optionalFetchAndCache({
     apiKey: AIRTABLE_API_KEY,
     baseId: maBaseId,
     tableName: AIRTABLE_MA_CASESTUDIES_TABLE_NAME || "Case Studies",
