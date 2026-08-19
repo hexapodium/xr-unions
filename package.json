@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "cache-airtable": "nvs exec krypton node --env-file=.env scripts/cache-airtable.js",
-    "schema": "nvs exec krypton node --env-file=.env scripts/dump-schema.js",
-    "debug": "nvs exec krypton node --env-file=.env scripts/cache-airtable.js",
-    "test": "nvs exec krypton node --test"
+    "cache": "node --env-file=.env scripts/cache-airtable.js",
+    "schema": "node --env-file=.env scripts/dump-schema.js",
+    "debug": "node --env-file=.env scripts/cache-airtable.js",
+    "test": "node --test"
   },
   "dependencies": {
     "airtable": "^0.12.2"

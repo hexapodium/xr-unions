@@ -3,18 +3,14 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"command": "nvs",
+			"command": "npm",
 			"args": [
-				"exec",
-				"krypton",
-				"node",
-				"scripts/cache-airtable.js"
+				"run",
+				"cache"
 			],
-			"problemMatcher": [
-				"$nvcc"
-			],
-			"label": "cache: run (nvs)",
-			"detail": "nvs exec krypton node scripts/cache-airtable.js", 
+			"problemMatcher": [],
+			"label": "cache: run",
+			"detail": "npm run cache",
 		}
 	]
 }
