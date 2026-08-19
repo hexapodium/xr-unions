@@ -121,9 +121,25 @@ async function fetchAndCache({
   label,
 }) {
   const table = new Airtable({ apiKey }).base(baseId)(tableName);
-  const records = await table
-    .select({ view: view || "Grid view", fields: Object.values(fields) })
-    .all();
+  let records;
+  try {
+    records = await table
+      .select({ view: view || "Grid view", fields: Object.values(fields) })
+      .all();
+  } catch (error) {
+    if (isAirtablePermissionError(error)) {
+      const reason = new Error(
+        `${error.message} (fetching "${label}" from base ${baseId}, table "${tableName}"` +
+          (view ? `, view "${view}"` : "") +
+          `). This usually means the API key/token is invalid or expired, lacks the ` +
+          `data.records:read scope, or hasn't been granted access to this base/table. ` +
+          `Airtable API keys were deprecated in Feb 2024 - use a Personal Access Token instead.`,
+      );
+      reason.status = error.status ?? error.statusCode;
+      throw reason;
+    }
+    throw error;
+  }
   const items = records.map(normalize).filter((item) => item[filterKey]);
   const output = fileURLToPath(new URL(`../public/${fileName}`, import.meta.url));
 
@@ -339,6 +355,14 @@ async function cacheAirtable() {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   cacheAirtable().catch((error) => {
     console.error(error.message);
+    if (isAirtablePermissionError(error)) {
+      console.error(
+        "\nHint: check that AIRTABLE_API_KEY is a valid, non-expired Personal " +
+          "Access Token (legacy Airtable API keys stopped working in Feb 2024), " +
+          "that it has the data.records:read scope, and that it has been given " +
+          "access to the specific base(s) configured here.",
+      );
+    }
     process.exitCode = 1;
   });
 }
