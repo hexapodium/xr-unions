@@ -19,6 +19,36 @@ const caseStudyFields = {
   links: "Source links",
 };
 
+// Movement Assessment Sources Database (see airtable-schema.json)
+const sourceFields = {
+  publication: "Publication",
+  publicationType: "Publication type",
+  orgType: "Org Type",
+  accessNotes: "Access Notes",
+  priority: "Priority (Source)",
+  label: "Label",
+};
+
+const articleFields = {
+  title: "Article",
+  edition: "Edition / Title",
+  link: "Article Link",
+  docLink: "Article Doc Link",
+  read: "Article Read",
+  priority: "Priority (Article)",
+};
+
+const maCaseStudyFields = {
+  title: "Name",
+  date: "Date of case study",
+  quotes: "Quotes from articles",
+  tags: "Tags",
+  notes: "Notes",
+  details: "Details for further research",
+  startDate: "Start Date",
+  endDate: "End Date",
+};
+
 const list = (value) => {
   if (Array.isArray(value)) return value.map(String).filter(Boolean);
   if (!value) return [];
@@ -47,6 +77,38 @@ export const normalizeCaseStudy = (record) => ({
   links: list(record.get(caseStudyFields.links)),
 });
 
+export const normalizeSource = (record) => ({
+  id: record.id,
+  publication: String(record.get(sourceFields.publication) ?? ""),
+  publicationType: String(record.get(sourceFields.publicationType) ?? ""),
+  orgType: String(record.get(sourceFields.orgType) ?? ""),
+  accessNotes: String(record.get(sourceFields.accessNotes) ?? ""),
+  priority: String(record.get(sourceFields.priority) ?? ""),
+  label: String(record.get(sourceFields.label) ?? ""),
+});
+
+export const normalizeArticle = (record) => ({
+  id: record.id,
+  title: String(record.get(articleFields.title) ?? ""),
+  edition: String(record.get(articleFields.edition) ?? ""),
+  link: String(record.get(articleFields.link) ?? ""),
+  docLink: String(record.get(articleFields.docLink) ?? ""),
+  read: Boolean(record.get(articleFields.read)),
+  priority: String(record.get(articleFields.priority) ?? ""),
+});
+
+export const normalizeMaCaseStudy = (record) => ({
+  id: record.id,
+  title: String(record.get(maCaseStudyFields.title) ?? ""),
+  date: String(record.get(maCaseStudyFields.date) ?? ""),
+  quotes: String(record.get(maCaseStudyFields.quotes) ?? ""),
+  tags: list(record.get(maCaseStudyFields.tags)),
+  notes: String(record.get(maCaseStudyFields.notes) ?? ""),
+  details: String(record.get(maCaseStudyFields.details) ?? ""),
+  startDate: String(record.get(maCaseStudyFields.startDate) ?? ""),
+  endDate: String(record.get(maCaseStudyFields.endDate) ?? ""),
+});
+
 async function fetchAndCache({
   apiKey,
   baseId,
@@ -73,6 +135,77 @@ async function fetchAndCache({
   return items;
 }
 
+async function airtableMetaGet(apiKey, path) {
+  const res = await fetch(`https://api.airtable.com/v0/meta/${path}`, {
+    headers: { Authorization: `Bearer ${apiKey}` },
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Request failed: ${res.status} ${res.statusText}\n${text}`);
+  }
+
+  return res.json();
+}
+
+const slugify = (name) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const parseIdList = (value) =>
+  (value || "")
+    .split(";")
+    .map((id) => id.trim())
+    .filter(Boolean);
+
+// Generic fallback: given just an API key + base ID (no table name), discover
+// every table in the base via the Metadata API and cache each one verbatim
+// (record id + raw field values) to public/<slugified-table-name>.json.
+//
+// `includeIds`/`excludeIds` are optional arrays of Airtable table IDs
+// (e.g. "tblAHzBiQWTwED2jN"). If `includeIds` is non-empty, only those
+// tables are cached. Otherwise, if `excludeIds` is non-empty, every table
+// except those is cached.
+async function cacheAllTables({ apiKey, baseId, includeIds = [], excludeIds = [] }) {
+  const { tables } = await airtableMetaGet(apiKey, `bases/${baseId}/tables`);
+
+  if (!tables || tables.length === 0) {
+    console.log(`No tables found in base ${baseId}`);
+    return;
+  }
+
+  const includeSet = new Set(includeIds);
+  const excludeSet = new Set(excludeIds);
+  const filteredTables = tables.filter(({ id }) => {
+    if (includeSet.size > 0) return includeSet.has(id);
+    if (excludeSet.size > 0) return !excludeSet.has(id);
+    return true;
+  });
+
+  for (const { id, name } of tables) {
+    if (!filteredTables.some((table) => table.id === id)) {
+      console.log(`Skipping table "${name}" (${id})`);
+    }
+  }
+
+  const base = new Airtable({ apiKey }).base(baseId);
+  await mkdir(fileURLToPath(new URL("../public", import.meta.url)), {
+    recursive: true,
+  });
+
+  for (const { name } of filteredTables) {
+    const records = await base(name).select().all();
+    const items = records.map((record) => ({ id: record.id, ...record.fields }));
+    const fileName = `${slugify(name)}.json`;
+    const output = fileURLToPath(new URL(`../public/${fileName}`, import.meta.url));
+
+    await writeFile(output, `${JSON.stringify(items, null, 2)}\n`);
+    console.log(`Cached ${items.length} records from "${name}" in public/${fileName}`);
+  }
+}
+
 async function cacheAirtable() {
   const {
     AIRTABLE_API_KEY,
@@ -81,14 +214,33 @@ async function cacheAirtable() {
     AIRTABLE_VIEW,
     AIRTABLE_CASESTUDIES_TABLE_NAME,
     AIRTABLE_CASESTUDIES_VIEW,
+    AIRTABLE_MA_BASE_ID,
+    AIRTABLE_SOURCES_TABLE_NAME,
+    AIRTABLE_SOURCES_VIEW,
+    AIRTABLE_ARTICLES_TABLE_NAME,
+    AIRTABLE_ARTICLES_VIEW,
+    AIRTABLE_MA_CASESTUDIES_TABLE_NAME,
+    AIRTABLE_MA_CASESTUDIES_VIEW,
+    INCLUDE_TABLE_IDS,
+    EXCLUDE_TABLE_IDS,
   } = process.env;
 
-  for (const [name, value] of Object.entries({
-    AIRTABLE_API_KEY,
-    AIRTABLE_BASE_ID,
-    AIRTABLE_TABLE_NAME,
-  })) {
-    if (!value) throw new Error(`${name} is required`);
+  if (!AIRTABLE_API_KEY) throw new Error("AIRTABLE_API_KEY is required");
+  if (!AIRTABLE_BASE_ID) throw new Error("AIRTABLE_BASE_ID is required");
+
+  // If no table name is configured, fall back to dumping every table in the
+  // base generically instead of the curated groups/case-study caching below.
+  if (!AIRTABLE_TABLE_NAME) {
+    console.log(
+      `AIRTABLE_TABLE_NAME not set; dumping all tables from base ${AIRTABLE_BASE_ID}`,
+    );
+    await cacheAllTables({
+      apiKey: AIRTABLE_API_KEY,
+      baseId: AIRTABLE_BASE_ID,
+      includeIds: parseIdList(INCLUDE_TABLE_IDS),
+      excludeIds: parseIdList(EXCLUDE_TABLE_IDS),
+    });
+    return;
   }
 
   await fetchAndCache({
@@ -120,6 +272,46 @@ async function cacheAirtable() {
       "Skipping case studies (AIRTABLE_CASESTUDIES_TABLE_NAME not set)",
     );
   }
+
+  // Movement Assessment Sources Database (see airtable-schema.json).
+  // Falls back to AIRTABLE_BASE_ID if a dedicated base isn't configured.
+  const maBaseId = AIRTABLE_MA_BASE_ID || AIRTABLE_BASE_ID;
+
+  await fetchAndCache({
+    apiKey: AIRTABLE_API_KEY,
+    baseId: maBaseId,
+    tableName: AIRTABLE_SOURCES_TABLE_NAME || "Sources",
+    view: AIRTABLE_SOURCES_VIEW,
+    fields: sourceFields,
+    normalize: normalizeSource,
+    filterKey: "publication",
+    fileName: "sources.json",
+    label: "sources",
+  });
+
+  await fetchAndCache({
+    apiKey: AIRTABLE_API_KEY,
+    baseId: maBaseId,
+    tableName: AIRTABLE_ARTICLES_TABLE_NAME || "Articles",
+    view: AIRTABLE_ARTICLES_VIEW,
+    fields: articleFields,
+    normalize: normalizeArticle,
+    filterKey: "title",
+    fileName: "articles.json",
+    label: "articles",
+  });
+
+  await fetchAndCache({
+    apiKey: AIRTABLE_API_KEY,
+    baseId: maBaseId,
+    tableName: AIRTABLE_MA_CASESTUDIES_TABLE_NAME || "Case Studies",
+    view: AIRTABLE_MA_CASESTUDIES_VIEW,
+    fields: maCaseStudyFields,
+    normalize: normalizeMaCaseStudy,
+    filterKey: "title",
+    fileName: "ma-casestudies.json",
+    label: "MA case studies",
+  });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

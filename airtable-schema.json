@@ -1,0 +1,5084 @@
+[
+  {
+    "id": "appS60muYwAqB3S4V",
+    "name": "Movement Assessment Sources Database",
+    "tables": [
+      {
+        "id": "tblAHzBiQWTwED2jN",
+        "name": "Sources",
+        "primaryFieldId": "fldrAOHzKjTyTsgEw",
+        "fields": [
+          {
+            "type": "singleLineText",
+            "id": "fldrAOHzKjTyTsgEw",
+            "name": "Publication"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selcZG4pq36WkH9Wu",
+                  "name": "Reports/ Publications",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selTyu82b9VPfzffz",
+                  "name": "Union Structure",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "seljeJVO1LGjckmNV",
+                  "name": "Other ",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selW28yEdmROmQLT0",
+                  "name": "Conference Agenda",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "selsDRV1Gda9jO7UZ",
+                  "name": "Magazine/ Newsletter",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selRfORTvyvTgUyjA",
+                  "name": "Website",
+                  "color": "orangeLight2"
+                }
+              ]
+            },
+            "id": "flddQtDxanFG0srRJ",
+            "name": "Publication type"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "sele1WVZbyQXUH9OE",
+                  "name": "Union (Official)",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selgD4fxaeETlmCTe",
+                  "name": "WC Group",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selXvZN4vLJOSPbIH",
+                  "name": "Union (Member Structure)",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selwaIVdTQcA1jiXj",
+                  "name": "NGO",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "selYFX73ilH7usCr1",
+                  "name": "Cross-Group Campaign",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selGXVZuulIyMUwaj",
+                  "name": "Academic",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selWXbGjosl6jv4Zq",
+                  "name": "Worker group",
+                  "color": "grayLight2"
+                }
+              ]
+            },
+            "id": "fldIRtWOekfh1Xjsz",
+            "name": "Org Type"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblKPlwSsCpLYPrIP",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldWDwuijNdjIAdxv"
+            },
+            "id": "fldKU4ZIVAB6Q1hA9",
+            "name": "Articles"
+          },
+          {
+            "type": "count",
+            "options": {
+              "isValid": true,
+              "recordLinkFieldId": "fldKU4ZIVAB6Q1hA9"
+            },
+            "id": "fldBdO9mICFV5bS0a",
+            "name": "Articles Outstanding"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tbl2bFV7kKwq9C0SV",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldLGh0fTTHrvQAXm"
+            },
+            "id": "fld43CJDT5W4mlcBW",
+            "name": "Team Members"
+          },
+          {
+            "type": "multilineText",
+            "id": "fldZ5nrnptdL5Uu8H",
+            "name": "Access Notes"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selHOBfzAReUCRNB6",
+                  "name": "1 - High Priority (Active)",
+                  "color": "redLight2"
+                },
+                {
+                  "id": "selQVGKRa8TLjFJ07",
+                  "name": "2 - High Priority (Not Yet Active)",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selEilE7h8a2kaxwM",
+                  "name": "3 - Low Priority",
+                  "color": "tealLight2"
+                }
+              ]
+            },
+            "id": "fldu1ahvBpF2LzKrk",
+            "name": "Priority (Source)"
+          },
+          {
+            "type": "count",
+            "options": {
+              "isValid": true,
+              "recordLinkFieldId": "fldKU4ZIVAB6Q1hA9"
+            },
+            "id": "fldLf8UGb2qKsokHu",
+            "name": "Editions (Count)"
+          },
+          {
+            "type": "count",
+            "options": {
+              "isValid": false,
+              "recordLinkFieldId": null
+            },
+            "id": "fld2gN4QYbbTw4LSR",
+            "name": "Editions (Complete)"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldKQZo7dEAvSB3g8",
+            "name": "Label"
+          }
+        ],
+        "views": [
+          {
+            "id": "viw7mVYL4Bn0BjBpH",
+            "name": "All Sources",
+            "type": "grid"
+          },
+          {
+            "id": "viw6o0rxNmqJ5miam",
+            "name": "WC Groups",
+            "type": "grid"
+          }
+        ]
+      },
+      {
+        "id": "tblKPlwSsCpLYPrIP",
+        "name": "Articles",
+        "primaryFieldId": "fld3ZDtf1PIdex6uf",
+        "fields": [
+          {
+            "type": "formula",
+            "options": {
+              "isValid": true,
+              "formula": "CONCATENATE({fldWDwuijNdjIAdxv}, \" | \", {fldHVFvXsvXAZaFWf})",
+              "referencedFieldIds": [
+                "fldWDwuijNdjIAdxv",
+                "fldHVFvXsvXAZaFWf"
+              ],
+              "result": {
+                "type": "singleLineText"
+              }
+            },
+            "id": "fld3ZDtf1PIdex6uf",
+            "name": "Article"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblAHzBiQWTwED2jN",
+              "isReversed": false,
+              "prefersSingleRecordLink": true,
+              "inverseLinkFieldId": "fldKU4ZIVAB6Q1hA9"
+            },
+            "id": "fldWDwuijNdjIAdxv",
+            "name": "Publication"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldHVFvXsvXAZaFWf",
+            "name": "Edition / Title"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldmsAyKjNJmwv4rU",
+            "name": "Article Link"
+          },
+          {
+            "type": "multilineText",
+            "id": "fldqhtgoWdSMVS51y",
+            "name": "Article Doc Link"
+          },
+          {
+            "type": "checkbox",
+            "options": {
+              "icon": "thumbsUp",
+              "color": "greenBright"
+            },
+            "id": "fldGxlprIww44s5UK",
+            "name": "Article Read"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tbl2bFV7kKwq9C0SV",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldGmChSu5V8OOr32"
+            },
+            "id": "fld5PA3tGsvZvayLl",
+            "name": "Team Member"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selFESkq3Ny4FqpjI",
+                  "name": "1 - High Priority (Active)",
+                  "color": "redLight2"
+                },
+                {
+                  "id": "selaXP8SbW9T4rMhA",
+                  "name": "2 - High Priority (Not Yet Active)",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selsd3yf52d4mTrnj",
+                  "name": "3 -  Medium Priority",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "selM9wTr0jB8SU9Vp",
+                  "name": "4 - Low Priority",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "seliB8PvEAwUt1mjH",
+                  "name": "5 - Read",
+                  "color": "blueLight2"
+                }
+              ]
+            },
+            "id": "fldSBp9tIrOeEr7uR",
+            "name": "Priority (Article)"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblyttxIhjlMBang4",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldfFAw89WTvOOzd6"
+            },
+            "id": "fldQARRP1Kfj6jR8W",
+            "name": "Case Studies"
+          }
+        ],
+        "views": [
+          {
+            "id": "viwgv5E1HWpOD9q3I",
+            "name": "In Progress",
+            "type": "grid"
+          },
+          {
+            "id": "viwK9fYhrQerBAxwf",
+            "name": "In Progress and Done",
+            "type": "grid"
+          },
+          {
+            "id": "viw12k4xYStSHwy14",
+            "name": "Done",
+            "type": "grid"
+          },
+          {
+            "id": "viwiZVpLHJVPHm8J5",
+            "name": "All Publications",
+            "type": "grid"
+          },
+          {
+            "id": "viwZzzuOubPg0j0LP",
+            "name": "Alicia",
+            "type": "grid"
+          },
+          {
+            "id": "viwMcRnb0y9eFqD7G",
+            "name": "Chris B",
+            "type": "grid"
+          },
+          {
+            "id": "viwySp2VY9WQJghl3",
+            "name": "Elmo MB",
+            "type": "grid"
+          },
+          {
+            "id": "viwREVo34FdSXVOKH",
+            "name": "Eve",
+            "type": "grid"
+          },
+          {
+            "id": "viw8yK9DWrQCHxt90",
+            "name": "Gina",
+            "type": "grid"
+          },
+          {
+            "id": "viwi0qfPSAMvez5Nc",
+            "name": "Gwen",
+            "type": "grid"
+          },
+          {
+            "id": "viwt52zO37gFHVZOe",
+            "name": "Heleena",
+            "type": "grid"
+          },
+          {
+            "id": "viwJRj9UcfepQUZgM",
+            "name": "Hope",
+            "type": "grid"
+          },
+          {
+            "id": "viwM0KsVqWBTH2gDR",
+            "name": "Jonathan",
+            "type": "grid"
+          },
+          {
+            "id": "viwWnTuXfJw0V0FEx",
+            "name": "Sara",
+            "type": "grid"
+          },
+          {
+            "id": "viwkmlWfcWv0HoHRF",
+            "name": "Sydney",
+            "type": "grid"
+          },
+          {
+            "id": "viwchKoJ0rtdtXXVC",
+            "name": "Tash",
+            "type": "grid"
+          },
+          {
+            "id": "viwnwltyvEVXkIzNb",
+            "name": "Toby",
+            "type": "grid"
+          },
+          {
+            "id": "viwaGSx5o5zcfdOH1",
+            "name": "Vaidehee",
+            "type": "grid"
+          },
+          {
+            "id": "viwGv1qhnhMjhxO6G",
+            "name": "BFAWU Green Reps",
+            "type": "grid"
+          },
+          {
+            "id": "viwZLBjxGaWiLQvfo",
+            "name": "CACCTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwu2EEJfQPJzGFJH",
+            "name": "CJC",
+            "type": "grid"
+          },
+          {
+            "id": "viwrVhlJMhLdDKrGv",
+            "name": "CJC TUC",
+            "type": "grid"
+          },
+          {
+            "id": "viw2dSL7KlYT29IOe",
+            "name": "Equity GND Network",
+            "type": "grid"
+          },
+          {
+            "id": "viwGlwSxOZLfvetJJ",
+            "name": "FoE",
+            "type": "grid"
+          },
+          {
+            "id": "viwvO3J1L3wLtlbKy",
+            "name": "FoES",
+            "type": "grid"
+          },
+          {
+            "id": "viwe4Ta0cf0zIkJQX",
+            "name": "GJA",
+            "type": "grid"
+          },
+          {
+            "id": "viwEQqscj6R1RZytJ",
+            "name": "GKN Factory Collective",
+            "type": "grid"
+          },
+          {
+            "id": "viwUCN2KHi5D7I0fj",
+            "name": "GMB for a GND",
+            "type": "grid"
+          },
+          {
+            "id": "viw5oRdSRCaHonLse",
+            "name": "Green Unison",
+            "type": "grid"
+          },
+          {
+            "id": "viw0jvKba4VOvmyuY",
+            "name": "Heat Strike",
+            "type": "grid"
+          },
+          {
+            "id": "viwM5pGFtoQ6HBoB5",
+            "name": "Just Transition Partnership",
+            "type": "grid"
+          },
+          {
+            "id": "viw8AKpkP0l9XlJVn",
+            "name": "Just Transition Wakefield",
+            "type": "grid"
+          },
+          {
+            "id": "viw4iGQWKkj7dXa11",
+            "name": "NEF",
+            "type": "grid"
+          },
+          {
+            "id": "viwEnB8oIhQymbTuD",
+            "name": "NEON",
+            "type": "grid"
+          },
+          {
+            "id": "viw7uJBc3PLaq90GP",
+            "name": "New Lucas Plan",
+            "type": "grid"
+          },
+          {
+            "id": "viwKvwZgL9hfYxrTf",
+            "name": "PCS Green Workplaces",
+            "type": "grid"
+          },
+          {
+            "id": "viwqQe8NCNmvy4uzf",
+            "name": "Platform",
+            "type": "grid"
+          },
+          {
+            "id": "viwDGcpZR6iZAQ6qw",
+            "name": "Safe Landing",
+            "type": "grid"
+          },
+          {
+            "id": "viwFc33wHz0vggIMY",
+            "name": "Scot E3",
+            "type": "grid"
+          },
+          {
+            "id": "viwQBV7ZshH8HPguR",
+            "name": "Tipping Point",
+            "type": "grid"
+          },
+          {
+            "id": "viwfIK0dNSYKFX2GA",
+            "name": "TUCAN",
+            "type": "grid"
+          },
+          {
+            "id": "viwVa0rE8Jb27xOvg",
+            "name": "TUED",
+            "type": "grid"
+          },
+          {
+            "id": "viwRziAjzqeNRnUZC",
+            "name": "UCU Green Reps",
+            "type": "grid"
+          },
+          {
+            "id": "viw0OfrcGnd20d7uj",
+            "name": "Unite GCJC",
+            "type": "grid"
+          },
+          {
+            "id": "viwgD4Ws3Q31Zx73e",
+            "name": "WCCA",
+            "type": "grid"
+          },
+          {
+            "id": "viw8JtRSUrU6GEfTr",
+            "name": "Workers Coop",
+            "type": "grid"
+          },
+          {
+            "id": "viwmoeL59SflPaPS7",
+            "name": "Workers Planet",
+            "type": "grid"
+          },
+          {
+            "id": "viwO5rZaXQfrSRlzH",
+            "name": "XR TU",
+            "type": "grid"
+          },
+          {
+            "id": "viwOHQeOMCx9HTrWV",
+            "name": "2 - High Priority (Not Yet Assigned)",
+            "type": "grid"
+          },
+          {
+            "id": "viwD0hjiXTwRw5Hxh",
+            "name": "3 - Medium Priority",
+            "type": "grid"
+          },
+          {
+            "id": "viw1QG0OuSszC07Nx",
+            "name": "Publication View",
+            "type": "grid"
+          },
+          {
+            "id": "viwjrnsWdRY0wo0Ki",
+            "name": "No Doc Yet",
+            "type": "grid"
+          },
+          {
+            "id": "viwgNp28RNoLyTE21",
+            "name": "By Priority (not updated)",
+            "type": "grid"
+          },
+          {
+            "id": "viwTCq4wQT9dxNzRS",
+            "name": "TEST Case Study groups",
+            "type": "grid"
+          },
+          {
+            "id": "viwFgtrU4t4xC0eGN",
+            "name": "Grid 55",
+            "type": "grid"
+          }
+        ]
+      },
+      {
+        "id": "tblyttxIhjlMBang4",
+        "name": "Case Studies",
+        "primaryFieldId": "fldrPKK48RuGVyzjL",
+        "fields": [
+          {
+            "type": "singleLineText",
+            "id": "fldrPKK48RuGVyzjL",
+            "name": "Name"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldUqDtWOjGUWFroA",
+            "name": "Date of case study"
+          },
+          {
+            "type": "multilineText",
+            "id": "fldZkd7z16tfFx7aF",
+            "name": "Quotes from articles"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblKPlwSsCpLYPrIP",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldQARRP1Kfj6jR8W",
+              "viewIdForRecordSelection": "viwK9fYhrQerBAxwf"
+            },
+            "id": "fldfFAw89WTvOOzd6",
+            "name": "Articles"
+          },
+          {
+            "type": "multipleSelects",
+            "options": {
+              "choices": [
+                {
+                  "id": "selBOXvgzBaTVdRpp",
+                  "name": "Collaboration",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "sel0MMzMWVLZf6AEE",
+                  "name": "Collaboration: Cross-Movement",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "selByjqaygUONoudX",
+                  "name": "Collaboration: Cross-Union",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "selF4CqrI7AnbzGFA",
+                  "name": "Collaboration: International",
+                  "color": "greenLight2"
+                },
+                {
+                  "id": "selclIGETksvktYPv",
+                  "name": "Demand: Air Quality",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selPngK5CANwHereo",
+                  "name": "Demand: British Procurement",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel3ecUdbEYav859V",
+                  "name": "Demand: Call to Action",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selTcF5euRQENE6sY",
+                  "name": "Demand: Campaign",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selZSBQwblQ73i3iC",
+                  "name": "Demand: Challenge Climate Denial",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selxe5oyjsfetsw1E",
+                  "name": "Demand: Climate Action",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selAJ5ziToTWXhZ0W",
+                  "name": "Demand: Climate Adaptation",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel5t4WEHHGiOF9C2",
+                  "name": "Demand: Climate Justice",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selBGbK6Qc0w8mMYb",
+                  "name": "Demand: Decarbonisation",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selHKxpEcsOn5KVrn",
+                  "name": "Demand: Divestment",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selCO7ogDzjDYtRwu",
+                  "name": "Demand: Eco-Social Justice",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel2jsv1i32xpeWF5",
+                  "name": "Demand: Economic Democracy",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel6AWOuCiNsZpWg1",
+                  "name": "Demand: Energy Justice",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selhCguGBB5mSVLnb",
+                  "name": "Demand: Engagement in Collective Bargaining",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selzCQ6OXvJa8slCG",
+                  "name": "Demand: Environmental Audit",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selwyFazxG76Z6grP",
+                  "name": "Demand: Food Security",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sell1Z1jAHu9pRvby",
+                  "name": "Demand: Free Energy",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selikjJp7RiIP50Ig",
+                  "name": "Demand: Free Public Transport",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selWgfzDo2J1vZ6LE",
+                  "name": "Demand: Freedom of Speech",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selGQLcxS3dONRaGw",
+                  "name": "Demand: Funding and Investment",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selubn3vQgxamb5pW",
+                  "name": "Demand: Gender Equality",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel44lqqrGgwP4SzM",
+                  "name": "Demand: Government Training Grants",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selsfDb3vxj1mdsYy",
+                  "name": "Demand: Greening Production",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selytb3OuHpv6S61O",
+                  "name": "Demand: Green Infrastructure",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "seljyI7vFmjDZrX1h",
+                  "name": "Demand: Green Jobs",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selkMeBDDWUvzcT6G",
+                  "name": "Demand: Green New Deal",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selQWOCrTU1Zf2owQ",
+                  "name": "Demand: Green Pensions",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel0YIu9GORxD7y5G",
+                  "name": "Demand: Green Skills and Training",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selTjHv15ZwwXKUsm",
+                  "name": "Demand: Green Transport",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selgRfw4k4ZVwAYIp",
+                  "name": "Demand: Health and Safety",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selaeEKrr5TzN3vGZ",
+                  "name": "Demand: Heatwave Furlough Scheme",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selrgRDyRCNbyqTQE",
+                  "name": "Demand: Housing",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selDSZpq0trYRqQF8",
+                  "name": "Demand: Improved Working Conditions",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "seltdZwFEO2SND3hA",
+                  "name": "Demand: Industrial Reuse and Repurposing",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selfzkd5kvPttQDeZ",
+                  "name": "Demand: Investment in Care Economy",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "seln7hX8a7qBErTiJ",
+                  "name": "Demand: Just Transition",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selWB8DumrmvNRzi3",
+                  "name": "Demand: Legislation",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selvKNtWWJ6Zf7O0U",
+                  "name": "Demand: Low Impact Catering ",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selaS3nBhcejznLX5",
+                  "name": "Demand: Maximum Working Temperature",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selrgkpkJgxPLadVH",
+                  "name": "Demand: National Climate Service",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "seltkcqV6GXJq1HCI",
+                  "name": "Demand: Net-Zero Carbon Emissions",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selsXR1umojbPcOJe",
+                  "name": "Demand: No Zonal Electricity Pricing",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selMI7TAQWKIkVNoA",
+                  "name": "Demand: Oppose the Far Right ",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel8Y0oXb9tfKbqt5",
+                  "name": "Demand: Polluter Pays Principle",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selooyAC8ju2TS0xz",
+                  "name": "Demand: Public Ownership",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selbvr285awSI6YY0",
+                  "name": "Demand: Racial Equality",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selBHPOeBISgzQ7lK",
+                  "name": "Demand: Reject Fossil Fuel Sponsorship",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selHWbDvF2Z6fjoWY",
+                  "name": "Demand: Renewable Energy Expansion",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selUCIGjo57woKfAO",
+                  "name": "Demand: Response to Job Losses",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selGgS3DRYDqsIVA2",
+                  "name": "Demand: Retrofitting",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel4YtjwNuyA3mNz1",
+                  "name": "Demand: Skills Audit",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel8mL0z7NgKMKqKO",
+                  "name": "Demand: Socially/Environmentally Useful Production",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selFw3lRtBq4oxoIF",
+                  "name": "Demand: Socioeconomic Transformation",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selGuEu59XqVZzdJH",
+                  "name": "Demand: State-Supported Transition",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sele0FUv6CEEn2jbg",
+                  "name": "Demand: Strengthen Role of Green Reps",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selONe3WnhREsswpk",
+                  "name": "Demand: Support Biodiversity",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sell53rne3hjaq0sf",
+                  "name": "Demand: Sustainable Travel Plan",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selzxQ7jrWEidG1F0",
+                  "name": "Demand: Tax",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selo2clkHRq1wSVi1",
+                  "name": "Demand: Universal Workers Rights",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "sel3u9kZc3LqzQ1gA",
+                  "name": "Demand: Wage Floor ",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selzrT6xCPzkpejUY",
+                  "name": "Demand: Whistleblowing Rights",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selqC91K1IBU7LWfT",
+                  "name": "Demand: Worker-Led Transition",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selaDCiEODq22uPCA",
+                  "name": "Demand: Zero Waste and Circular Model",
+                  "color": "purpleLight2"
+                },
+                {
+                  "id": "selRI7y3vLzPvKiuP",
+                  "name": "Group: ACORN",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selAVVE29juzKEpUJ",
+                  "name": "Group: Adaptation Scotland",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel7wYgRiIrWc9JSc",
+                  "name": "Group: Association of Colleges (AoC)",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel68SPWNWM1sLAY0",
+                  "name": "Group: BARAC",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selsiSSja6LHgbTSQ",
+                  "name": "Group: Battersea and Wandsworth TUC",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selTaZnWf01WmI0w4",
+                  "name": "Group: BDHTC",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selOBg7kNPHfJjtWD",
+                  "name": "Group: BFAWU Green Reps",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selO9WjYwwImhSapd",
+                  "name": "Group: BIGTU",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selhodUpt15iNL4sQ",
+                  "name": "Group: Bristol Unions United",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selWlCbBhiJdyIoYm",
+                  "name": "Group: BMA",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selR2gRoXxUTiCuAy",
+                  "name": "Group: C40 Global Youth Forum",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selgvjKpERNGG38CC",
+                  "name": "Group: CACC",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selCNq3MSn9H1dl9U",
+                  "name": "Group: CACCTU",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel2AOB7RFvT9eTUB",
+                  "name": "Group: Campaign for Better Transport",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selV6OL4WmhoNkkDC",
+                  "name": "Group: Climate Action Leeds",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selGfU9M0DQEUgMa4",
+                  "name": "Group: Climate Coalition",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selvzWEEnlQIkWjyw",
+                  "name": "Group: Climate Jobs UK",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seljJITWC9rldWAxQ",
+                  "name": "Group: Climate Justice Coalition",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "self7JoFCAbY90OcS",
+                  "name": "Group: Climate Justice Coalition Trade Union Caucus",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selQMbCBNtc9yg1si",
+                  "name": "Group: Climate Majority Project",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sellwpplAcUGYfatt",
+                  "name": "Group: Coventry for a GND",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selEGMOmupuiIsPa1",
+                  "name": "Group: Disability Rights UK",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel29JOWpIKEac6Gd",
+                  "name": "Group: Earth Strike",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selQ2s5NyfDK308gr",
+                  "name": "Group: End Fuel Poverty Coalition",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selLDP16dTC3pF91x",
+                  "name": "Group: Energy for All",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel8r6AHeJedNcDoY",
+                  "name": "Group: Equity for A Green New Deal",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sellkGwkHFgqYBPRQ",
+                  "name": "Group: Extinction Rebellion",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seldPX72CtXs3T4D6",
+                  "name": "Group: Fare Free London",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selD73KENmkjrZteu",
+                  "name": "Group: Financing a Just Transition Alliance",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel3Sz9MfH2nKvjSE",
+                  "name": "Group: Fossil Free London",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selKAuHCroxhS8y1C",
+                  "name": "Group: FoE",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selE8DvbZmOoNxxH9",
+                  "name": "Group: FoES",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selmW3Fmt8LDoLMIt",
+                  "name": "Group: Fuel Poverty Action",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selTMXf8RmfiVE2uw",
+                  "name": "Group: GJA",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selofKwt1ZNPJa9yJ",
+                  "name": "Group: GKN",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel1DzaoVdgwbBAMj",
+                  "name": "Group: GKN Factory Collective",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selX1oITOnH4Ls1Q3",
+                  "name": "Group: Global Climate Jobs",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selEekhRW0mAioV7T",
+                  "name": "Group: Global Justice Now",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seloPuuc8yAPnQ0oS",
+                  "name": "Group: Global Witness",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selxfkfUkrAUO7vO8",
+                  "name": "Group: GMB 4 Green New Deal",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selUZB0mkPi8cX4qq",
+                  "name": "Group: GMB Just Transition Panel",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selib7PVRImgcuXC1",
+                  "name": "Group: GND Rising ",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selVcQ9H0qJd7E94O",
+                  "name": "Group: Good Law Project",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selqTjqfDsvSqp5eO",
+                  "name": "Group: Green Alliance",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selQzOAVNzuSgs8D1",
+                  "name": "Group: Greenpeace UK",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selJiYQ66G4V1ted4",
+                  "name": "Group: Green Rider",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selDsLTkFg0uSW1yJ",
+                  "name": "Group: Green UNISON",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selaWslOr51iMnIfm",
+                  "name": "Group: Guild of Students",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selNpsMvPKXtNO5ji",
+                  "name": "Group: Haiti Action for Change",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seldbh4EQLkQzfR2r",
+                  "name": "Group: Hazards",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selhuWTHmfDOeH7oY",
+                  "name": "Group: Healthy Air Coalition",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selpT7VYrxyWCweMf",
+                  "name": "Group: Heat Strike",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selETvSKEAW7RcBSV",
+                  "name": "Group: Households Declare!",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selc425XwYmnNJ0Sn",
+                  "name": "Group: ILAW",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selynUDZQqFw80JCH",
+                  "name": "Group: Just Transition Partnership",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selMXr7esYdeTvvJZ",
+                  "name": "Group: Just Transition Wakefield",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seltvNMGOwghYRQZK",
+                  "name": "Group: London Hazards Centre",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selu1CBah757EcNma",
+                  "name": "Group: London Mining Network",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selGBd6YBlOfM0Wns",
+                  "name": "Group: Lucas Aerospace Combine",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selkx5E8N5JImpqpu",
+                  "name": "Group: Medact",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel9hVheaDqpK3UYO",
+                  "name": "Group: Ministry of Eco Education",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selZWnWeGsSUvg7dF",
+                  "name": "Group: MU Climate Emergency Action Group",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selZhFUFYdvNmzDCy",
+                  "name": "Group: NEON",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selsaNnOrlR9yK0qC",
+                  "name": "Group: NEU Climate Network",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel6vsJDBQhQZDF0Q",
+                  "name": "Group: New Lucas Plan",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selMFaAviMuYaJ3jV",
+                  "name": "Group: No Third Runway Coalition ",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selONf1aa6v3note5",
+                  "name": "Group: Nova",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selayluaKAO7rwWIW",
+                  "name": "Group: Novara Media",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selNrEC6x9B793hR5",
+                  "name": "Group: NUS",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selWSXQNuPP4prMNO",
+                  "name": "Group: NYC Climate Group",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel8iJCP16XIVVh3B",
+                  "name": "Group: Oil Change International",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selGYosBFeDJxwDMp",
+                  "name": "Group: Oxfam",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selF7DgVp2Tt11hEd",
+                  "name": "Group: PCS Green Workplaces",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selr3IpOo0BiihEAq",
+                  "name": "Group: Peace and Justice Project",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selnhnnqWKarA64vL",
+                  "name": "Group: Platform",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selHjpYBzEXCizbYS",
+                  "name": "Group: PRALER",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel9I0d4IPh0Qkur2",
+                  "name": "Group: Protect (UK)",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selrdBK4MLUm2mtHK",
+                  "name": "Group: Residents Against Dirty Energy",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selWolAJZNdKIdsM2",
+                  "name": "Group: Rolls Royce",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selxcyjJZqicyfYdu",
+                  "name": "Group: Rolls Royce Combine Committee",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selfVlKUzsHVBJaaf",
+                  "name": "Group: Safe Landing",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selZQ9wKgrRbqDAHr",
+                  "name": "Group: Scot E3",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selJuNTcgzqS29foV",
+                  "name": "Group: Scottish Hazards",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selYakL01o5HpaDOF",
+                  "name": "Group: SOS-UK",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel0tqJumFQ9mlYuX",
+                  "name": "Group: SSE",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selgPjftfXtUZgJL9",
+                  "name": "Group: Stop Burning Trees Coalition",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seln4bjhQqi7CiLat",
+                  "name": "Group: Stop Sizewell C",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selrGLUJYG4SfKoae",
+                  "name": "Group: Teach the Future",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selvoQB68kIwZ11A5",
+                  "name": "Group: Thoughtbox",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sels2xhNwMiapXEJY",
+                  "name": "Group: Tipping Point UK",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seleBesPEvYMJ2zGm",
+                  "name": "Group: Transport for Quality of Life",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seluFXeoUCw0RwPff",
+                  "name": "Group: TUCAN",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "self3KVyeWiI5N8nm",
+                  "name": "Group: TUCG",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel14ytpP5KxvOqb3",
+                  "name": "Group: TUC Green Workplaces",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selvByB1r3Irk57Zw",
+                  "name": "Group: TUC TUSDAC",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selSZiBE13bmLJ06d",
+                  "name": "Group: TUED",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "sel9TqsrMAJtosNO7",
+                  "name": "Group: UCU Green Reps",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selXOVWw5wBM2cds9",
+                  "name": "Group: UNISON National Energy Branch",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selB1cVFWq05KxdWi",
+                  "name": "Group: Unite Grassroots Climate Justice Caucus",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selKprAnyuHRudxMY",
+                  "name": "Group: Uplift",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selxa7nEP4kLXPOUa",
+                  "name": "Group: Wakefield and District TUC",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selxgXhwzNr8p2qEE",
+                  "name": "Group: War on Want",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selVeaEX8fZE6ylex",
+                  "name": "Group: Workers 4 Energy For All",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selAySE4FhieTTmOg",
+                  "name": "Group: Worker-Climate Project",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "seldZAJFzDPdYRf93",
+                  "name": "Group: Workers Co-op",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selbDalJOwOan2sWa",
+                  "name": "Group: Workers Planet",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selWi8LAM84kWvlv9",
+                  "name": "Group: Working Class Climate Alliance",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selhVW1U1alY2WO35",
+                  "name": "Group: WWF Scotland",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selFFC5QS6FA8y0mY",
+                  "name": "Group: XR Trade Unions",
+                  "color": "tealLight2"
+                },
+                {
+                  "id": "selRF7L6LBGjZuPss",
+                  "name": "Institution: ClientEarth",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selCzcffoeLQkrJCy",
+                  "name": "Institution: Climate Change Committee",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selKDUt0bqSJ1ZY1L",
+                  "name": "Institution: Common Weal",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selRIg5kgIfiQha2M",
+                  "name": "Institution: Common Wealth",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selnNpVZecCDd9gJR",
+                  "name": "Institute: Cornell University",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selx8C8LygeNt1JJb",
+                  "name": "Institution: Energy Transition Fund",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selhkSMXXzF8QEjV4",
+                  "name": "Institution: European Union",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selfr0mlv8qPeFAis",
+                  "name": "Institution: Fairtrade Foundation",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sell9UWNncWOsugjq",
+                  "name": "Institution: Future Economy Scotland",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selLnHMAHtK0RhgaJ",
+                  "name": "Institution: Green Economy Coalition",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selT9PerHJUq3mC10",
+                  "name": "Institute: Global Labour Institute",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selW0B6XuhIdRRQJY",
+                  "name": "Institution: Green New Deal Group",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sel6jVORnY8RVYp5A",
+                  "name": "Institution: IIED Europe",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selq8RqJiMyi7GiJ3",
+                  "name": "Institution: Institute of Employment Rights",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selKIHDbXQGHWhCqk",
+                  "name": "Institution: Just Transition Commission",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selQhXJaNSS2uEYtz",
+                  "name": "Institution: Labour for a Green New Deal",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selT2L2TiK3ZyWDuX",
+                  "name": "Institution: Lancaster University",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selKRtBD0U13Beujm",
+                  "name": "Institution: Local Government",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selUd5mhh9Akdjd2e",
+                  "name": "Institution: Low Carbon Task Force",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selbdpvwO4rb05PGw",
+                  "name": "Institution: MCS Foundation",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sel0U0PeTuN670fqV",
+                  "name": "Institution: MutualGain",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "seltSek3m3dSYMeS0",
+                  "name": "Institution: New Economics Foundation",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selhFD0IbjHhfSRa2",
+                  "name": "Institution: North Sea Transition Authority ",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selaJKwZyh11ZwFDG",
+                  "name": "Institution: Oak Foundation",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selS2T4igEdimUxPi",
+                  "name": "Institution: Open Society Initiative for Europe",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selYILdE1ri8OIs2g",
+                  "name": "Institution: People’s Postcode Lottery",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selmE3cQsRPVgIfTV",
+                  "name": "Institution: Public Services International Research Unit",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selIrsSLr18AqFw75",
+                  "name": "Institution: Resolution Foundation",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selnjY1UzK4uWcXex",
+                  "name": "Institute: Rosa Luxemburg Stiftung NYC",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "seldigxNecxZIiKEu",
+                  "name": "Institution: Scottish Green Party",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selRFNVBYyqPSJkqr",
+                  "name": "Institution: Scottish Labour Party",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sel7R5tnvZIbk24i4",
+                  "name": "Institution: Scottish National Party (SNP)",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selgTSr40wwAjJRFL",
+                  "name": "Institution: Scottish Parliament",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selhskoPHe6F6TTmS",
+                  "name": "Institution: The Carbon Trust",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selLZfgj0R2qoEvMb",
+                  "name": "Institution: The Edge",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selUNigcQqa93VaVT",
+                  "name": "Institution: The Green Party",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "seltQ7rjCYwEvt5o5",
+                  "name": "Institution: The Labour Party",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selHA3xqweGoQ9yMj",
+                  "name": "Institute: The Worker Institute",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selMQNGtnoey4B2VW",
+                  "name": "Institution: Trade Union Task Force for a Public Energy Future",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selCliggVY76y63ap",
+                  "name": "Institution: Transition Economics",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selLqfAevoDqPHwBD",
+                  "name": "Institution: UCL",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sel9gH6p2BGJt3uiO",
+                  "name": "Institution: UK Parliament",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sel1ROs33eMs2qIed",
+                  "name": "Institution: UNFCCC COP",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selrMZJnVZbFohGeY",
+                  "name": "Institution: Wales Union Learning Fund",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selhilBVmq1Qp2K6N",
+                  "name": "Institution: Welsh Parliament",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "sel1hEmPCST6kMYq8",
+                  "name": "Institution: Zero Carbon Oxford Partnership",
+                  "color": "greenLight1"
+                },
+                {
+                  "id": "selGyI5riy3BHqxeD",
+                  "name": "International Union: AFA-CWA",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel7G0XZMxp5k4R6u",
+                  "name": "International Union: BWI",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "seltEX5v6mNtEqXEZ",
+                  "name": "International Union: CBTU",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel2Afs1A7PEJDVFh",
+                  "name": "International Union: CCOO",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selQho1BV2x1UA7Cb",
+                  "name": "International Union: CSIC",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel03EevXmrGeoeVg",
+                  "name": "International Union: Education International",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selSjInIYo5Bkakxb",
+                  "name": "International Union: EPSU",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel99cB5qSLhsB8xF",
+                  "name": "International Union: ETUC",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "seleEaAftV2SYTMWt",
+                  "name": "International Union: FIOM-CGIL",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selqOsSSwQEV64IOQ",
+                  "name": "International Union: FNME-CGT",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selo1GsMkLWs6Dtkg",
+                  "name": "International Union: IFALPA",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selvClNQ6yesR3KZh",
+                  "name": "International Union: Irish Congress of Trade Unions",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel5onqZhg2SCGGKB",
+                  "name": "International Union: ITF",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel01TqJ5roNRGuUD",
+                  "name": "International Union: ITUC",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "seljvS1T3SrACENx3",
+                  "name": "International Union: Nautilus International",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selEkQnrbf9u0CtNk",
+                  "name": "International Union: Nigeria Labour Congress",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel39sh3M1XyHwWTM",
+                  "name": "International Union: NUMSA",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel7uPL62jilH2aeu",
+                  "name": "International Union: OCAW",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "seluy1WkuQy1DDh89",
+                  "name": "International Union: PSI",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "sel8kZmCLv4i8jHab",
+                  "name": "International Union: UGT (General Union of Workers, Spain)",
+                  "color": "blueBright"
+                },
+                {
+                  "id": "selBD8i9aY61ACQpt",
+                  "name": "Place: Aberdeen",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selB2Wpo8PVwMvgXT",
+                  "name": "Place: Ansty",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selRj1RLzgQEE4Mkx",
+                  "name": "Place: Barnoldswick",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel7Tz9xMxU7Y481K",
+                  "name": "Place: Birmingham",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel47XM50fuS9oi3g",
+                  "name": "Place: Bristol",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selr1KkWj55HxLRu4",
+                  "name": "Place: Cardiff",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "seloKTw86P3qiML46",
+                  "name": "Place: Coventry",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selnd3gLUxMuDMr84",
+                  "name": "Place: Darlington",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selPyuInXGWCfe8Hp",
+                  "name": "Place: Doncaster",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selKAIi8hLIPGyhVd",
+                  "name": "Place: Durham",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel30QJVQnQRE21eo",
+                  "name": "Place: East England",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel3jC3EsN4Nw8pTU",
+                  "name": "Place: Egypt",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selPbo9P8XldCNmEW",
+                  "name": "Place: Ellesmere Port",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selk92piohb6yTL7H",
+                  "name": "Place: Europe",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selGcIuuazfGNfzE3",
+                  "name": "Place: Glasgow",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selXrkbZMV746PKCZ",
+                  "name": "Place: Grangemouth",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selBd7znisDZIAaDT",
+                  "name": "Place: Greenwich",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel1amQJGKRyeXBq9",
+                  "name": "Place: Harrogate",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selPCUEdZW25emnh3",
+                  "name": "Place: Inchinnan",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sellMeRizqnr0yoQB",
+                  "name": "Place: Inverness",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selfbGk8A2zoIvony",
+                  "name": "Place: Italy",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selsq5tSygVD4x5Zp",
+                  "name": "Place: Keele",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel0ppx5Kh4QZy5dE",
+                  "name": "Place: Leeds",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selt33KOKbajguJHv",
+                  "name": "Place: Liverpool",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel9dyCeeixSiDORN",
+                  "name": "Place: London",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel1Y5bk66OqjCrjr",
+                  "name": "Place: Manchester",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selHEmCWkJgSKTytH",
+                  "name": "Place: New York",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selId8qdIjlIUYcuy",
+                  "name": "Place: Newcastle",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selhrCcdNiCYsPo4U",
+                  "name": "Place: Northern Ireland",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selNQjGG1X47iVVZn",
+                  "name": "Place: North East England",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selzVhUv9VMT7Pr0y",
+                  "name": "Place: North Sea",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selbWKF8i3R0IesAh",
+                  "name": "Place: Oxford",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selAxZO4p3QBC15tE",
+                  "name": "Place: Port Talbot",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "seluEfBS64kfYvsYW",
+                  "name": "Place: Scotland",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selu7o8iXeJkjYAV3",
+                  "name": "Place: Scunthorpe",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "seliRDYna5vYVadl8",
+                  "name": "Place: Sheffield",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selNO4T9i8NBVs7IJ",
+                  "name": "Place: Shotton",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selqxzzwSTq6DDvlv",
+                  "name": "Place: South East England",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selWaojI04UWerBJJ",
+                  "name": "Place: South West England",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selqtLn55Kq0jIgPx",
+                  "name": "Place: Spain",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selfxwsxPSfGRi9ng",
+                  "name": "Place: Stockport",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selGs37ObirZq0ZQn",
+                  "name": "Place: Swansea",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "sel352vu3j5FL2N5C",
+                  "name": "Place: Trostre",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "seliPHVvptOc9UUgJ",
+                  "name": "Place: UK Continental Shelf (UKCS)",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selOQ9cGYkN8pBoSD",
+                  "name": "Place: USA",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selZANC8Si7Xg8WAk",
+                  "name": "Place: Wales",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selYNfnny2j151hHr",
+                  "name": "Place: Yorkshire and the Humber",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selwor96c7uYYF3WS",
+                  "name": "Result: Demands Met",
+                  "color": "redLight1"
+                },
+                {
+                  "id": "sel8FNSYqCpWN2Amq",
+                  "name": "Result: Worker Action Failure",
+                  "color": "redLight1"
+                },
+                {
+                  "id": "selMi7XZVgCkNsjdm",
+                  "name": "Sector: Agriculture",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selFQMiuYy9xDryRy",
+                  "name": "Sector: Arts/Creative Industries",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selrG4XEfYvI3McIa",
+                  "name": "Sector: Automotive",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "sel1Nw0zxaqaRrFTN",
+                  "name": "Sector: Aviation",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selOPY9xRtehOQ6BK",
+                  "name": "Sector: Catering & Food Production",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selHBB8Hvh1vDFW9a",
+                  "name": "Sector: Chemicals",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selSF8mhPbF0cfksP",
+                  "name": "Sector: Civil Service",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selRSUJxhyj8Jk99H",
+                  "name": "Sector: Construction",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selXGCRK53eAGEloc",
+                  "name": "Sector: Emergency Services",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "sel3lKYid3eIeT1e6",
+                  "name": "Sector: Education",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selz9snmXPR5R3gtf",
+                  "name": "Sector: Energy",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "seliVEezgfhod6FMS",
+                  "name": "Sector: Finance",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selJzeFHrvsEg3pjv",
+                  "name": "Sector: Healthcare",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "sel2TeE6mGg0aCgX2",
+                  "name": "Sector: Housing",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selEUcMjFowNMZGS3",
+                  "name": "Sector: Manufacturing",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selS1EMrTJ7lcdY7q",
+                  "name": "Sector: Maritime",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "sel5lP7IRCMlO79TA",
+                  "name": "Sector: Media/Journalism",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selXKBDKfHNot1fZ2",
+                  "name": "Sector: Military",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selABBU48oPfeJBti",
+                  "name": "Sector: Mining",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selxqAbq5HKCUDddM",
+                  "name": "Sector: Museums",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selByusQcjVUrakuC",
+                  "name": "Sector: Offshore Wind",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "seliY2qR299bcuBzk",
+                  "name": "Sector: Oil and Gas",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selALmSxYu84OD11q",
+                  "name": "Sector: Postal Services",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selvekPwwiY4IYEbh",
+                  "name": "Sector: Public Services",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "sel05NZ5I9fccnTEn",
+                  "name": "Sector: Renewables",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selBibDqT0bS7KvGv",
+                  "name": "Sector: Sport",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selQ3nnXqEAirZDpp",
+                  "name": "Sector: Steel",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selaxJcp4IaS3n5Le",
+                  "name": "Sector: Transport",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selTMa3d1e2uJ860V",
+                  "name": "Sector: Water",
+                  "color": "orangeLight2"
+                },
+                {
+                  "id": "selN0ThAlYL8qOKt3",
+                  "name": "Internal Structure: Environment Officer",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "seljSRkSUSgwMcZFr",
+                  "name": "Internal Structure: General Secretary",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selATu7qsWAd3Wcji",
+                  "name": "Internal Structure: Green Representative",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selHvU4rnCWdAwbpN",
+                  "name": "Internal Structure: Health and Safety Representative",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selJJoeo6WjAv9jEj",
+                  "name": "Internal Structure: Just Transition Commission ",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "seljgKDdNuZDSccNl",
+                  "name": "Internal Structure: National Industrial Sector Committee",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "seljPOixc7levQK4h",
+                  "name": "Internal Structure: Regional Industrial Sector Committee",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selUr9via9yDT4HrU",
+                  "name": "Internal Structure: Representative Structure",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selMpMyqbeT1ZdsEY",
+                  "name": "Internal Structure: Trades Councils",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selYRuY37pgmCsbCM",
+                  "name": "Internal Structure: Transition Staff",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selh8rM1oHIpcAtJs",
+                  "name": "Tactic: Boycott",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "seloWcwwBCEAqhCP2",
+                  "name": "Tactic: Call to Action",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selpCxBX6JL6Geghf",
+                  "name": "Tactic: Campaigns",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel2YzRDetZznq96l",
+                  "name": "Tactic: Capacity Building",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selpDjyGc0oClE31M",
+                  "name": "Tactic: Collective Bargaining",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selGYPRfgS1QFSV4N",
+                  "name": "Tactic: Committee Creation",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selzJgrqmZJHTiDtQ",
+                  "name": "Tactic: Community Energy Financing",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selvJxrsTjHrLptNh",
+                  "name": "Tactic: Community Projects",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selll331uICo4DvW6",
+                  "name": "Tactic: Conference",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selUD9puyPID575bB",
+                  "name": "Tactic: Consultations",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel79r6ILRBqzbJC2",
+                  "name": "Tactic: Debate",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel41SlYwtmvWZqrX",
+                  "name": "Tactic: Delegation",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selw90DVNdFn74CPT",
+                  "name": "Tactic: Demonstration/Protest",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel2hkcDtYaHeSOdf",
+                  "name": "Tactic: Environmental Audit",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selqVeTk5PRitGWm2",
+                  "name": "Tactic: Environmental Mainstreaming",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selIG6xtg9YOqompc",
+                  "name": "Tactic: Factory Conversion",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selc3rIxslVezgft7",
+                  "name": "Tactic: Framework",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selFPRN2Ra04uMz5I",
+                  "name": "Tactic: Fundraising",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selwW6562O8ZFDjmP",
+                  "name": "Tactic: Green Bargaining",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selBiFeRzBItALeph",
+                  "name": "Tactic: Greening Activities",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selEGGvfXZxuauFfT",
+                  "name": "Tactic: Hosting Events",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selUkLplJpS1Pilsn",
+                  "name": "Tactic: Identify Co-Benefits",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selvuWd1m7LrqpPp8",
+                  "name": "Tactic: Influenced by International Action",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selqrEA6iOz0iohug",
+                  "name": "Tactic: International Organising",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selgXqPOIaekEB2X1",
+                  "name": "Tactic: Legal Action",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selQKvBURZtlzRd6l",
+                  "name": "Tactic: Letter Writing",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selzXTALRSEW27Amy",
+                  "name": "Tactic: Lobbying",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selsThDlefRCM7ABs",
+                  "name": "Tactic: Media Stunt",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel2atzp01kxy6KYO",
+                  "name": "Tactic: Meeting",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selTG1MTfLEUei3jn",
+                  "name": "Tactic: Motions",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selVymRBqC2oH8qmE",
+                  "name": "Tactic: MP Briefing ",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selsFZoPLqvKsX3SD",
+                  "name": "Tactic: Negotiation",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selUJ9PsK6kPhIjpj",
+                  "name": "Tactic: Network Building ",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selAH8Ix6MwZ0iIkx",
+                  "name": "Tactic: Newsletter",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selBcalQJaV1L0JMs",
+                  "name": "Tactic: Petition",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selGkpULccRBWaONR",
+                  "name": "Tactic: Policy Briefing/Report Publication",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selHaw7c08cgJkyk4",
+                  "name": "Tactic: Policy/Law/Regulation Proposal",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selJeAeLWOGt9UGlh",
+                  "name": "Tactic: Public Sector Procurement",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selHhBqdM4rVaG6X2",
+                  "name": "Tactic: Raising Awareness",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selqMfjH5UyLRBkrE",
+                  "name": "Tactic: Reducing Waste",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel3AXlqZOCQdbigT",
+                  "name": "Tactic: Research",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "seli3bw9opEC4aOJV",
+                  "name": "Tactic: Resource Creation",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selZ4ncWW3TAwkeTw",
+                  "name": "Tactic: Social Media Use",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selRlUaqY3kcoj1V2",
+                  "name": "Tactic: Strike",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selPV3zxXa3cRNfj3",
+                  "name": "Tactic: Testimony Gathering ",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selYmUZKwFUnXd3CG",
+                  "name": "Tactic: Training/Education",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selNfhZpxG2DTnoCj",
+                  "name": "Tactic: Using Union Structures",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "sel36XthJ7fVD4xCA",
+                  "name": "Tactic: Whistleblowing ",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selzl3DipYaA9gsDQ",
+                  "name": "Tactic: Workshops",
+                  "color": "pinkLight2"
+                },
+                {
+                  "id": "selDFTSBkMev8wpIr",
+                  "name": "Union: Accord",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selCi0ExpZPpKismq",
+                  "name": "Union: Advance",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selRSWWvyWqAkX8KH",
+                  "name": "Union: Aegis",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selmgN2NHzDmS6dI4",
+                  "name": "Union: AEP",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selDI8sDGhUfxFYQR",
+                  "name": "Union: ASCL",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selTDj0plHAdnqTJm",
+                  "name": "Union: ASLEF",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selbpieUM11DTab5n",
+                  "name": "Union: AUE",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "seldxdKtHPNtgNbSc",
+                  "name": "Union: BALPA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selvBflo73Shx2fHA",
+                  "name": "Union: BDA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "seltUBCIeCPadIrH4",
+                  "name": "Union: BECTU Sector of Prospect",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selmrzzntf4HM6cHs",
+                  "name": "Union: BFAWU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel3PmdWZ4x4068iN",
+                  "name": "Union: BOSTU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sellAh1CTm7UcKnER",
+                  "name": "Union: Community",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selmmi5t5Z0snI4RS",
+                  "name": "Union: CSP",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selSLQKUk7r7l3shE",
+                  "name": "Union: CWU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selzLFFRgYu0VNKPo",
+                  "name": "Union: EIS",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selmHjlvaYtmN1v9e",
+                  "name": "Union: Equity",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selJow1SiEmID881j",
+                  "name": "Union: FBU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selJhxwiBW6DQRT6B",
+                  "name": "Union: FDA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sele5eQXRnm6tpiKu",
+                  "name": "Union: GFTU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel41HjprZnQurLST",
+                  "name": "Union: GMB",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selSmKcGqgcANRg07",
+                  "name": "Union: HCSA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "seljfvzUWVKenrliv",
+                  "name": "Union: IWGB",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selNodXgsEQ3HOY8T",
+                  "name": "Union: MU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selvqpm4Zs3SsFKjj",
+                  "name": "Union: NAHT",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selElufMZ9ViG3a1x",
+                  "name": "Union: NAPO",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selCLB4gtLYTdZhqH",
+                  "name": "Union: NASUWT",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selirPaSLIBVlc83t",
+                  "name": "Union: NEU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel40lx8ZDYm5vVQr",
+                  "name": "Union: NGSU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selLWcoti8FGgMijk",
+                  "name": "Union: NHBC-SA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selw0dQxD7lft7vOa",
+                  "name": "Union: NSEAD",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selvbS1VlpZtpYBjE",
+                  "name": "Union: NUJ",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selIx6DIPc4GVq6bx",
+                  "name": "Union: NUM",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel0r3x8Xub9W294t",
+                  "name": "Union: PCS",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selVSupeaKrbalZ5M",
+                  "name": "Union: PDA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selLgglTqoDqgxZVu",
+                  "name": "Union: PFA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selUzZOnmOLmc0uQO",
+                  "name": "Union: POA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selGL4TR7tOnSoEmd",
+                  "name": "Union: Prospect",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selJFWBSOuKRRMOZK",
+                  "name": "Union: RCM",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selXV9dHdueiKugbj",
+                  "name": "Union: RCN",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selmuUx5z3NdR9RfF",
+                  "name": "Union: Rcpod",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel1OEHkLw6iQENMX",
+                  "name": "Union: RMT",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel0c0Z10LL7AAVR1",
+                  "name": "Union: Social Workers' Union (SWU)",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selDTR35Nf68n68fP",
+                  "name": "Union: SoR",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "sel4AEc9v9O0yB5zd",
+                  "name": "Union: STUC",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selFXxufeHnSg6t9A",
+                  "name": "Union: TSSA",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selGjhq6ZCh6j9Z7r",
+                  "name": "Union: TUC",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selhrWXVI61jWnuYc",
+                  "name": "Union: TUC NEYH",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selVwMUE9XcYcFSCh",
+                  "name": "Union: UCAC",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selUYmA33KMXa4dXC",
+                  "name": "Union: UCU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selUhp9Ox4C9eDFwi",
+                  "name": "Union: Unison",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selzqYHC9jlZvYVR0",
+                  "name": "Union: Unite",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selOjmSPTiaPurMN4",
+                  "name": "Union: URTU",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selXTYk55X3nKt0N1",
+                  "name": "Union: USDAW",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selTDhZTDYG08BXpR",
+                  "name": "Union: UVW",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selG1k7u7p2tJ3LY9",
+                  "name": "Union: WGGB",
+                  "color": "cyanLight2"
+                },
+                {
+                  "id": "selZtucX0Tq9I7vbo",
+                  "name": "Union: WTUC",
+                  "color": "cyanLight2"
+                }
+              ]
+            },
+            "id": "fld4ETpwC4iq9rQlV",
+            "name": "Tags"
+          },
+          {
+            "type": "multilineText",
+            "id": "fldZMbGP4uxnG3nTK",
+            "name": "New Tags Needed"
+          },
+          {
+            "type": "checkbox",
+            "options": {
+              "icon": "xCheckbox",
+              "color": "redBright"
+            },
+            "id": "fldQx30JdCHJY3X5w",
+            "name": "No Worker-Climate Activity"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selSXcegcJYYRKj7f",
+                  "name": "More Research Needed",
+                  "color": "orangeBright"
+                },
+                {
+                  "id": "selNqtP1rwV8JS3j0",
+                  "name": "More Research Completed",
+                  "color": "greenLight1"
+                }
+              ]
+            },
+            "id": "fld4PP2k08dUUJMBm",
+            "name": "More Research?"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblyttxIhjlMBang4",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldEUuBbAM16I6kGf"
+            },
+            "id": "fldJhqJhwquvJ1DiG",
+            "name": "Case Studies Linked"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldh1BWDSMsCru4uo",
+            "name": "Notes"
+          },
+          {
+            "type": "autoNumber",
+            "id": "fldLTmqzWzrmZsygv",
+            "name": "ID"
+          },
+          {
+            "type": "multipleLookupValues",
+            "options": {
+              "isValid": true,
+              "recordLinkFieldId": "fldfFAw89WTvOOzd6",
+              "fieldIdInLinkedTable": "fld3ZDtf1PIdex6uf",
+              "result": {
+                "type": "singleLineText"
+              }
+            },
+            "id": "fldYIltMGsFXd5YO1",
+            "name": "Article (from Articles)"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblyttxIhjlMBang4",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fldJhqJhwquvJ1DiG"
+            },
+            "id": "fldEUuBbAM16I6kGf",
+            "name": "From field: Case Studies"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldwUv7Fq9U95VNOt",
+            "name": "Details for further research"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldVLyek0cSY6xmyO",
+            "name": "MA Team Members"
+          },
+          {
+            "type": "date",
+            "options": {
+              "dateFormat": {
+                "name": "local",
+                "format": "l"
+              }
+            },
+            "id": "fldlyKfuMWFNitXwQ",
+            "name": "Start Date"
+          },
+          {
+            "type": "date",
+            "options": {
+              "dateFormat": {
+                "name": "local",
+                "format": "l"
+              }
+            },
+            "id": "fld2HG6BJNKEfd6Nx",
+            "name": "End Date"
+          }
+        ],
+        "views": [
+          {
+            "id": "viwTCB19J6wIvgWnx",
+            "name": "Case Studies Overview",
+            "type": "grid"
+          },
+          {
+            "id": "viwAF5ZXcTwuSuMQJ",
+            "name": "Tags List",
+            "type": "levels"
+          },
+          {
+            "id": "viwt7SdHvI8H5NuOI",
+            "name": "Aegis",
+            "type": "grid"
+          },
+          {
+            "id": "viwpieVNKx6QhC6qF",
+            "name": "AEP",
+            "type": "grid"
+          },
+          {
+            "id": "viwKw4eEzDYQIjOQt",
+            "name": "ASCL",
+            "type": "grid"
+          },
+          {
+            "id": "viwCvFANSYbR9iDgP",
+            "name": "ASLEF",
+            "type": "grid"
+          },
+          {
+            "id": "viwbu8m17GHlI5JQc",
+            "name": "AUE",
+            "type": "grid"
+          },
+          {
+            "id": "viw1pDwSEsOeszynJ",
+            "name": "BALPA",
+            "type": "grid"
+          },
+          {
+            "id": "viwOnp502sf0ZiW3W",
+            "name": "BFAWU",
+            "type": "grid"
+          },
+          {
+            "id": "viwuWUI7Aaym4FKCL",
+            "name": "BDA",
+            "type": "grid"
+          },
+          {
+            "id": "viwyplD6IeeT0TPge",
+            "name": "BOSTU",
+            "type": "grid"
+          },
+          {
+            "id": "viw4EttnwVbBVTAEW",
+            "name": "Community",
+            "type": "grid"
+          },
+          {
+            "id": "viw4FsT4t799AdjCf",
+            "name": "CWU",
+            "type": "grid"
+          },
+          {
+            "id": "viw6UsY567uNlv8Om",
+            "name": "EIS",
+            "type": "grid"
+          },
+          {
+            "id": "viw4PQyy38sqQbDpm",
+            "name": "Equity",
+            "type": "grid"
+          },
+          {
+            "id": "viwn0x8xSOeXgvilZ",
+            "name": "FBU",
+            "type": "grid"
+          },
+          {
+            "id": "viwggbONmgGHxxpCL",
+            "name": "FDA",
+            "type": "grid"
+          },
+          {
+            "id": "viwyieY3dAVpN9EZs",
+            "name": "GFTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwBV7AHJEg6QMF2V",
+            "name": "GMB",
+            "type": "grid"
+          },
+          {
+            "id": "viw89tQ4upON5Me32",
+            "name": "IWGB",
+            "type": "grid"
+          },
+          {
+            "id": "viwJvI6sRAG8xV8rg",
+            "name": "MU",
+            "type": "grid"
+          },
+          {
+            "id": "viwlEJJ3AqkBDNt6I",
+            "name": "NAHT",
+            "type": "grid"
+          },
+          {
+            "id": "viw298NtWnu1kBBcG",
+            "name": "NAPO",
+            "type": "grid"
+          },
+          {
+            "id": "viwPVNkNwMNDO4BZO",
+            "name": "NASUWT",
+            "type": "grid"
+          },
+          {
+            "id": "viw0gmWEhNcMChyAv",
+            "name": "NEU",
+            "type": "grid"
+          },
+          {
+            "id": "viwMcIhh4SjW90t3M",
+            "name": "NGSU",
+            "type": "grid"
+          },
+          {
+            "id": "viwZZErvz1u4DtjYO",
+            "name": "NHBC-SA",
+            "type": "grid"
+          },
+          {
+            "id": "viwkbvtmNhlWJSwGq",
+            "name": "NSEAD",
+            "type": "grid"
+          },
+          {
+            "id": "viwREMhQCgKz3qCYT",
+            "name": "NUJ",
+            "type": "grid"
+          },
+          {
+            "id": "viwFhDQvi1q0wREKR",
+            "name": "PCS",
+            "type": "grid"
+          },
+          {
+            "id": "viwOshyHlwKWbh5Fp",
+            "name": "PDA",
+            "type": "grid"
+          },
+          {
+            "id": "viw3ip91886CB4MuU",
+            "name": "POA",
+            "type": "grid"
+          },
+          {
+            "id": "viwPytEdvqETPUH6H",
+            "name": "Prospect",
+            "type": "grid"
+          },
+          {
+            "id": "viwZWlLlkBngC1IF8",
+            "name": "RCN",
+            "type": "grid"
+          },
+          {
+            "id": "viwM8n1psjTuC92FY",
+            "name": "RMT",
+            "type": "grid"
+          },
+          {
+            "id": "viwRprHpFgvMyo9qy",
+            "name": "SoR",
+            "type": "grid"
+          },
+          {
+            "id": "viwIYsX0NHyMEhYSC",
+            "name": "STUC",
+            "type": "grid"
+          },
+          {
+            "id": "viwKTecL03P50cC5Z",
+            "name": "SWU",
+            "type": "grid"
+          },
+          {
+            "id": "viwlmM3UcwB1YptUA",
+            "name": "TSSA",
+            "type": "grid"
+          },
+          {
+            "id": "viwOd7xH0JN4NRR6v",
+            "name": "TUC",
+            "type": "grid"
+          },
+          {
+            "id": "viwls9bM5Xb3uwISI",
+            "name": "TUC NEYH",
+            "type": "grid"
+          },
+          {
+            "id": "viwlUUzjyfivfYhno",
+            "name": "UCU",
+            "type": "grid"
+          },
+          {
+            "id": "viw8BG13zN8RRsURC",
+            "name": "Unison",
+            "type": "grid"
+          },
+          {
+            "id": "viwd40PTnV4SK6xqm",
+            "name": "Unite",
+            "type": "grid"
+          },
+          {
+            "id": "viw45AKsWdRvmWOz6",
+            "name": "UVW",
+            "type": "grid"
+          },
+          {
+            "id": "viwwsZPhFNPku928i",
+            "name": "WTUC",
+            "type": "grid"
+          },
+          {
+            "id": "viw7Npwcr6mtPYVqZ",
+            "name": "Accord",
+            "type": "grid"
+          },
+          {
+            "id": "viwUeMGqm4PvKd6dO",
+            "name": "Advance",
+            "type": "grid"
+          },
+          {
+            "id": "viwijAECWwMUAx7jP",
+            "name": "BECTU",
+            "type": "grid"
+          },
+          {
+            "id": "viw0l6mgaw6VS9939",
+            "name": "CSP",
+            "type": "grid"
+          },
+          {
+            "id": "viwJ3on40Mw0cqyuZ",
+            "name": "HCSA",
+            "type": "grid"
+          },
+          {
+            "id": "viwlDvSdC4W6K7Aim",
+            "name": "NUM",
+            "type": "grid"
+          },
+          {
+            "id": "viwrznboQQkRqEQ7H",
+            "name": "PFA",
+            "type": "grid"
+          },
+          {
+            "id": "viwvwXwmULZK2WolO",
+            "name": "RCM",
+            "type": "grid"
+          },
+          {
+            "id": "viwOhifFT4ebZLrE1",
+            "name": "RCPod",
+            "type": "grid"
+          },
+          {
+            "id": "viwTjDRDQRqEyFuPG",
+            "name": "UCAC",
+            "type": "grid"
+          },
+          {
+            "id": "viwAHiF36D0jhtA4O",
+            "name": "URTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwGtKPQDnjOJx4AJ",
+            "name": "USDAW",
+            "type": "grid"
+          },
+          {
+            "id": "viwFCLT8zBExk9bmW",
+            "name": "WGGB",
+            "type": "grid"
+          },
+          {
+            "id": "viw0rnMSqrRH3y6i6",
+            "name": "Boycott",
+            "type": "grid"
+          },
+          {
+            "id": "viwXg86RQiuT5wEr5",
+            "name": "Call to Action (Tactic)",
+            "type": "grid"
+          },
+          {
+            "id": "viwGRGtrLvcunFK2D",
+            "name": "Campaigns",
+            "type": "grid"
+          },
+          {
+            "id": "viwB9LKdJFAKZP3fg",
+            "name": "Capacity Building",
+            "type": "grid"
+          },
+          {
+            "id": "viwyM0Lly7X4WRe9E",
+            "name": "Collective Bargaining",
+            "type": "grid"
+          },
+          {
+            "id": "viwAZZZ6zLG1zyzOq",
+            "name": "Committee Creation",
+            "type": "grid"
+          },
+          {
+            "id": "viwtodpERKuRYMFZG",
+            "name": "Community Energy Financing",
+            "type": "grid"
+          },
+          {
+            "id": "viwA0Ugb9rll0u9Hd",
+            "name": "Community Projects",
+            "type": "grid"
+          },
+          {
+            "id": "viwBz8TIS4R3SAHdL",
+            "name": "Conference",
+            "type": "grid"
+          },
+          {
+            "id": "viwgitmajJrgYdhl8",
+            "name": "Consultations",
+            "type": "grid"
+          },
+          {
+            "id": "viwz6j5v38S7i5Om1",
+            "name": "Debate",
+            "type": "grid"
+          },
+          {
+            "id": "viwzbZ1FKHyEEuvf9",
+            "name": "Delegation",
+            "type": "grid"
+          },
+          {
+            "id": "viw2NXq4eHwKMnKOi",
+            "name": "Demonstration/Protest",
+            "type": "grid"
+          },
+          {
+            "id": "viwAlbj21r46siPXG",
+            "name": "Environmental Audit",
+            "type": "grid"
+          },
+          {
+            "id": "viwFzeABIEJVBihkd",
+            "name": "Environmental Mainstreaming",
+            "type": "grid"
+          },
+          {
+            "id": "viwEFVOR2rf5HUpdt",
+            "name": "Factory Conversion",
+            "type": "grid"
+          },
+          {
+            "id": "viw0HE49YFrASecNk",
+            "name": "Framework",
+            "type": "grid"
+          },
+          {
+            "id": "viwudt4t2sv3LY66j",
+            "name": "Fundraising",
+            "type": "grid"
+          },
+          {
+            "id": "viwtmvcF97XHioWdN",
+            "name": "Green Bargaining",
+            "type": "grid"
+          },
+          {
+            "id": "viwyK2ko3MgRejB9O",
+            "name": "Greening Activities",
+            "type": "grid"
+          },
+          {
+            "id": "viw1G2GdogYLXbLHN",
+            "name": "Hosting Events",
+            "type": "grid"
+          },
+          {
+            "id": "viwulyWQ2sdikV5MJ",
+            "name": "Identify Co-Benefits",
+            "type": "grid"
+          },
+          {
+            "id": "viw6AugTEFgbSE0w6",
+            "name": "Influenced by International Action",
+            "type": "grid"
+          },
+          {
+            "id": "viwhKBGBXn5AekTXF",
+            "name": "International Organising",
+            "type": "grid"
+          },
+          {
+            "id": "viwswaMWppWHM8qNc",
+            "name": "Legal Action",
+            "type": "grid"
+          },
+          {
+            "id": "viwE0SexDAcd7gxFV",
+            "name": "Letter Writing",
+            "type": "grid"
+          },
+          {
+            "id": "viwJJJG0M8GVrUHKX",
+            "name": "Lobbying",
+            "type": "grid"
+          },
+          {
+            "id": "viwcgq2Br0ux8B2Gl",
+            "name": "Media Stunt",
+            "type": "grid"
+          },
+          {
+            "id": "viwzg8sS8LQh3KsGx",
+            "name": "Meeting",
+            "type": "grid"
+          },
+          {
+            "id": "viwQJHA632AtwrCbK",
+            "name": "Motions",
+            "type": "grid"
+          },
+          {
+            "id": "viweBQ30vhygnxJJ4",
+            "name": "MP Briefing",
+            "type": "grid"
+          },
+          {
+            "id": "viwT2x4Y1h5pD7u1E",
+            "name": "Negotiation",
+            "type": "grid"
+          },
+          {
+            "id": "viw3V4ViOFB14GL3h",
+            "name": "Network Building",
+            "type": "grid"
+          },
+          {
+            "id": "viwXzCdyuTxkvvQWl",
+            "name": "Newsletter",
+            "type": "grid"
+          },
+          {
+            "id": "viw9gw5ZdCTdj4dw6",
+            "name": "Petition",
+            "type": "grid"
+          },
+          {
+            "id": "viwuQWJY3BWIf5xpm",
+            "name": "Policy Briefing/Report Publication",
+            "type": "grid"
+          },
+          {
+            "id": "viwBsi98Pnai7H2Ei",
+            "name": "Policy/Law/Regulation Proposal",
+            "type": "grid"
+          },
+          {
+            "id": "viw0VV66rSuNCICjO",
+            "name": "Public Sector Procurement",
+            "type": "grid"
+          },
+          {
+            "id": "viwLxjx0e6LKz2Onm",
+            "name": "Raising Awareness",
+            "type": "grid"
+          },
+          {
+            "id": "viwddEDX0BAumEBex",
+            "name": "Reducing Waste",
+            "type": "grid"
+          },
+          {
+            "id": "viwsVkQ8iavl0yDYd",
+            "name": "Research",
+            "type": "grid"
+          },
+          {
+            "id": "viwFDglrlUl9DOZVv",
+            "name": "Resource Creation",
+            "type": "grid"
+          },
+          {
+            "id": "viwjg4w0VlUvNxCim",
+            "name": "Social Media Use",
+            "type": "grid"
+          },
+          {
+            "id": "viwd3hNrVpVxpezEt",
+            "name": "Strike",
+            "type": "grid"
+          },
+          {
+            "id": "viwqNX6XCGxu4gdVw",
+            "name": "Testimony Gathering",
+            "type": "grid"
+          },
+          {
+            "id": "viw7nNcbU2HsqGa8y",
+            "name": "Training/Education",
+            "type": "grid"
+          },
+          {
+            "id": "viwEaFR5WBcfh0nsp",
+            "name": "Using Union Structures",
+            "type": "grid"
+          },
+          {
+            "id": "viw1McunhEXUiQUDB",
+            "name": "Whistleblowing",
+            "type": "grid"
+          },
+          {
+            "id": "viwuYXiWEhBhs5KrT",
+            "name": "Workshops",
+            "type": "grid"
+          },
+          {
+            "id": "viwd1w0PuzPfGyTCT",
+            "name": "Demands Met",
+            "type": "grid"
+          },
+          {
+            "id": "viwJ4FzBSyXz7In6G",
+            "name": "Worker Action Failure",
+            "type": "grid"
+          },
+          {
+            "id": "viwOOdsQOuP35nodx",
+            "name": "Air Quality",
+            "type": "grid"
+          },
+          {
+            "id": "viwXi1h9tsCUWXPzE",
+            "name": "British Procurement",
+            "type": "grid"
+          },
+          {
+            "id": "viwoROaJX283PlhKr",
+            "name": "Call to Action (Demand)",
+            "type": "grid"
+          },
+          {
+            "id": "viwOd12seDTIyjJhd",
+            "name": "Campaign",
+            "type": "grid"
+          },
+          {
+            "id": "viwJdj3BByter70Lc",
+            "name": "Challenge Climate Denial",
+            "type": "grid"
+          },
+          {
+            "id": "viwB6RvbpONJUgT7I",
+            "name": "Climate Action",
+            "type": "grid"
+          },
+          {
+            "id": "viwULN9VSiItWZXbM",
+            "name": "Climate Adaptation",
+            "type": "grid"
+          },
+          {
+            "id": "viwthwmZab5bBank0",
+            "name": "Climate Justice",
+            "type": "grid"
+          },
+          {
+            "id": "viwH4uEtM3rhiusWb",
+            "name": "Decarbonisation",
+            "type": "grid"
+          },
+          {
+            "id": "viwVjA86jzMT80POP",
+            "name": "Divestment",
+            "type": "grid"
+          },
+          {
+            "id": "viwp95yCgJSF64EYg",
+            "name": "Eco-Social Justice",
+            "type": "grid"
+          },
+          {
+            "id": "viwHa0Pu3MxI521PD",
+            "name": "Economic Democracy",
+            "type": "grid"
+          },
+          {
+            "id": "viwuvlloNIw6CCq8d",
+            "name": "Energy Justice",
+            "type": "grid"
+          },
+          {
+            "id": "viwTgSGbCsZJ2Pfhj",
+            "name": "Engagement in Collective Bargaining",
+            "type": "grid"
+          },
+          {
+            "id": "viw1YSFurujS1p27P",
+            "name": "Environmental Audit (Demand)",
+            "type": "grid"
+          },
+          {
+            "id": "viwsFhvZgSHqbmA4k",
+            "name": "Food Security",
+            "type": "grid"
+          },
+          {
+            "id": "viwzoGy3GAGzEdz6q",
+            "name": "Free Energy",
+            "type": "grid"
+          },
+          {
+            "id": "viwhd4B0X9fFTamhq",
+            "name": "Free Public Transport",
+            "type": "grid"
+          },
+          {
+            "id": "viw5GY7vBZRIVyQ7F",
+            "name": "Freedom of Speech",
+            "type": "grid"
+          },
+          {
+            "id": "viwVsoQdiAgRARDuC",
+            "name": "Funding and Investment",
+            "type": "grid"
+          },
+          {
+            "id": "viwZaLE7nmc50m3ZG",
+            "name": "Gender Equality",
+            "type": "grid"
+          },
+          {
+            "id": "viwUvCAmg2S8XTsGX",
+            "name": "Government Training Grants",
+            "type": "grid"
+          },
+          {
+            "id": "viwAH7jHWH7ReuHst",
+            "name": "Green Infrastructure",
+            "type": "grid"
+          },
+          {
+            "id": "viw6OL0NeeVinhGGd",
+            "name": "Greening Production",
+            "type": "grid"
+          },
+          {
+            "id": "viwyCnlDQs7xQNwqK",
+            "name": "Green Jobs",
+            "type": "grid"
+          },
+          {
+            "id": "viwWHWrYVgLk1G763",
+            "name": "Green New Deal",
+            "type": "grid"
+          },
+          {
+            "id": "viwf5dpQiJUF94es0",
+            "name": "Green Pensions",
+            "type": "grid"
+          },
+          {
+            "id": "viwzc4CfMG4B6SPCL",
+            "name": "Green Skills and Training",
+            "type": "grid"
+          },
+          {
+            "id": "viw2LBzQOxqyBhHhV",
+            "name": "Green Transport",
+            "type": "grid"
+          },
+          {
+            "id": "viwLigk5z4V1MXqYH",
+            "name": "Health and Safety",
+            "type": "grid"
+          },
+          {
+            "id": "viwSL7SYsFxOniRU5",
+            "name": "Heatwave Furlough Scheme",
+            "type": "grid"
+          },
+          {
+            "id": "viwyVWyGOJ6NzMCBu",
+            "name": "Housing",
+            "type": "grid"
+          },
+          {
+            "id": "viwiHuCvhVVoSe8u7",
+            "name": "Improved Working Conditions",
+            "type": "grid"
+          },
+          {
+            "id": "viwvRt0Q6NlVzcvDQ",
+            "name": "Industrial Reuse and Repurposing",
+            "type": "grid"
+          },
+          {
+            "id": "viwGPH8STSlINOgco",
+            "name": "Investment in Care Economy",
+            "type": "grid"
+          },
+          {
+            "id": "viw6aOptCPkEmyCmA",
+            "name": "Just Transition",
+            "type": "grid"
+          },
+          {
+            "id": "viwXxdRA6PX2SelJE",
+            "name": "Legislation",
+            "type": "grid"
+          },
+          {
+            "id": "viwiiGMLgo0CwJzyd",
+            "name": "Low Impact Catering",
+            "type": "grid"
+          },
+          {
+            "id": "viwbmGZ89TuTIwvrn",
+            "name": "Maximum Working Temperature",
+            "type": "grid"
+          },
+          {
+            "id": "viws13sfq74Z32IO9",
+            "name": "National Climate Service",
+            "type": "grid"
+          },
+          {
+            "id": "viwY53p39GWrzIqaf",
+            "name": "Net-Zero Carbon Emissions",
+            "type": "grid"
+          },
+          {
+            "id": "viw02LObxqQaeLvhq",
+            "name": "No Zonal Electricity Pricing",
+            "type": "grid"
+          },
+          {
+            "id": "viwBqodBYtMIbFSme",
+            "name": "Oppose the Far Right",
+            "type": "grid"
+          },
+          {
+            "id": "viwOYn1ew1XESAeWt",
+            "name": "Polluter Pays Principle",
+            "type": "grid"
+          },
+          {
+            "id": "viw4bf9wM5sRNLJhq",
+            "name": "Public Ownership",
+            "type": "grid"
+          },
+          {
+            "id": "viwwNY7UPlTCFlCjY",
+            "name": "Racial Equality",
+            "type": "grid"
+          },
+          {
+            "id": "viwhcwrZfQhx514fc",
+            "name": "Reject Fossil Fuel Sponsorship",
+            "type": "grid"
+          },
+          {
+            "id": "viwxH1ogZYoTY0VIT",
+            "name": "Renewable Energy Expansion",
+            "type": "grid"
+          },
+          {
+            "id": "viwRTOwttNJRG6to8",
+            "name": "Response to Job Losses",
+            "type": "grid"
+          },
+          {
+            "id": "viwAQqlY1xSYxHyp2",
+            "name": "Retrofitting",
+            "type": "grid"
+          },
+          {
+            "id": "viwmlwDBbsYGZXASQ",
+            "name": "Skills Audit",
+            "type": "grid"
+          },
+          {
+            "id": "viw97TMFU1jCaryrt",
+            "name": "Socially/Environmentally Useful Production",
+            "type": "grid"
+          },
+          {
+            "id": "viw5ib9bwk4fsbefe",
+            "name": "Socioeconomic Transformation",
+            "type": "grid"
+          },
+          {
+            "id": "viwrJJSbwKJvEKk2i",
+            "name": "State-Supported Transition",
+            "type": "grid"
+          },
+          {
+            "id": "viwAGs91NwmqhSTyg",
+            "name": "Strengthen Role of Green Reps",
+            "type": "grid"
+          },
+          {
+            "id": "viwCJs1cBUjSUdXUM",
+            "name": "Support Biodiversity",
+            "type": "grid"
+          },
+          {
+            "id": "viwO3R19pwz8APzLZ",
+            "name": "Sustainable Travel Plan",
+            "type": "grid"
+          },
+          {
+            "id": "viw6fQkaTyzf8Zwwh",
+            "name": "Tax",
+            "type": "grid"
+          },
+          {
+            "id": "viwSplpGVxGDfUdbR",
+            "name": "Universal Workers Rights",
+            "type": "grid"
+          },
+          {
+            "id": "viw2vMD7iB4MrqNji",
+            "name": "Wage Floor",
+            "type": "grid"
+          },
+          {
+            "id": "viwpmZBljZNYsv67y",
+            "name": "Whistleblowing Rights",
+            "type": "grid"
+          },
+          {
+            "id": "viwteaeo53Qk0B8Gw",
+            "name": "Worker-Led Transition",
+            "type": "grid"
+          },
+          {
+            "id": "viwYdiLKhMS5NFqnd",
+            "name": "Zero Waste and Circular Model",
+            "type": "grid"
+          },
+          {
+            "id": "viwcUihePvaTVgsCE",
+            "name": "BWI",
+            "type": "grid"
+          },
+          {
+            "id": "viwRU615RokpjLzog",
+            "name": "CBTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwKmfvaqXDl5c505",
+            "name": "CCOO",
+            "type": "grid"
+          },
+          {
+            "id": "viwRddPoO7dIHwsX2",
+            "name": "CSIC",
+            "type": "grid"
+          },
+          {
+            "id": "viwiBxw74BhbPaA9l",
+            "name": "Education International",
+            "type": "grid"
+          },
+          {
+            "id": "viwI0ScwkuyHXilcE",
+            "name": "EPSU",
+            "type": "grid"
+          },
+          {
+            "id": "viwmIgX9DW3dOyz5c",
+            "name": "ETUC",
+            "type": "grid"
+          },
+          {
+            "id": "viwWHZBYgcD1xKuYs",
+            "name": "FIOM-CGIL",
+            "type": "grid"
+          },
+          {
+            "id": "viw0xneRbDJUFC0vo",
+            "name": "FNME-CGT",
+            "type": "grid"
+          },
+          {
+            "id": "viwRfKyI0IHjJD3EC",
+            "name": "ICTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwn8udB5m5VkSQhQ",
+            "name": "IFALPA",
+            "type": "grid"
+          },
+          {
+            "id": "viwdLpGxMpViz9iqm",
+            "name": "Irish Congress of Trade Unions",
+            "type": "grid"
+          },
+          {
+            "id": "viwjt8pSQfV4Rh88Y",
+            "name": "ITF",
+            "type": "grid"
+          },
+          {
+            "id": "viw4PaMe4USoZEwLC",
+            "name": "ITUC",
+            "type": "grid"
+          },
+          {
+            "id": "viwVr0cSQgsly5mAa",
+            "name": "Nautilus International",
+            "type": "grid"
+          },
+          {
+            "id": "viwObJvIuMhsfuH9c",
+            "name": "Nigeria Labour Congress",
+            "type": "grid"
+          },
+          {
+            "id": "viwtUxTje9rY197h8",
+            "name": "NUMSA",
+            "type": "grid"
+          },
+          {
+            "id": "viwDRP8JhMEjsvJx9",
+            "name": "PSI",
+            "type": "grid"
+          },
+          {
+            "id": "viwQudWg6dRKVpSr0",
+            "name": "OCAW",
+            "type": "grid"
+          },
+          {
+            "id": "viwgdjYXR6PVtY8bs",
+            "name": "UGT",
+            "type": "grid"
+          },
+          {
+            "id": "viwV3zLnz2kJ1EU9N",
+            "name": "AFA-CWA",
+            "type": "grid"
+          },
+          {
+            "id": "viwpwGR4kTKiS7XGj",
+            "name": "ACORN",
+            "type": "grid"
+          },
+          {
+            "id": "viwRJCFbTW47nNokd",
+            "name": "Adaptation Scotland",
+            "type": "grid"
+          },
+          {
+            "id": "viwSIn7EiUei1CiSa",
+            "name": "Association of Colleges",
+            "type": "grid"
+          },
+          {
+            "id": "viwajwb5vitm9VNwC",
+            "name": "BARAC",
+            "type": "grid"
+          },
+          {
+            "id": "viwNEYO064d1OUY0j",
+            "name": "Battersea and Wandsworth TUC",
+            "type": "grid"
+          },
+          {
+            "id": "viwB84SF2lZUB6ug1",
+            "name": "BDHTC",
+            "type": "grid"
+          },
+          {
+            "id": "viwDysHLHoXT4vW04",
+            "name": "BFAWU Green Reps",
+            "type": "grid"
+          },
+          {
+            "id": "viwCWimuMqfOhuIvT",
+            "name": "BIGTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwjts0IMqkWaEtSY",
+            "name": "BMA",
+            "type": "grid"
+          },
+          {
+            "id": "viw8Jpxe50Ue2fo1M",
+            "name": "Bristol Unions United",
+            "type": "grid"
+          },
+          {
+            "id": "viwk1eYxFp6pNMajp",
+            "name": "C40 Global Youth Forum",
+            "type": "grid"
+          },
+          {
+            "id": "viw2HtqjVXWEkJRBp",
+            "name": "CACC",
+            "type": "grid"
+          },
+          {
+            "id": "viwHS7CfxTgZ9OPYa",
+            "name": "CACCTU",
+            "type": "grid"
+          },
+          {
+            "id": "viwbrWIfznpgoWGvd",
+            "name": "Campaign for Better Transport",
+            "type": "grid"
+          },
+          {
+            "id": "viwSn02mqJQUTG4yt",
+            "name": "CJC",
+            "type": "grid"
+          },
+          {
+            "id": "viwDkUi4kTqquFeCa",
+            "name": "CJCTUC",
+            "type": "grid"
+          },
+          {
+            "id": "viwb56prVk74mSwRV",
+            "name": "Climate Action Leeds",
+            "type": "grid"
+          },
+          {
+            "id": "viwRi4XjvrFCryTAn",
+            "name": "Climate Coalition",
+            "type": "grid"
+          },
+          {
+            "id": "viwSpG8hzoIpLUycq",
+            "name": "Climate Jobs UK",
+            "type": "grid"
+          },
+          {
+            "id": "viwcRlqUxZyATa6PQ",
+            "name": "Climate Majority Project",
+            "type": "grid"
+          },
+          {
+            "id": "viwC2ROi4EzgcMr2B",
+            "name": "Coventry for a GND",
+            "type": "grid"
+          },
+          {
+            "id": "viwSG658oryAXRCvD",
+            "name": "Disability Rights UK",
+            "type": "grid"
+          },
+          {
+            "id": "viwMdFVoFJ1fZj2UI",
+            "name": "Earth Strike",
+            "type": "grid"
+          },
+          {
+            "id": "viwAVgezusiQP2IH6",
+            "name": "End Fuel Poverty Coalition",
+            "type": "grid"
+          },
+          {
+            "id": "viwDECJ8wfOpiU6Ur",
+            "name": "Energy for All",
+            "type": "grid"
+          },
+          {
+            "id": "viwpY264c5zzTZauq",
+            "name": "Equity for a GND",
+            "type": "grid"
+          },
+          {
+            "id": "viwrfCbkYbc4m0VSv",
+            "name": "Fare Free London",
+            "type": "grid"
+          },
+          {
+            "id": "viwV5ttuaKoxKP142",
+            "name": "Financing a JT Alliance",
+            "type": "grid"
+          },
+          {
+            "id": "viwirpV4LlzkHmakz",
+            "name": "Fossil Free London",
+            "type": "grid"
+          },
+          {
+            "id": "viwcpkY7ZZZxspcbq",
+            "name": "FoE",
+            "type": "grid"
+          },
+          {
+            "id": "viw3f4I48syewhc0v",
+            "name": "FoES",
+            "type": "grid"
+          },
+          {
+            "id": "viwkVpvMQsrsNzZVZ",
+            "name": "Fuel Poverty Action",
+            "type": "grid"
+          },
+          {
+            "id": "viwqUuaEhQEhi6gPg",
+            "name": "GJA",
+            "type": "grid"
+          },
+          {
+            "id": "viwyUqRJslD0DgDgO",
+            "name": "GKN",
+            "type": "grid"
+          },
+          {
+            "id": "viw8hbPQjTdTGOs9O",
+            "name": "GKN Factory Collective",
+            "type": "grid"
+          },
+          {
+            "id": "viwd5a5MVV4yENtGV",
+            "name": "Global Climate Jobs",
+            "type": "grid"
+          },
+          {
+            "id": "viwuD7wyXIMIzjRqj",
+            "name": "Global Justice Now",
+            "type": "grid"
+          },
+          {
+            "id": "viwtlO15KTyn4qKvS",
+            "name": "Global Witness",
+            "type": "grid"
+          },
+          {
+            "id": "viwFTbt3XXd3LYouT",
+            "name": "GMB 4 GND",
+            "type": "grid"
+          },
+          {
+            "id": "viwaeC45UGilZKN2L",
+            "name": "GMB JT Panel",
+            "type": "grid"
+          },
+          {
+            "id": "viw0xVRazTBuooWxi",
+            "name": "GND Rising ",
+            "type": "grid"
+          },
+          {
+            "id": "viworr3a0HPEJgIYr",
+            "name": "Good Law Project",
+            "type": "grid"
+          },
+          {
+            "id": "viwH4KbzEsw0QSYrA",
+            "name": "Green Alliance",
+            "type": "grid"
+          },
+          {
+            "id": "viwZhrMT7LLzxFbMU",
+            "name": "Greenpeace UK",
+            "type": "grid"
+          },
+          {
+            "id": "viwSFfQW71ON0XEu5",
+            "name": "Green Rider",
+            "type": "grid"
+          },
+          {
+            "id": "viwFfpcRgt7mtjOEs",
+            "name": "Green Unison",
+            "type": "grid"
+          },
+          {
+            "id": "viwPklkIzFjxf55Lj",
+            "name": "Guild of Students",
+            "type": "grid"
+          },
+          {
+            "id": "viw1o38UbAO1QmtnA",
+            "name": "Haiti Action for Change",
+            "type": "grid"
+          },
+          {
+            "id": "viwfAYXeJloid58Q0",
+            "name": "Hazards",
+            "type": "grid"
+          },
+          {
+            "id": "viwfe5gRZCuaylxA2",
+            "name": "Healthy Air Coalition",
+            "type": "grid"
+          },
+          {
+            "id": "viw3QI5r3Y6BHSnnC",
+            "name": "Heat Strike",
+            "type": "grid"
+          },
+          {
+            "id": "viwmQBjaPToxCk4BS",
+            "name": "Households Declare!",
+            "type": "grid"
+          },
+          {
+            "id": "viwHmJuWs0EMjFV7u",
+            "name": "ILAW",
+            "type": "grid"
+          },
+          {
+            "id": "viwWSnAxNzcedc1pn",
+            "name": "Just Transition Partnership",
+            "type": "grid"
+          },
+          {
+            "id": "viwJZvLEHPofryW1H",
+            "name": "Just Transition Wakefield",
+            "type": "grid"
+          },
+          {
+            "id": "viwW30PMg7rwTla3c",
+            "name": "London Hazards Centre",
+            "type": "grid"
+          },
+          {
+            "id": "viwMNCkx4d2USk7Uv",
+            "name": "London Mining Network",
+            "type": "grid"
+          },
+          {
+            "id": "viw2prrMV9doEzKLx",
+            "name": "Lucas Aerospace Combine",
+            "type": "grid"
+          },
+          {
+            "id": "viwMqywNiCScDGaHv",
+            "name": "Medact",
+            "type": "grid"
+          },
+          {
+            "id": "viwDUEe3iaPKPxMPX",
+            "name": "Ministry of Eco Education",
+            "type": "grid"
+          },
+          {
+            "id": "viwfU6ewGOp1IzJg1",
+            "name": "MU Climate Emergency Action Group",
+            "type": "grid"
+          },
+          {
+            "id": "viwefg7ssFKdxBETb",
+            "name": "NEON",
+            "type": "grid"
+          },
+          {
+            "id": "viwFbte0TDfblfN8M",
+            "name": "NEON copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw6cnMmreyoDryGp",
+            "name": "NEU Climate Network",
+            "type": "grid"
+          },
+          {
+            "id": "viwXEwEHWHR9vosD1",
+            "name": "New Lucas Plan",
+            "type": "grid"
+          },
+          {
+            "id": "viwYcerPAPAvPevmp",
+            "name": "No Third Runway Coalition",
+            "type": "grid"
+          },
+          {
+            "id": "viwWkHee2pC99z735",
+            "name": "Nova",
+            "type": "grid"
+          },
+          {
+            "id": "viwyocrPR6z6fuTAN",
+            "name": "Novara Media",
+            "type": "grid"
+          },
+          {
+            "id": "viwYCtQQ23How6UTX",
+            "name": "NUS",
+            "type": "grid"
+          },
+          {
+            "id": "viwSFodQFXoQpOmC9",
+            "name": "NYC Climate Group",
+            "type": "grid"
+          },
+          {
+            "id": "viw0wcq0I9h8Uv36C",
+            "name": "Oil Change International",
+            "type": "grid"
+          },
+          {
+            "id": "viwcCltTI0yfOrS9W",
+            "name": "Oxfam",
+            "type": "grid"
+          },
+          {
+            "id": "viw0qlgekDJflNqQl",
+            "name": "PCS Green Workplaces",
+            "type": "grid"
+          },
+          {
+            "id": "viwLxUarrinneuU2I",
+            "name": "Peace and Justice Project",
+            "type": "grid"
+          },
+          {
+            "id": "viw62fmjhWYuN5sEn",
+            "name": "Platform",
+            "type": "grid"
+          },
+          {
+            "id": "viwHgwgrsE7sgGuf7",
+            "name": "Platform copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw4xXPEs0q2ZTMca",
+            "name": "PRALER",
+            "type": "grid"
+          },
+          {
+            "id": "viwxa3jTvr1r8jcAO",
+            "name": "Protect (UK)",
+            "type": "grid"
+          },
+          {
+            "id": "viwIFZAOdI6mhhajc",
+            "name": "Residents Against Dirty Energy",
+            "type": "grid"
+          },
+          {
+            "id": "viw5NmbAap2FMXERp",
+            "name": "Rolls Royce",
+            "type": "grid"
+          },
+          {
+            "id": "viwGBGZbmxrcfXXbB",
+            "name": "Rolls Royce Combine Committee",
+            "type": "grid"
+          },
+          {
+            "id": "viwtp0jd0lsHorSCM",
+            "name": "Safe Landing",
+            "type": "grid"
+          },
+          {
+            "id": "viwbEtvxDoAw2HnWa",
+            "name": "Safe Landing copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwIMrVnjDMiiyWit",
+            "name": "Scot E3",
+            "type": "grid"
+          },
+          {
+            "id": "viwsP5iyHecAWc6EM",
+            "name": "Scottish Hazards",
+            "type": "grid"
+          },
+          {
+            "id": "viwYXEOQ3eTKdPf2f",
+            "name": "SOS-UK",
+            "type": "grid"
+          },
+          {
+            "id": "viwHeQaLP9NkXKz5b",
+            "name": "SSE",
+            "type": "grid"
+          },
+          {
+            "id": "viwZe4gJFsg60m7gB",
+            "name": "Stop Burning Trees Coalition",
+            "type": "grid"
+          },
+          {
+            "id": "viw8aHYrwMnXycJgO",
+            "name": "Stop Sizwell C",
+            "type": "grid"
+          },
+          {
+            "id": "viwMiDZ6hSTjPIlS3",
+            "name": "Teach the Future",
+            "type": "grid"
+          },
+          {
+            "id": "viwi5WF3REFi26ueY",
+            "name": "ThoughtBox",
+            "type": "grid"
+          },
+          {
+            "id": "viwKlJI2GQXWK1IX0",
+            "name": "Tipping Point UK",
+            "type": "grid"
+          },
+          {
+            "id": "viwH7voPMcGKO5PeO",
+            "name": "Transport for Quality of Life",
+            "type": "grid"
+          },
+          {
+            "id": "viwakXKGVnaQUVZZE",
+            "name": "TUCAN",
+            "type": "grid"
+          },
+          {
+            "id": "viwoRfcdvQjpw2i25",
+            "name": "TUCAN copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwTI5YQTGpxSiJVp",
+            "name": "TUCG",
+            "type": "grid"
+          },
+          {
+            "id": "viwCJGUDvGTXuNQP0",
+            "name": "TUC Green Workplaces",
+            "type": "grid"
+          },
+          {
+            "id": "viw9BkFQ86TPsbcuY",
+            "name": "TUC TUSDAC",
+            "type": "grid"
+          },
+          {
+            "id": "viwdoUWtU4Jfotthm",
+            "name": "TUED",
+            "type": "grid"
+          },
+          {
+            "id": "viwnqpIbu7UK3PyJh",
+            "name": "TUED copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw2eG9fyYom72Nsm",
+            "name": "UCU Green Reps",
+            "type": "grid"
+          },
+          {
+            "id": "viws5HshmjFvNC9AC",
+            "name": "UNISON National Energy Branch",
+            "type": "grid"
+          },
+          {
+            "id": "viwExg57AfLdCIts4",
+            "name": "Unite Grassroots Climate Caucus",
+            "type": "grid"
+          },
+          {
+            "id": "viwXF1Wb4krxzjlZF",
+            "name": "Uplift",
+            "type": "grid"
+          },
+          {
+            "id": "viw4UPlIL7EqJsBNx",
+            "name": "Wakefield and District TUC",
+            "type": "grid"
+          },
+          {
+            "id": "viw4fAEyBYRsWB5Fn",
+            "name": "War on Want",
+            "type": "grid"
+          },
+          {
+            "id": "viwuBQFrcpCNIpQou",
+            "name": "Workers 4 Energy For All",
+            "type": "grid"
+          },
+          {
+            "id": "viwQB2VpAWtZn9n1H",
+            "name": "Worker-Climate Project",
+            "type": "grid"
+          },
+          {
+            "id": "viwrkCnWOK1ZRUnXb",
+            "name": "Workers Co-op",
+            "type": "grid"
+          },
+          {
+            "id": "viwobz2kMIivpy5ms",
+            "name": "Workers Planet",
+            "type": "grid"
+          },
+          {
+            "id": "viwNb5SoeiVbHH0Mb",
+            "name": "Workers Planet copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwAb5D0uiHLomgCN",
+            "name": "Working Class Climate Alliance",
+            "type": "grid"
+          },
+          {
+            "id": "viwEpcuWnxFm4sGRf",
+            "name": "WWF Scotland",
+            "type": "grid"
+          },
+          {
+            "id": "viwCkXGB91dAd8vgx",
+            "name": "XR",
+            "type": "grid"
+          },
+          {
+            "id": "viweiVWB1ahIebECR",
+            "name": "XR TU",
+            "type": "grid"
+          },
+          {
+            "id": "viwe69obj6QzDEqfA",
+            "name": "XR TU copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwzRtAq4VVL8fekc",
+            "name": "ClientEarth",
+            "type": "grid"
+          },
+          {
+            "id": "viw4fn5p6wYjP93BT",
+            "name": "Climate Change Committee",
+            "type": "grid"
+          },
+          {
+            "id": "viwdB3mAbJcGk2gZb",
+            "name": "Common Weal",
+            "type": "grid"
+          },
+          {
+            "id": "viwrWTtNhsBlNIUS8",
+            "name": "Common Wealth",
+            "type": "grid"
+          },
+          {
+            "id": "viwZl7USg2WCkGrlc",
+            "name": "Cornell University",
+            "type": "grid"
+          },
+          {
+            "id": "viwthcIANkAymUmgY",
+            "name": "Energy Transition Fund",
+            "type": "grid"
+          },
+          {
+            "id": "viw4Lzz6kItbL11AY",
+            "name": "European Union",
+            "type": "grid"
+          },
+          {
+            "id": "viwgR6uug27yb4Jlb",
+            "name": "Fairtrade Foundation",
+            "type": "grid"
+          },
+          {
+            "id": "viwLXfeBj3Jw113g8",
+            "name": "Future Economy Scotland",
+            "type": "grid"
+          },
+          {
+            "id": "viwNkyi2ShtgOQ8Rq",
+            "name": "Global Labour Institute",
+            "type": "grid"
+          },
+          {
+            "id": "viwYc3fYaV1JfbNng",
+            "name": "Green Economy Coalition",
+            "type": "grid"
+          },
+          {
+            "id": "viwDW6rkzgmIDbqzr",
+            "name": "Green New Deal Group",
+            "type": "grid"
+          },
+          {
+            "id": "viwK4vldCgWN87mzc",
+            "name": "IIED Europe",
+            "type": "grid"
+          },
+          {
+            "id": "viwaZWgMmWpof7zTz",
+            "name": "Institute of Employment Rights",
+            "type": "grid"
+          },
+          {
+            "id": "viw8rJhVPUTmMyPo8",
+            "name": "Just Transition Commission",
+            "type": "grid"
+          },
+          {
+            "id": "viwM62xR9EUvgB4qL",
+            "name": "Labour for a GND",
+            "type": "grid"
+          },
+          {
+            "id": "viweMJ6UKASKx1uM4",
+            "name": "Lancaster University",
+            "type": "grid"
+          },
+          {
+            "id": "viwMtV6pj3DfCdDni",
+            "name": "Local Government",
+            "type": "grid"
+          },
+          {
+            "id": "viwmqy0veWAgfakEN",
+            "name": "Low Carbon Task Force",
+            "type": "grid"
+          },
+          {
+            "id": "viwzuSdvXZbQjYl5B",
+            "name": "MCS Foundation",
+            "type": "grid"
+          },
+          {
+            "id": "viwk7Vx7ct2dlBb69",
+            "name": "MutualGain",
+            "type": "grid"
+          },
+          {
+            "id": "viwNoPFf5C4exoytw",
+            "name": "New Economics Foundation",
+            "type": "grid"
+          },
+          {
+            "id": "viwh7ILeLeQuMm5Hf",
+            "name": "North Sea Transition Authority",
+            "type": "grid"
+          },
+          {
+            "id": "viwEOU4W4uCNhCm3W",
+            "name": "Oak Foundation",
+            "type": "grid"
+          },
+          {
+            "id": "viwotZwfEmuOGHTfv",
+            "name": "Open Society Initiative for Europe",
+            "type": "grid"
+          },
+          {
+            "id": "viwtisxJvjyMB2948",
+            "name": "People’s Postcode Lottery",
+            "type": "grid"
+          },
+          {
+            "id": "viwgOF9ORcNITzXEg",
+            "name": "PSIRU",
+            "type": "grid"
+          },
+          {
+            "id": "viwPfxOdRJg6yAuiu",
+            "name": "Resolution Foundation",
+            "type": "grid"
+          },
+          {
+            "id": "viwAnQiiY7EzanoRC",
+            "name": "Rosa Luxemburg Stiftung NYC",
+            "type": "grid"
+          },
+          {
+            "id": "viwueFJcuGxZCznKf",
+            "name": "Scottish Green Party",
+            "type": "grid"
+          },
+          {
+            "id": "viwUxhAIm7lV4LBhb",
+            "name": "Scottish Labour Party",
+            "type": "grid"
+          },
+          {
+            "id": "viw6e8jAa4DUUGlxR",
+            "name": "Scottish National Party",
+            "type": "grid"
+          },
+          {
+            "id": "viwIrw7Tb8HwUZMTX",
+            "name": "Scottish Parliament",
+            "type": "grid"
+          },
+          {
+            "id": "viw3DD6WjDlL3QdEk",
+            "name": "The Carbon Trust",
+            "type": "grid"
+          },
+          {
+            "id": "viwa9NLZ0xoZiIxvh",
+            "name": "The Edge",
+            "type": "grid"
+          },
+          {
+            "id": "viwQKtQ8lCyunVjU2",
+            "name": "The Green Party",
+            "type": "grid"
+          },
+          {
+            "id": "viwVWFdaKMqlsgMT0",
+            "name": "The Labour Party",
+            "type": "grid"
+          },
+          {
+            "id": "viw1rylhbVYLyV8Q3",
+            "name": "The Worker Institute",
+            "type": "grid"
+          },
+          {
+            "id": "viwjIrZMGTjpJirKr",
+            "name": "Trade Union Task Force for a Public Energy Future",
+            "type": "grid"
+          },
+          {
+            "id": "viwqzIxB8K2QA0d1H",
+            "name": "Transition Economics",
+            "type": "grid"
+          },
+          {
+            "id": "viwTUjCpLWJ3p6lBF",
+            "name": "UCL",
+            "type": "grid"
+          },
+          {
+            "id": "viwYjdtsJoSmf6hQC",
+            "name": "UK Parliament",
+            "type": "grid"
+          },
+          {
+            "id": "viwfVZhwIBgayeMRQ",
+            "name": "UNFCCC COP",
+            "type": "grid"
+          },
+          {
+            "id": "viwlJF4y5EXWPEtHD",
+            "name": "Wales Union Learning Fund",
+            "type": "grid"
+          },
+          {
+            "id": "viwr5PadTXCYPATFx",
+            "name": "Welsh Parliament",
+            "type": "grid"
+          },
+          {
+            "id": "viw1pi3dI6fDgBUOk",
+            "name": "Zero Carbon Oxford Partnership",
+            "type": "grid"
+          },
+          {
+            "id": "viwrRT9ZQga1ByuU4",
+            "name": "England",
+            "type": "grid"
+          },
+          {
+            "id": "viw4b4JLzTN4Pxwaj",
+            "name": "Scotland",
+            "type": "grid"
+          },
+          {
+            "id": "viwYWBB4HGVjOor6i",
+            "name": "Wales",
+            "type": "grid"
+          },
+          {
+            "id": "viwz9raZYH0Bu9WH4",
+            "name": "Northern Ireland",
+            "type": "grid"
+          },
+          {
+            "id": "viwB1xWeJKhaoxaAv",
+            "name": "International",
+            "type": "grid"
+          },
+          {
+            "id": "viwlFhh8q7xYQuZFN",
+            "name": "Heat Strike copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwXhiCZ3xHKIu52h",
+            "name": "GJA copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw8ECJoptFaneK03",
+            "name": "CJC copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwIi0Ss0cJCZPCfz",
+            "name": "CJCTUC copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwnU1eq5wkJR0ZEa",
+            "name": "CACCTU copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwr0zSjsfe11CQR9",
+            "name": "BFAWU Green Reps copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwVT3wminGUWq77u",
+            "name": "Equity for a GND copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwakItBHQ8pW7WdL",
+            "name": "Green Unison copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwXZKoMLC7UG2goH",
+            "name": "Global Climate Jobs copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw653unhtjnuPJgi",
+            "name": "GMB 4 GND copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwGtw2Z7jnxBGozm",
+            "name": "GND UK copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw0B1QTjXFkYrbnc",
+            "name": "New Lucas Plan copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwuNMCXoBa3IIsfd",
+            "name": "NEF copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwGmsFtpdzoMGz3x",
+            "name": "PCS Green Workplaces copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwRzHClQRRHtggDR",
+            "name": "Tipping Point UK copy",
+            "type": "grid"
+          },
+          {
+            "id": "viw6whAYIWbUHyZb8",
+            "name": "Unite Grassroots Climate Caucus copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwgrDTrDxwMbJAba",
+            "name": "UCU CEEC copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwWgCXaJtBJcnRw8",
+            "name": "Working Class Climate Alliance copy",
+            "type": "grid"
+          },
+          {
+            "id": "viwWTmkMbZzJsYv4Q",
+            "name": "Multiple sources",
+            "type": "grid"
+          },
+          {
+            "id": "viwET25KYh39pIXBp",
+            "name": "Chronological order",
+            "type": "grid"
+          },
+          {
+            "id": "viwloDKlJGpKnp7rS",
+            "name": "Group checking",
+            "type": "grid"
+          },
+          {
+            "id": "viwQ4owRWeEczVHId",
+            "name": "More Research Needed",
+            "type": "grid"
+          },
+          {
+            "id": "viwDA3SXSMjyPhdUV",
+            "name": "No WC Activity",
+            "type": "grid"
+          },
+          {
+            "id": "viwW6Hro8yh3FFZs1",
+            "name": "Name and ID Only",
+            "type": "grid"
+          },
+          {
+            "id": "viw19AcJMxWv1yL3h",
+            "name": "Sara",
+            "type": "grid"
+          }
+        ]
+      },
+      {
+        "id": "tbl2bFV7kKwq9C0SV",
+        "name": "MA Team Members",
+        "primaryFieldId": "fldrOQXs64OlBbSkR",
+        "fields": [
+          {
+            "type": "singleLineText",
+            "id": "fldrOQXs64OlBbSkR",
+            "name": "Name"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblKPlwSsCpLYPrIP",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fld5PA3tGsvZvayLl"
+            },
+            "id": "fldGmChSu5V8OOr32",
+            "name": "Articles"
+          },
+          {
+            "type": "multipleRecordLinks",
+            "options": {
+              "linkedTableId": "tblAHzBiQWTwED2jN",
+              "isReversed": false,
+              "prefersSingleRecordLink": false,
+              "inverseLinkFieldId": "fld43CJDT5W4mlcBW"
+            },
+            "id": "fldLGh0fTTHrvQAXm",
+            "name": "Sources"
+          },
+          {
+            "type": "checkbox",
+            "options": {
+              "icon": "check",
+              "color": "greenBright"
+            },
+            "id": "fldFg1CoppUcttWPL",
+            "name": "Active"
+          },
+          {
+            "type": "singleLineText",
+            "id": "fldJbWM36t3ontwmc",
+            "name": "GI Assigned"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selTxQLrxdZhgCvIb",
+                  "name": "Todo",
+                  "color": "redLight2"
+                },
+                {
+                  "id": "selvmiUR5rd045phE",
+                  "name": "In progress",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selnUljfLQauBIJjA",
+                  "name": "Done",
+                  "color": "greenLight2"
+                }
+              ]
+            },
+            "id": "fldxo44becq0QkGkn",
+            "name": "Status"
+          }
+        ],
+        "views": [
+          {
+            "id": "viwB7ZMldrmfEdbUN",
+            "name": "Active",
+            "type": "grid"
+          },
+          {
+            "id": "viwoDFqbHbxPipQYA",
+            "name": "Inactive",
+            "type": "grid"
+          },
+          {
+            "id": "viwzll1pEexdogrYk",
+            "name": "Groups Index",
+            "type": "grid"
+          }
+        ]
+      },
+      {
+        "id": "tblhVSGQStcRttmWw",
+        "name": "Timeline (2/7)",
+        "primaryFieldId": "fld7i4zMzvpWOgVgS",
+        "fields": [
+          {
+            "type": "singleLineText",
+            "id": "fld7i4zMzvpWOgVgS",
+            "name": "Name"
+          },
+          {
+            "type": "date",
+            "options": {
+              "dateFormat": {
+                "name": "local",
+                "format": "l"
+              }
+            },
+            "id": "fldAqMIaNPyoUAQQF",
+            "name": "Start date"
+          },
+          {
+            "type": "date",
+            "options": {
+              "dateFormat": {
+                "name": "local",
+                "format": "l"
+              }
+            },
+            "id": "fldqQxj36CtyVWBUW",
+            "name": "End date"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selKCC6F5dRRJPmg8",
+                  "name": "Data Collection",
+                  "color": "pinkLight1"
+                },
+                {
+                  "id": "seltKvnP67Jj6Eqig",
+                  "name": "Report ",
+                  "color": "tealBright"
+                },
+                {
+                  "id": "sel6skdBmk2XtkuPt",
+                  "name": "Index",
+                  "color": "yellowLight1"
+                },
+                {
+                  "id": "selvZZrC9kHrRJFJC",
+                  "name": "Misc",
+                  "color": "blueLight2"
+                },
+                {
+                  "id": "selirrwABDEmwEoa4",
+                  "name": "Groups",
+                  "color": "purpleBright"
+                }
+              ]
+            },
+            "id": "flduRbk2zLSMYmzbX",
+            "name": "Work Stream"
+          },
+          {
+            "type": "multilineText",
+            "id": "fldElM7lGDw0k0T1p",
+            "name": "Notes"
+          },
+          {
+            "type": "singleCollaborator",
+            "id": "flddF86evLZYikYFF",
+            "name": "Assignee"
+          },
+          {
+            "type": "singleSelect",
+            "options": {
+              "choices": [
+                {
+                  "id": "selPtiS5voblCDK4t",
+                  "name": "Todo",
+                  "color": "redLight2"
+                },
+                {
+                  "id": "selNSOKyRr61qjOSl",
+                  "name": "In progress",
+                  "color": "yellowLight2"
+                },
+                {
+                  "id": "selXiQ86Zhgjq5itO",
+                  "name": "Done",
+                  "color": "greenLight2"
+                }
+              ]
+            },
+            "id": "fldf2GrphmMZqN5VE",
+            "name": "Status"
+          },
+          {
+            "type": "multipleAttachments",
+            "options": {
+              "isReversed": false
+            },
+            "id": "fldykn3SQtaksGmGw",
+            "name": "Attachments"
+          },
+          {
+            "type": "aiText",
+            "options": {
+              "referencedFieldIds": [
+                "fldykn3SQtaksGmGw"
+              ],
+              "prompt": [
+                "You are a professional document analyst specializing in summarizing content from various file types. Your task is to extract key points and provide a concise summary of the content found in the attached files. Ensure that the summary captures the main ideas and any important details without including unnecessary information.\n\nAnalyze the content of the attached files to identify the main themes and significant details. Summarize these points clearly and concisely, ensuring that the summary is informative and relevant to the document's purpose.\n\nFormat your response as plain text, keeping it concise and to the point. If you cannot summarize the content, output \"Unable to summarize the content.\" Example: \"The document discusses the impact of climate change on polar bears, highlighting the loss of habitat and food sources.\" (Real examples should be longer and more detailed.)\n\nFiles:\n",
+                {
+                  "field": {
+                    "fieldId": "fldykn3SQtaksGmGw"
+                  }
+                }
+              ]
+            },
+            "id": "fldkAIjBasGZmdizC",
+            "name": "Attachment Summary",
+            "description": "An AI generated summary of the Attachments field. Upload files to Attachments to generate a summary."
+          }
+        ],
+        "views": [
+          {
+            "id": "viwtxuzWyks3VpYk0",
+            "name": "Grid view",
+            "type": "grid"
+          },
+          {
+            "id": "viwPu81aQssDwFoEi",
+            "name": "Timeline",
+            "type": "timeline"
+          }
+        ]
+      }
+    ]
+  }
+]
