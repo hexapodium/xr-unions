@@ -160,8 +160,13 @@ const parseIdList = (value) =>
     .map((id) => id.trim())
     .filter(Boolean);
 
-export const isAirtablePermissionError = (error) =>
-  /not authorized/i.test(String(error?.message ?? ""));
+export const isAirtablePermissionError = (error) => {
+  const message =
+    typeof error === "string" ? error : String(error?.message ?? "");
+  if (/not authorized|unauthorized/i.test(message)) return true;
+  const status = error?.status ?? error?.statusCode;
+  return status === 401 || status === 403;
+};
 
 // Generic fallback: given just an API key + base ID (no table name), discover
 // every table in the base via the Metadata API and cache each one verbatim
@@ -286,7 +291,7 @@ async function cacheAirtable() {
     } catch (error) {
       if (isAirtablePermissionError(error)) {
         console.warn(
-          `Skipping ${options.label} cache because Airtable access is not authorized`,
+          `Skipping ${options.label} cache (table: ${options.tableName}) because Airtable access is not authorized`,
         );
         return;
       }

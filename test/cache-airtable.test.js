@@ -109,5 +109,16 @@ test("detects Airtable authorization errors", () => {
     ),
     true,
   );
+  assert.equal(
+    isAirtablePermissionError("You are not authorized to perform this operation"),
+    true,
+  );
+  assert.equal(isAirtablePermissionError(null), false);
   assert.equal(isAirtablePermissionError(new Error("Network timeout")), false);
+  assert.equal(
+    isAirtablePermissionError({ message: "UNAUTHORIZED" }),
+    true,
+  );
+  assert.equal(isAirtablePermissionError({ status: 401 }), true);
+  assert.equal(isAirtablePermissionError({ statusCode: 403 }), true);
 });
