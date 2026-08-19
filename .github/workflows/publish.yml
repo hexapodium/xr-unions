@@ -30,7 +30,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - run: npm run cache
+      - run: npm run cache-airtable
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}

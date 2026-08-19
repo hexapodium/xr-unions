@@ -20,7 +20,7 @@ Create a `Groups` table (the names can be changed in the single `fields` map in
 ## Dumping an entire base (no table name configured)
 
 If `.env` only sets `AIRTABLE_API_KEY` and `AIRTABLE_BASE_ID` (no
-`AIRTABLE_TABLE_NAME`), `npm run cache` skips the curated groups/case-study
+`AIRTABLE_TABLE_NAME`), `npm run cache-airtable` skips the curated groups/case-study
 caching below entirely and instead discovers every table in the base via the
 Airtable Metadata API (requires a token with the `schema.bases:read` scope)
 and dumps each one verbatim — record id plus raw field values, no field
@@ -52,7 +52,7 @@ Case studies use a separate Airtable table and are cached to
 
 1. Run `npm install`.
 2. Copy `.env.example` to `.env`, then expose those values in your shell.
-3. Run `npm run cache`.
+3. Run `npm run cache-airtable`.
 4. Serve `public` with any static HTTP server.
 
 For GitHub Pages, add `AIRTABLE_API_KEY` and `AIRTABLE_BASE_ID` as repository

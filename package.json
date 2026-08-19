@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "cache": "node scripts/cache-airtable.js",
+    "cache-airtable": "node scripts/cache-airtable.js",
     "schema": "node scripts/dump-schema.js",
     "debug": "node --env-file=.env scripts/cache-airtable.js",
     "test": "node --test"

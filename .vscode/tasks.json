@@ -6,11 +6,11 @@
 			"command": "npm",
 			"args": [
 				"run",
-				"cache"
+				"cache-airtable"
 			],
 			"problemMatcher": [],
 			"label": "cache: run",
-			"detail": "npm run cache",
+			"detail": "npm run cache-airtable",
 		}
 	]
 }
