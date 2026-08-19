@@ -1,4 +1,8 @@
 /* expando.js
+   DEPRECATED: targets public/groups.json and public/casestudies.json
+   (curated fields), which this repo no longer generates by default. See
+   data-table-snippet.html and instructions.md for the current approach.
+   Kept here for reference only.
    Copy this into Squarespace Code Injection (Footer) or paste into a Code Block.
 */
 (function () {

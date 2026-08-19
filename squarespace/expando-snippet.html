@@ -1,4 +1,11 @@
 <!--
+  DEPRECATED: this snippet targets public/groups.json and public/casestudies.json
+  (curated fields: name/intro/documents/activities, title/org/summary/story),
+  which this repo no longer generates by default. The currently cached files
+  are public/articles.json, public/case-studies.json, and public/sources.json
+  (raw Airtable dumps) — see data-table-snippet.html and instructions.md
+  instead. Kept here for reference only.
+
   Single copy-paste snippet for Squarespace Code Block.
   This contains the CSS, a sample HTML wrapper, and the JS required to make
   inline links with class="expando-link" open a split view card populated
@@ -6,6 +13,7 @@
 -->
 <link rel="stylesheet" href="expando.css">
 <div id="expando-root" data-groups-url="../public/groups.json" data-casestudies-url="../public/casestudies.json">
+
   <p>
     Read more about the work of <a class="expando-link" data-group-id="example">Example XR Group</a> in our research.
   </p>

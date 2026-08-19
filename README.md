@@ -62,6 +62,13 @@ and (optionally) `AIRTABLE_CASESTUDIES_VIEW` as repository variables. Enable
 GitHub Actions as the Pages source. The generated `groups.json` and
 `casestudies.json` are deployed beside the tables and are publicly readable.
 
+> **Note:** if `.env`/repository config only sets `AIRTABLE_API_KEY` and
+> `AIRTABLE_BASE_ID` (the "dump an entire base" mode described above), the
+> curated `groups.json`/`casestudies.json` caching is skipped and you'll get
+> raw verbatim dumps instead — that's the mode currently in use for this
+> repo's `public/articles.json`, `public/case-studies.json`, and
+> `public/sources.json` (see below).
+
 ## Movement Assessment Sources Database
 
 `scripts/cache-airtable.js` also caches the `Sources`, `Articles`, and
@@ -78,13 +85,43 @@ with `AIRTABLE_SOURCES_TABLE_NAME`, `AIRTABLE_ARTICLES_TABLE_NAME`, and
 `AIRTABLE_MA_CASESTUDIES_VIEW`) let you restrict each fetch to a specific
 view.
 
-Reuse the components on another page with:
+In practice this repo currently runs `cache-airtable` in the "dump an entire
+base" mode, so `public/articles.json`, `public/case-studies.json`, and
+`public/sources.json` are raw, verbatim Airtable field dumps (whatever
+columns exist in each table), rather than the normalized `title`/`org`/etc.
+shape described above.
+
+## Browsing the data (`public/index.html`)
+
+`public/index.html` renders a filterable table for each of
+`public/articles.json`, `public/case-studies.json`, and `public/sources.json`
+using two small dependency-free custom elements:
+
+- **`data-table.js`** — `<data-table src="articles.json" label="articles">`
+  fetches the JSON, infers columns from the union of keys across all
+  records, hides columns that only ever contain internal Airtable record
+  IDs, renders arrays/Markdown links/URLs sensibly, and provides a live
+  text filter.
+- **`copy-link.js`** — `<copy-link href="articles.json">` renders a readonly
+  input with the file's absolute URL plus a **Copy** button, so you can
+  paste the direct link into another site.
+
+Reuse either component on another page with:
 
 ```html
-<script type="module" src="/groups-table.js"></script>
-<groups-table src="/groups.json"></groups-table>
+<script type="module" src="/data-table.js"></script>
+<data-table src="/articles.json" label="articles"></data-table>
 
-<script type="module" src="/casestudies-table.js"></script>
-<casestudies-table src="/casestudies.json"></casestudies-table>
+<script type="module" src="/copy-link.js"></script>
+<copy-link href="/articles.json"></copy-link>
 ```
+
+## Embedding in Squarespace
+
+Because `public/*.json` is served with permissive CORS headers (GitHub Pages
+default), any of the cached JSON files can be `fetch()`-ed directly from a
+Squarespace code block. Copy the direct link shown under each table on
+`public/index.html` (or build it yourself as
+`https://<your-pages-domain>/<file>.json`) and see `squarespace/instructions.md`
+for a ready-to-paste snippet that reuses `data-table.js`/`copy-link.js`.
 

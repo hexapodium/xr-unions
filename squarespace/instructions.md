@@ -1,50 +1,77 @@
-# Expando inline card — Squarespace usage
+# Embedding the data tables in Squarespace
 
-This folder contains a ready-to-copy snippet and separate files so you can either paste a single block into a Squarespace Code Block or add CSS/JS via Code Injection.
+The current cached data lives in `public/articles.json`,
+`public/case-studies.json`, and `public/sources.json` (raw Airtable field
+dumps — see the repo README's "Movement Assessment Sources Database"
+section). `public/index.html` browses all three using two small custom
+elements, `data-table.js` and `copy-link.js`, and this is the recommended way
+to embed them elsewhere too.
 
-Files
-- `expando-snippet.html` — single copy-paste Code Block containing CSS, a sample wrapper, and JS.
-- `expando.css` — copy the CSS into Site Header or a CSS block.
-- `expando.js` — copy the JS into Footer (Code Injection) or a Code Block.
+## Quick start
 
-Basic usage
-
-1. Single-block option (quick): paste the contents of `expando-snippet.html` into a Squarespace Code Block where your content is.
-
-2. Split option (preferred for reuse):
-   - Paste `expando.css` into Design → Custom CSS or into a Code Block.
-   - Paste `expando.js` into Settings → Advanced → Code Injection → Footer (or a Code Block).
-   - In your page content, add the wrapper and inline link example:
-
-```html
-<div id="expando-root" data-groups-url="/groups.json" data-casestudies-url="/casestudies.json">
-  <p>
-    Read more about the work of <a class="expando-link" data-group-id="example">Example XR Group</a> in our research.
-  </p>
-  <p>
-    See how somewhere else did it in this <a class="expando-link" data-casestudy-id="example">case study</a>.
-  </p>
-</div>
-```
-
-Case studies also have a searchable list view, similar to the groups table:
+1. Open `public/index.html` on the deployed site (GitHub Pages) and use the
+   **Copy** button under the table you want to embed to grab its direct
+   JSON link — this is a CORS-friendly URL a Squarespace code block can
+   `fetch()` directly.
+2. Paste the contents of `data-table-snippet.html` into a Squarespace Code
+   Block.
+3. Replace `SITE_ORIGIN` with your deployed origin (e.g.
+   `hexapodium.github.io/xr-unions`) and `FILE` with one of `articles.json`,
+   `case-studies.json`, or `sources.json`.
 
 ```html
-<script type="module" src="/casestudies-table.js"></script>
-<casestudies-table src="/casestudies.json"></casestudies-table>
+<script type="module" src="https://SITE_ORIGIN/data-table.js"></script>
+<script type="module" src="https://SITE_ORIGIN/copy-link.js"></script>
+<link rel="stylesheet" href="https://SITE_ORIGIN/styles.css">
+
+<copy-link href="https://SITE_ORIGIN/FILE"></copy-link>
+<data-table src="https://SITE_ORIGIN/FILE" label="rows"></data-table>
 ```
 
-Customization
-- To point to a different JSON file, set `data-groups-url` or `data-casestudies-url` on the `#expando-root` element, e.g. `data-groups-url="https://cdn.example.com/groups.json"`.
-- For a fixed-width right column instead of a 50/50 split, change `grid-template-columns` in the CSS, e.g. `1fr 380px`.
-- To preserve existing link href behavior, the script stores an existing `href` as `data-href-fallback` before removing it.
+You can repeat the `<copy-link>`/`<data-table>` pair as many times as you
+like on one page (e.g. once per file) — the two `<script type="module">`
+tags only need to be included once.
 
-Notes
-- The snippet expects your `groups.json` to be an array of group objects with fields like `id`, `name`, `intro`, `documents`, `activities`, and `additionalInfo`. The repository includes `public/groups.json` as an example.
-- The `casestudies.json` file is an array of case study objects with fields like `id`, `title`, `org`, `summary`, `story`, `tags`, and `links`. Links with `data-casestudy-id="<id>"` open the matching case study inline instead of a group card.
+## How it works
 
+- **`data-table.js`** defines `<data-table src="..." label="...">`. It
+  fetches the JSON, infers table columns from the union of keys seen across
+  all records, hides columns that only ever contain internal Airtable
+  record IDs, renders Markdown-style `[text](url)` links and bare URLs as
+  clickable links, truncates long text behind a "More" toggle, and adds a
+  live search box.
+- **`copy-link.js`** defines `<copy-link href="...">`. It resolves the given
+  path to an absolute URL and renders a readonly input plus a **Copy**
+  button (uses the Clipboard API with a `document.execCommand` fallback).
+- Both elements are dependency-free vanilla JS/CSS, so they work fine
+  injected into a Squarespace Code Block or via Settings → Advanced → Code
+  Injection.
+- This only works cross-origin because GitHub Pages serves `public/*.json`
+  with permissive CORS headers by default. If you host the JSON somewhere
+  else, make sure `Access-Control-Allow-Origin` is set.
 
-Accessibility
-- Links are keyboard-focusable. The panel contains a close button for keyboard users.
+## Customizing columns/styling
 
+- `data-table.js` has no configuration for hiding/reordering specific
+  columns beyond the automatic "record ID only" filtering — if you need a
+  curated subset of fields, it's simplest to pre-filter/reshape the JSON in
+  `scripts/cache-airtable.js` before caching, or fork the component.
+- Copy `public/styles.css` (or the relevant `.filter`, `.table-scroll`,
+  `table`, `.copy-link`, `.copy-row` rules from it) into Squarespace's
+  custom CSS if you want the embedded table to match the look of
+  `public/index.html`; otherwise it'll pick up your Squarespace theme's
+  default table/input/button styles.
+
+## Legacy inline "expando" cards
+
+`expando.js`, `expando.css`, and `expando-snippet.html` in this folder are an
+older, separate embedding mechanism built around a different, curated JSON
+shape (`public/groups.json` with `name`/`intro`/`documents`/`activities`
+fields, and `public/casestudies.json` with `title`/`org`/`summary`/`story`
+fields) that **this repo no longer generates by default** — the currently
+cached files are the raw dumps described above instead. Those files are kept
+for reference in case you re-enable the curated caching path in
+`scripts/cache-airtable.js` (see the README), but for browsing/embedding the
+current `articles.json`/`case-studies.json`/`sources.json` files, use
+`data-table-snippet.html` above instead.
 

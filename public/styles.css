@@ -59,6 +59,47 @@ input:focus {
   outline-offset: 1px;
 }
 
+.copy-link {
+  display: grid;
+  gap: .35rem;
+  max-width: 40rem;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.copy-row {
+  display: flex;
+  gap: .5rem;
+}
+
+.copy-row input {
+  flex: 1;
+  font-family: ui-monospace, monospace;
+  font-size: .85rem;
+  color: #54595d;
+}
+
+.copy-row button {
+  padding: .55rem 1rem;
+  border: 1px solid #36c;
+  border-radius: 2px;
+  background: #36c;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.copy-row button:hover { background: #2a4b8d; }
+
+.count {
+  margin-top: .5rem;
+  color: #54595d;
+  font-size: .85rem;
+}
+
+td.bool { text-align: center; }
+
 .table-scroll { overflow-x: auto; }
 
 table {

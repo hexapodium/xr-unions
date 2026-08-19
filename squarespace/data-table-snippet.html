@@ -1,0 +1,20 @@
+<!--
+  Copy-paste snippet for a Squarespace Code Block.
+
+  Renders a filterable table for one of this repo's cached JSON files
+  (articles.json, case-studies.json, or sources.json) plus a "Copy" button
+  for the direct/CORS link, by loading the same data-table.js/copy-link.js
+  used on public/index.html straight from GitHub Pages.
+
+  Before pasting:
+  1. Replace SITE_ORIGIN below with your deployed origin, e.g.
+     "https://hexapodium.github.io/xr-unions".
+  2. Replace FILE below with one of: articles.json, case-studies.json,
+     sources.json.
+-->
+<script type="module" src="https://SITE_ORIGIN/data-table.js"></script>
+<script type="module" src="https://SITE_ORIGIN/copy-link.js"></script>
+<link rel="stylesheet" href="https://SITE_ORIGIN/styles.css">
+
+<copy-link href="https://SITE_ORIGIN/FILE"></copy-link>
+<data-table src="https://SITE_ORIGIN/FILE" label="rows"></data-table>

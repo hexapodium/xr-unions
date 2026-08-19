@@ -2,8 +2,4 @@ node_modules/
 .env
 .env.*
 schema.txt
-public/articles.json
-public/case-studies.json
-public/sources.json
-public/casestudies.json
-public/groups.json
+

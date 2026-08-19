@@ -1,3 +1,9 @@
+/* DEPRECATED: styles for expando.js/expando-snippet.html, which target
+   public/groups.json and public/casestudies.json (curated fields) — this
+   repo no longer generates those files by default. See
+   data-table-snippet.html and instructions.md for the current approach.
+   Kept here for reference only. */
+
 /* Expando container styles */
 .expando-container {
   position: relative;

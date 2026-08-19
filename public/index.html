@@ -5,18 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>XR unions and groups</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="module" src="groups-table.js"></script>
-    <script type="module" src="casestudies-table.js"></script>
+    <script type="module" src="data-table.js"></script>
+    <script type="module" src="copy-link.js"></script>
   </head>
   <body>
     <main>
-      <h1>XR unions and groups</h1>
-      <p class="lede">A directory of groups, their work, and relevant resources.</p>
-      <groups-table src="groups.json"></groups-table>
+      <h1>Movement Assessment Sources Database</h1>
+      <p class="lede">
+        Cached snapshots of the Airtable base, refreshed on a schedule so
+        visitors never need Airtable credentials. Use the direct link under
+        each table to fetch the raw JSON from another site (for example a
+        Squarespace code block) &mdash; the files are served with permissive
+        CORS headers.
+      </p>
+
+      <h2>Articles</h2>
+      <copy-link href="articles.json"></copy-link>
+      <data-table src="articles.json" label="articles"></data-table>
 
       <h2>Case studies</h2>
-      <p class="lede">Stories of organising in action.</p>
-      <casestudies-table src="casestudies.json"></casestudies-table>
+      <copy-link href="case-studies.json"></copy-link>
+      <data-table src="case-studies.json" label="case studies"></data-table>
+
+      <h2>Sources</h2>
+      <copy-link href="sources.json"></copy-link>
+      <data-table src="sources.json" label="sources"></data-table>
     </main>
   </body>
 </html>
