@@ -62,6 +62,42 @@ tags only need to be included once.
   `public/index.html`; otherwise it'll pick up your Squarespace theme's
   default table/input/button styles.
 
+## Inline "expando" cards (current data shape)
+
+`expando2.js`, `expando2.css`, and `expando2-snippet.html` reimplement the
+inline expando UX against the *current* raw Airtable dumps — no curated
+caching path required.
+
+Paste the contents of `expando2-snippet.html` into a Squarespace Code Block,
+then:
+
+1. To insert a case study or article inline in a paragraph, add a link with
+   `class="expando-link"` and either `data-article-id="recXXXXXXXXXXXXXX"`
+   or `data-casestudy-id="recXXXXXXXXXXXXXX"`, using the record's `id` field
+   from `articles.json`/`case-studies.json` (or the `id` column shown by
+   `data-table.js`). Multiple space/comma-separated ids on one link render
+   several cards side-by-side. Clicking the link expands a card in place
+   (built from `Article`/`Article Link`/`Priority (Article)`/etc. for
+   articles, or `Name`/`Tags`/`Quotes from articles`/etc. for case studies);
+   clicking again collapses it. Cards cross-link: an article card lists its
+   linked case studies, and a case study card lists its linked articles, each
+   as its own expando-link.
+2. For a "table of icons" of every row in `sources.json`, add
+   `<div class="expando-gallery" data-sources data-cols="6"></div>`. Each
+   source renders as an icon tile (initials, since `sources.json` has no
+   logo/icon field) with its `Publication` name as a caption. Clicking a tile
+   expands a panel with `Org Type`, `Publication type`, `Editions (Count)`,
+   and a list of that source's articles (again as expando-links). Omit
+   `data-cols` for a responsive auto-fit grid, or set `data-sources="id1,id2"`
+   to show only specific sources.
+3. If the snippet isn't served from the same origin as the JSON files, set
+   `data-articles-url`, `data-casestudies-url`, and `data-sources-url` on the
+   `#expando-root` wrapper to absolute URLs (e.g. your GitHub Pages origin).
+
+Under the hood, `expando2.js` tries several fallback URLs
+(`/articles.json`, `/public/articles.json`, etc.) if the configured one
+404s, same as the legacy script.
+
 ## Legacy inline "expando" cards
 
 `expando.js`, `expando.css`, and `expando-snippet.html` in this folder are an
@@ -71,7 +107,7 @@ fields, and `public/casestudies.json` with `title`/`org`/`summary`/`story`
 fields) that **this repo no longer generates by default** — the currently
 cached files are the raw dumps described above instead. Those files are kept
 for reference in case you re-enable the curated caching path in
-`scripts/cache-airtable.js` (see the README), but for browsing/embedding the
-current `articles.json`/`case-studies.json`/`sources.json` files, use
-`data-table-snippet.html` above instead.
+`scripts/cache-airtable.js` (see the README). For the current data shape, use
+`expando2.js` (above) for inline cards/icon gallery, or
+`data-table-snippet.html` for full filterable tables.
 

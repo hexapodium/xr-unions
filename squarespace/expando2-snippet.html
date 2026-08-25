@@ -1,0 +1,59 @@
+<!--
+  Copy-paste snippet for a Squarespace Code Block (or Code Injection).
+
+  Works with the *current* cached data files:
+    public/articles.json, public/case-studies.json, public/sources.json
+
+  It gives you two things:
+
+  1. Inline "expando" links you can drop into any paragraph to insert a
+     case study or article as an expandable card, e.g.:
+
+       Read about <a class="expando-link" data-article-id="recXXXXXXXXXXXXXX">this campaign</a>
+       or the <a class="expando-link" data-casestudy-id="recYYYYYYYYYYYYYY">full case study</a>.
+
+     Find the record id by opening public/articles.json or
+     public/case-studies.json (or the "id" column of the data-table.js
+     view) and copying the "id" field (e.g. "rec057y7jNAcgI6TH"). Multiple
+     ids can be space/comma separated on one link to render several cards
+     at once.
+
+  2. A "table of icons" gallery of every source in sources.json. Clicking
+     an icon expands a panel with that source's org type, publication
+     type, edition count, and a list of its articles (each itself an
+     expando-link into the article card).
+
+  Before pasting:
+  - If this file is served from the same origin as the JSON (e.g. you
+    copied it into public/ or set up a reverse proxy), the defaults below
+    work as-is.
+  - Otherwise replace the data-*-url attributes on #expando-root with
+    absolute URLs, e.g.
+      data-articles-url="https://hexapodium.github.io/xr-unions/articles.json"
+      data-casestudies-url="https://hexapodium.github.io/xr-unions/case-studies.json"
+      data-sources-url="https://hexapodium.github.io/xr-unions/sources.json"
+-->
+<link rel="stylesheet" href="expando2.css">
+<div id="expando-root"
+     data-articles-url="../public/articles.json"
+     data-casestudies-url="../public/case-studies.json"
+     data-sources-url="../public/sources.json">
+
+  <!-- Example: inserting a case study and an article inline in a paragraph -->
+  <p>
+    One example of union climate action is the
+    <a class="expando-link" data-casestudy-id="rec00TQTZFklOrGfv">NEU Green Reps</a>
+    case study, discussed further in
+    <a class="expando-link" data-article-id="rec057y7jNAcgI6TH">this Unite GCJC article</a>.
+  </p>
+
+  <!-- Table of icons: every source in sources.json, 6 per row on desktop -->
+  <h3>Our sources</h3>
+  <div class="expando-gallery" data-sources data-cols="6" style="margin-top:1rem;">
+    <!-- JS renders icon tiles here on load -->
+  </div>
+
+  <div id="expando-status" aria-hidden="false" style="margin-top:.5rem;font-size:.9rem;color:#444"></div>
+</div>
+
+<script src="./expando2.js"></script>
