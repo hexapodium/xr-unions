@@ -1,6 +1,7 @@
 import Airtable from "airtable";
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { ARTICLE_DOC_LINK_FIELD } from "./airtable-fields.js";
 
 const groupFields = {
   name: "Group / org name",
@@ -170,6 +171,16 @@ const slugify = (name) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+// Strips the internal "Article Doc Link" field (a Google Doc working
+// link) from a raw record before it lands in the public JSON dump. Title
+// + link are deliberately kept as separate fields here — combining them
+// into a single "[title](link)" value is a presentation-layer concern,
+// handled by <data-table>'s `link-columns` attribute instead.
+function stripInternalFields(record) {
+  delete record[ARTICLE_DOC_LINK_FIELD];
+  return record;
+}
+
 const parseIdList = (value) =>
   (value || "")
     .split(";")
@@ -221,7 +232,9 @@ async function cacheAllTables({ apiKey, baseId, includeIds = [], excludeIds = []
 
   for (const { name } of filteredTables) {
     const records = await base(name).select().all();
-    const items = records.map((record) => ({ id: record.id, ...record.fields }));
+    const items = records.map((record) =>
+      stripInternalFields({ id: record.id, ...record.fields })
+    );
     const fileName = `${slugify(name)}.json`;
     const output = fileURLToPath(new URL(`../public/${fileName}`, import.meta.url));
 

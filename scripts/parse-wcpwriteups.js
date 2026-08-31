@@ -13,6 +13,7 @@ import { join, basename } from "node:path";
 import AdmZip from "adm-zip";
 import { XMLParser } from "fast-xml-parser";
 import Airtable from "airtable";
+import { ARTICLE_TITLE_FIELD, ARTICLE_LINK_FIELD } from "./airtable-fields.js";
 
 const SOURCE_DIR = join(process.cwd(), "wcpwriteups");
 const OUTPUT_PATH = join(process.cwd(), "public", "groups.json");
@@ -288,15 +289,19 @@ function groupTagCandidates(groupName) {
 async function fetchAirtableDocsIndex({ apiKey, baseId }) {
   const base = new Airtable({ apiKey }).base(baseId);
 
+  // Only ever select the reader-facing title + link fields — never
+  // "Article Doc Link" (an internal Google Doc working link) — matching
+  // the same restriction applied to the public JSON dump in
+  // cache-airtable.js (see ./airtable-fields.js).
   const articleRecords = await base(ARTICLES_TABLE)
-    .select({ fields: ["Article", "Article Link"] })
+    .select({ fields: [ARTICLE_TITLE_FIELD, ARTICLE_LINK_FIELD] })
     .all();
   const articlesById = new Map(
     articleRecords.map((record) => [
       record.id,
       {
-        text: String(record.get("Article") ?? "").trim(),
-        link: String(record.get("Article Link") ?? "").trim(),
+        text: String(record.get(ARTICLE_TITLE_FIELD) ?? "").trim(),
+        link: String(record.get(ARTICLE_LINK_FIELD) ?? "").trim(),
       },
     ])
   );

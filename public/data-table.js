@@ -17,6 +17,7 @@ class DataTable extends HTMLElement {
     this.nameColumn = this.getAttribute("name-column") || null;
     this.wordLimits = this.parseWordLimits();
     this.columnAllowlist = this.parseColumns();
+    this.linkColumns = this.parseLinkColumns();
     this.innerHTML = `<p class="status">Loading ${label}…</p>`;
 
     try {
@@ -67,6 +68,24 @@ class DataTable extends HTMLElement {
     }
   }
 
+  // Reads an optional `link-columns` attribute — a JSON object mapping a
+  // title column to the column holding its URL (e.g. link-columns=
+  // '{"Article":"Article Link"}') — so the underlying JSON can keep title
+  // and URL as separate fields (a data-structure concern) while the table
+  // still renders the title as a clickable link and hides the raw URL
+  // column (a presentation concern).
+  parseLinkColumns() {
+    const raw = this.getAttribute("link-columns");
+    if (!raw) return {};
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      console.warn(`<data-table>: could not parse link-columns attribute: ${raw}`);
+      return {};
+    }
+  }
+
   wordCount(text) {
     return text.trim().split(/\s+/).filter(Boolean).length;
   }
@@ -85,9 +104,14 @@ class DataTable extends HTMLElement {
         order.push(key);
       }
     }
-    // Drop columns that only ever contain internal Airtable record IDs;
-    // they aren't meaningful to a reader and just add clutter.
-    const inferred = order.filter((key) => !this.isRecordIdOnlyColumn(records, key));
+    // Drop columns that only ever contain internal Airtable record IDs
+    // (not meaningful to a reader), and columns folded into their paired
+    // title column via `link-columns` (rendered as that title's href
+    // instead of their own column).
+    const linkColumnValues = new Set(Object.values(this.linkColumns));
+    const inferred = order.filter(
+      (key) => !this.isRecordIdOnlyColumn(records, key) && !linkColumnValues.has(key)
+    );
     if (!this.columnAllowlist) return inferred;
     // Respect the requested column order, but only for columns that
     // actually exist in the data (plus the name column, which is handled
@@ -169,11 +193,11 @@ class DataTable extends HTMLElement {
 
   row(record, columns) {
     const tr = document.createElement("tr");
-    tr.append(...columns.map((column) => this.cell(record[column], column)));
+    tr.append(...columns.map((column) => this.cell(record[column], column, record)));
     return tr;
   }
 
-  cell(value, column) {
+  cell(value, column, record) {
     const td = document.createElement("td");
     if (value === undefined || value === null || value === "") return td;
 
@@ -181,6 +205,18 @@ class DataTable extends HTMLElement {
       td.className = "bool";
       td.textContent = value ? "✓" : "";
       return td;
+    }
+
+    // If this column is paired with a link column (via `link-columns`),
+    // render its value as a hyperlink using that column's value as the
+    // href, instead of showing the URL as its own column.
+    const linkColumn = this.linkColumns[column];
+    if (linkColumn && record) {
+      const href = record[linkColumn];
+      if (typeof href === "string" && href) {
+        td.append(this.link(String(value), href));
+        return td;
+      }
     }
 
     const limit = this.wordLimitFor(column);
