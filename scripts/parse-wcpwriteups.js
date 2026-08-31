@@ -12,6 +12,7 @@ import { readdirSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join, basename } from "node:path";
 import AdmZip from "adm-zip";
 import { XMLParser } from "fast-xml-parser";
+import Airtable from "airtable";
 
 const SOURCE_DIR = join(process.cwd(), "wcpwriteups");
 const OUTPUT_PATH = join(process.cwd(), "public", "groups.json");
@@ -249,6 +250,94 @@ function deriveGroupId(fileName) {
     .trim();
 }
 
+// --- Airtable expansion of "Relevant Docs and Articles" -----------------
+//
+// Each group's docx links to an Airtable *filter view* ("Airtable
+// articles"/"Case studies") rather than listing the underlying records.
+// Those views are filtered by a `Group: <name>` option in the Case
+// Studies table's "Tags" field (see airtable-schema.json), and each case
+// study links on to the Articles that support it. Rather than trying to
+// resolve the opaque shared-view URL (shrXXXX ids aren't accessible via
+// the regular records API), we recreate the same filter directly: fetch
+// every Case Study + Article once, then for each group pull out the case
+// studies tagged for it and the articles they reference.
+
+const CASE_STUDIES_TABLE = "Case Studies";
+const ARTICLES_TABLE = "Articles";
+
+// A group's docx name is usually "Full Name (ABBR)"; Airtable's `Group:`
+// tags sometimes use the full name and sometimes the abbreviation, so try
+// both when matching.
+function groupTagCandidates(groupName) {
+  if (!groupName) return [];
+  const candidates = new Set([groupName.trim()]);
+  const match = groupName.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  if (match) {
+    candidates.add(match[1].trim());
+    candidates.add(match[2].trim());
+  }
+  return [...candidates].filter(Boolean);
+}
+
+async function fetchAirtableDocsIndex({ apiKey, baseId }) {
+  const base = new Airtable({ apiKey }).base(baseId);
+
+  const articleRecords = await base(ARTICLES_TABLE)
+    .select({ fields: ["Article", "Article Link"] })
+    .all();
+  const articlesById = new Map(
+    articleRecords.map((record) => [
+      record.id,
+      {
+        text: String(record.get("Article") ?? "").trim(),
+        link: String(record.get("Article Link") ?? "").trim(),
+      },
+    ])
+  );
+
+  const caseStudyRecords = await base(CASE_STUDIES_TABLE)
+    .select({ fields: ["Name", "Tags", "Articles"] })
+    .all();
+
+  return { articlesById, caseStudyRecords };
+}
+
+// Given the pre-fetched index, returns extra `relevantDocsAndArticles`
+// blocks (in the same `{ text, bullet, links }` shape produced by the docx
+// parser) for a single group, by matching `Group: <name>` tags.
+function expandGroupDocs(groupName, { articlesById, caseStudyRecords }) {
+  const candidates = groupTagCandidates(groupName).map(
+    (name) => `group: ${name.toLowerCase()}`
+  );
+  if (!candidates.length) return [];
+
+  const blocks = [];
+  const seenArticleIds = new Set();
+
+  for (const record of caseStudyRecords) {
+    const tags = record.get("Tags") || [];
+    const isMatch = tags.some((tag) => candidates.includes(String(tag).toLowerCase()));
+    if (!isMatch) continue;
+
+    const name = String(record.get("Name") ?? "").trim();
+    if (name) blocks.push({ text: `Case study: ${name}`, bullet: true, links: [] });
+
+    for (const articleId of record.get("Articles") || []) {
+      if (seenArticleIds.has(articleId)) continue;
+      seenArticleIds.add(articleId);
+      const article = articlesById.get(articleId);
+      if (!article || !article.text) continue;
+      blocks.push({
+        text: article.text,
+        bullet: true,
+        links: article.link ? [article.link] : [],
+      });
+    }
+  }
+
+  return blocks;
+}
+
 // Human-friendly column headings for the flattened table view, in display
 // order. Anything in `extraFields` gets its own column, appended after
 // these using its original (verbatim) header text.
@@ -299,7 +388,7 @@ function toTableRow(group) {
   return row;
 }
 
-function main() {
+async function main() {
   const files = listDocxFiles(SOURCE_DIR);
   const groups = [];
 
@@ -342,6 +431,35 @@ function main() {
     }
   }
 
+  // Expand each group's "Relevant Docs and Articles" filter-view links into
+  // the actual case studies/articles they point to, via the Airtable API.
+  // Requires AIRTABLE_API_KEY + (AIRTABLE_MA_BASE_ID or AIRTABLE_BASE_ID);
+  // skipped (leaving the docx-only links intact) if not configured.
+  const { AIRTABLE_API_KEY, AIRTABLE_MA_BASE_ID, AIRTABLE_BASE_ID } = process.env;
+  const baseId = AIRTABLE_MA_BASE_ID || AIRTABLE_BASE_ID;
+  if (AIRTABLE_API_KEY && baseId) {
+    try {
+      const index = await fetchAirtableDocsIndex({ apiKey: AIRTABLE_API_KEY, baseId });
+      for (const group of groups) {
+        const extraBlocks = expandGroupDocs(group.groupName, index);
+        if (!extraBlocks.length) continue;
+        const existing = Array.isArray(group.relevantDocsAndArticles)
+          ? group.relevantDocsAndArticles
+          : group.relevantDocsAndArticles
+            ? [group.relevantDocsAndArticles]
+            : [];
+        group.relevantDocsAndArticles = [...existing, ...extraBlocks];
+      }
+      console.log("Expanded Relevant Docs and Articles via the Airtable API");
+    } catch (err) {
+      console.warn(`Skipping Airtable expansion of docs/articles: ${err.message}`);
+    }
+  } else {
+    console.log(
+      "Skipping Airtable expansion of docs/articles (AIRTABLE_API_KEY/AIRTABLE_MA_BASE_ID or AIRTABLE_BASE_ID not set)"
+    );
+  }
+
   const output = {
     generatedAt: new Date().toISOString(),
     sourceDir: "wcpwriteups",
@@ -358,4 +476,7 @@ function main() {
   console.log(`Wrote ${tableRows.length} rows to ${TABLE_OUTPUT_PATH}`);
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exitCode = 1;
+});

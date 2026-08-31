@@ -16,6 +16,7 @@ class DataTable extends HTMLElement {
     const label = this.getAttribute("label") || src;
     this.nameColumn = this.getAttribute("name-column") || null;
     this.wordLimits = this.parseWordLimits();
+    this.columnAllowlist = this.parseColumns();
     this.innerHTML = `<p class="status">Loading ${label}…</p>`;
 
     try {
@@ -50,6 +51,22 @@ class DataTable extends HTMLElement {
     return typeof limit === "number" && limit > 0 ? limit : DEFAULT_WORD_LIMIT;
   }
 
+  // Reads an optional `columns` attribute — a JSON array of column headings
+  // to render, in the given order (e.g. columns='["Group Intro","Key Group
+  // Activities"]') — letting a snippet show only a subset of the columns
+  // present in the source data instead of every inferred column.
+  parseColumns() {
+    const raw = this.getAttribute("columns");
+    if (!raw) return null;
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) && parsed.length ? parsed : null;
+    } catch {
+      console.warn(`<data-table>: could not parse columns attribute: ${raw}`);
+      return null;
+    }
+  }
+
   wordCount(text) {
     return text.trim().split(/\s+/).filter(Boolean).length;
   }
@@ -70,7 +87,14 @@ class DataTable extends HTMLElement {
     }
     // Drop columns that only ever contain internal Airtable record IDs;
     // they aren't meaningful to a reader and just add clutter.
-    return order.filter((key) => !this.isRecordIdOnlyColumn(records, key));
+    const inferred = order.filter((key) => !this.isRecordIdOnlyColumn(records, key));
+    if (!this.columnAllowlist) return inferred;
+    // Respect the requested column order, but only for columns that
+    // actually exist in the data (plus the name column, which is handled
+    // separately by `render`/`rowGroup`).
+    return this.columnAllowlist.filter(
+      (column) => column === this.nameColumn || inferred.includes(column)
+    );
   }
 
   isRecordIdOnlyColumn(records, key) {

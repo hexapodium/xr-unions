@@ -104,6 +104,20 @@ input:focus {
 
 td.bool { text-align: center; }
 
+/*
+ * data-table sizes its contents against the width of its own container
+ * (e.g. a narrow Squarespace column), not the browser viewport. Without
+ * this, a `@media` breakpoint based on screen width would never kick in
+ * inside a narrow embed on a wide monitor, and vice versa. Establishing an
+ * inline-size containment context here lets the `@container` rule below
+ * respond to the actual rendered width of the <data-table> element.
+ */
+data-table {
+  display: block;
+  container-type: inline-size;
+  container-name: data-table;
+}
+
 .table-scroll {
   overflow: auto;
   max-height: 70vh;
@@ -177,7 +191,12 @@ table.has-name-header tbody tr:nth-child(4n-1) {
 table.has-name-header tbody tr.name-row:hover,
 table.has-name-header tbody tr:hover { background: #eef4ff; }
 
-@media (max-width: 600px) {
+/*
+ * Narrow-container variant (was `@media (max-width: 600px)`, which reacts
+ * to the viewport rather than the space the table is actually laid out
+ * in). `container-name: data-table` is declared above.
+ */
+@container data-table (max-width: 600px) {
   th, td {
     min-width: 6.5rem;
     max-width: 14rem;
