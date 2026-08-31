@@ -1,23 +1,31 @@
 # Embedding the data tables in Squarespace
 
 The current cached data lives in `public/articles.json`,
-`public/case-studies.json`, and `public/sources.json` (raw Airtable field
+`public/case-studies.json`, `public/sources.json` (raw Airtable field
 dumps — see the repo README's "Movement Assessment Sources Database"
-section). `public/index.html` browses all three using two small custom
-elements, `data-table.js` and `copy-link.js`, and this is the recommended way
-to embed them elsewhere too.
+section), and `public/groups-table.json` (a curated, flattened view of the
+WCP26 group write-ups — see `scripts/parse-wcpwriteups.js`). `public/index.html`
+browses all four using two small custom elements, `data-table.js` and
+`copy-link.js`, and this is the recommended way to embed them elsewhere too.
 
 ## Quick start
 
-1. Open `public/index.html` on the deployed site (GitHub Pages) and use the
-   **Copy** button under the table you want to embed to grab its direct
-   JSON link — this is a CORS-friendly URL a Squarespace code block can
-   `fetch()` directly.
-2. Paste the contents of `data-table-snippet.html` into a Squarespace Code
-   Block.
-3. Replace `SITE_ORIGIN` with your deployed origin (e.g.
-   `hexapodium.github.io/xr-unions`) and `FILE` with one of `articles.json`,
-   `case-studies.json`, or `sources.json`.
+Paste-ready snippets (already pointing at
+`https://hexapodium.github.io/xr-unions`, no placeholders to fill in) are
+provided for each table:
+
+- `articles-table-snippet.html` → `articles.json`
+- `case-studies-table-snippet.html` → `case-studies.json`
+- `sources-table-snippet.html` → `sources.json`
+- `groups-table-snippet.html` → `groups-table.json` (WCP26 group write-ups)
+
+1. Open the snippet file for the table you want.
+2. Copy its full contents into a Squarespace Code Block.
+3. If you deploy from a fork or different repo/org, update the
+   `hexapodium.github.io/xr-unions` origin in the snippet to match.
+
+If you're deploying somewhere other than `hexapodium.github.io/xr-unions`,
+use the generic placeholder version instead, `data-table-snippet.html`:
 
 ```html
 <script type="module" src="https://SITE_ORIGIN/data-table.js"></script>
@@ -27,6 +35,10 @@ to embed them elsewhere too.
 <copy-link href="https://SITE_ORIGIN/FILE"></copy-link>
 <data-table src="https://SITE_ORIGIN/FILE" label="rows"></data-table>
 ```
+
+Replace `SITE_ORIGIN` with your deployed origin (e.g.
+`hexapodium.github.io/xr-unions`) and `FILE` with one of `articles.json`,
+`case-studies.json`, `sources.json`, or `groups-table.json`.
 
 You can repeat the `<copy-link>`/`<data-table>` pair as many times as you
 like on one page (e.g. once per file) — the two `<script type="module">`

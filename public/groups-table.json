@@ -1,0 +1,807 @@
+[
+  {
+    "id": "FoE",
+    "Group Name": "Friends of the Earth (FoE)",
+    "Group Intro": "FoE is an environmental NGO that is heavily involved in lobbying the UK Government for climate action. Although their work is not explicitly linked to the worker-climate movement, they strongly align with the movement’s calls for a just transition and often include workers’ demands in their publications. Some campaigns link directly to green job creation, such as their lobby for the creation of a Green Apprenticeships scheme.",
+    "Key Group Activities": [
+      "FoE produce reports based on research they have commissioned, the findings are used to support their policy recommendations and proposals",
+      "FoE undertake a lot of legal action against the UK Government",
+      "They lobby for their demands to be met within UK legislation",
+      "Proposed a Green Apprenticeships scheme focused on green jobs, skills and training for young people",
+      "Their latest campaign is the Big Climate Plan, which began in 2025"
+    ],
+    "Additional Info": "Their work aligns with the worker-climate movement but they aren’t working in direct collaboration with unions or workers. They mainly focus on taking legal action for UK legislation, which if successful, has a positive impact on the worker-climate movement.",
+    "Relevant Docs and Articles": [
+      "[Airtable articles](https://airtable.com/appS60muYwAqB3S4V/shrnnlNu9yllP6NoV)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrmcoIkePC7lYLeF)"
+    ],
+    "Relevant Links": [
+      "[Website](https://friendsoftheearth.uk/)",
+      "Social Media: Bluesky, Facebook, Threads, X, Instagram, YouTube, TikTok",
+      "https://bsky.app/profile/friends-earth.bsky.social",
+      "https://www.facebook.com/friendsoftheearth",
+      "https://www.threads.com/@friends_earth",
+      "https://x.com/friends_earth",
+      "https://www.instagram.com/friends_earth/?hl=en",
+      "https://www.youtube.com/user/friendsoftheearth",
+      "https://www.tiktok.com/@friends_earth"
+    ]
+  },
+  {
+    "id": "FoES",
+    "Group Name": "Friends of the Earth Scotland (FoES)",
+    "Group Intro": "Friends of the Earth Scotland is a Scottish environmental campaigning organisation working on climate justice, fossil fuel phaseout and a fair transition to a zero-carbon economy. In the worker-climate movement, its most relevant work focuses on green jobs, oil and gas transition, public ownership of energy and putting workers and communities at the centre of transition planning.",
+    "Key Group Activities": [
+      "Campaigning for public investment in green jobs, infrastructure, training, public services and a just recovery, including through its Green Jobs Recovery plan.",
+      "Working with oil and gas workers, trade unions and communities to develop worker-led just transition demands, including through the Our Power project and its wider Just Transition campaign.",
+      "Producing research and campaigning for a managed phaseout of oil and gas, no new extraction, renewable-energy expansion and protection for affected workers and regions, including through SeaChange and No New Oil & Gas.",
+      "Supporting workers facing an unjust transition, including expressing solidarity with Grangemouth refinery workers and calling for investment in a transition plan with workers and trade unions at its centre."
+    ],
+    "Additional Info": "FoES is not a trade union, but works across the climate and labour movements through worker engagement, policy research and collaboration with trade unions, community organisations and groups including Platform, Oil Change International and the Just Transition Partnership.",
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrYTMOZ8WjEIL1YM)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrRpHhuRJPmr2gqW)"
+    ],
+    "Relevant Links": [
+      "[Link to Website: https://foe.scot/](https://foe.scot/)",
+      "Social Media: Instagram; Facebook; Bluesky",
+      "http://www.instagram.com/foescot/",
+      "https://facebook.com/foescot",
+      "https://bsky.app/profile/foescot.bsky.social"
+    ]
+  },
+  {
+    "id": "NEF",
+    "Group Name": "New Economics Foundation (NEF)",
+    "Group Intro": "The New Economics Foundation is a think tank that seeks to transform the economy so it works for people and the planet. As well as research they  with partners  on-the ground s, to campaign.",
+    "Key Group Activities": [
+      "NEF pioneered the idea of the green new deal in 2008 which has influenced many campaigns, policy and actions around the environment across the world",
+      "Campaigns and projects: National Energy Guarantee, Protect us from Climate Wrecking Finance, Greater Manchester Living Income Campaign, Great Homes Upgrade, Homes for Us Alliance, Extreme Wealth Line",
+      "https://neweconomics.org/campaigns/national-energy-guarantee",
+      "https://neweconomics.org/campaigns/protect-us-from-climate-wrecking-finance",
+      "https://gmlivingincome.co.uk/",
+      "https://greathomesupgrade.org/",
+      "https://homesforus.org.uk/",
+      "https://homesforus.org.uk/"
+    ],
+    "Additional Info": "NEF is a small research organisation of about 35 staff. Their 3 guiding missions include: a fast and fair transition, guaranteed economic security for all, shift power to people and communities. In 2016, the New Economy Organisers Network (NEON) separated from NEF to form an independent group.",
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrDf9lhaBqgKakfa)",
+      "[Case Studies](https://airtable.com/appS60muYwAqB3S4V/shrHwEqyGV7yvUlj7)"
+    ],
+    "Relevant Links": [
+      "[Website](https://neweconomics.org/)",
+      "Social Media: Facebook, Twitter/X, Instagram, LinkedIn, TikTok, YouTube",
+      "https://www.facebook.com/neweconomics",
+      "https://www.twitter.com/nef",
+      "https://www.instagram.com/neweconomicsfoundation/",
+      "https://www.linkedin.com/company/new-economics-foundation",
+      "https://www.tiktok.com/@neweconomicsfoundation",
+      "https://youtube.com/user/theneweconomics"
+    ]
+  },
+  {
+    "id": "NEON",
+    "Group Name": "New Economy Organisers Network (NEON)",
+    "Group Intro": "NEON is an organisation which supports social justice movements across sectors by building skills and strategy capacities in the UK. Their aim is to “build a new economy” which “puts people and the planet first”. Their work focuses on issues relating to the climate, housing, migration and far-right politics.",
+    "Key Group Activities": [
+      "Collaboration with the TUC on the ‘Future-Proofing’ efforts, supporting manufacturing workers to plan for their future through a transition",
+      "Creating and sharing strategic “organisational” resources through their Operations Hub and facilitating organising skills and strategy training sessions, mentoring and convenings through their Movement Building Hub",
+      "https://neweconomyorganisers.org/hubs/operations",
+      "https://neweconomyorganisers.org/hubs/communications",
+      "Conducting communication trainings for “progressives”, including media training,  through their the Communication Hub",
+      "https://neweconomyorganisers.org/trainings",
+      "https://neweconomyorganisers.org/hubs/communications",
+      "Hosting information events and sharing resources",
+      "https://neweconomyorganisers.org/events",
+      "https://neweconomyorganisers.org/resources"
+    ],
+    "Additional Info": [
+      "The organisation is composed of a Movement Building Hub, a Communication Hub and an Operations Hub. They focus heavily on strategy and communication capacity building.",
+      "They were initially part of the New Economics Foundation but have existed independently since 2016.",
+      "In 2023, they partnered with the Trade Union Congress to start a worker-led transition project to support unions and workers in manufacturing industries and high carbon industries to secure a just transition.",
+      "Their funders include the European Climate Foundation, Urban Movement Innovation, William and Flora Hewlett Foundation, Polden Puckham, Partners for a New Economy, Oak Foundation, Friends Provident, JRF, Unbound Philanthropy, Paul Hamlyn.",
+      "At the end of 2024 they had around 26 staff members."
+    ],
+    "Relevant Docs and Articles": [
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrccOeQlZyevl4gA)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shresQmciaFR6XfMR)"
+    ],
+    "Relevant Links": [
+      "[Website](https://neweconomyorganisers.org/)",
+      "Social Media: X, Facebook, LinkedIn",
+      "https://x.com/NEON_UK",
+      "https://www.facebook.com/neweconomyorganisers/",
+      "https://uk.linkedin.com/company/new-economy-organisers-network-neon-"
+    ]
+  },
+  {
+    "id": "New Lucas Plan",
+    "Group Name": "A New Lucas Plan",
+    "Group Intro": "The original Lucas Plan was a movement of arms manufacturing workers in the 1970s to defend their jobs by proposing a more socially useful service of their skills and technology. The New Lucas Plan was established at the 40th anniversary conference of the Lucas Plan in 2016 as discussions led to plans around the idea of a ‘just transition’ and what that means for local communities, union action and industry.",
+    "Key Group Activities": [
+      "Provides a network for environmentally and socially conscious trade unions and grassroots organisations.",
+      "Pursues a whole-of-society approach, calling for a new economic model that meets social needs within environmental limits.",
+      "Their work focuses on 4 core areas: arms conversion, robotics and automation, just transition and democratic local planning.",
+      "They organise events such as webinars to share ideas and build cross-movement networks."
+    ],
+    "Additional Info": "The New Lucas Plan clearly stipulates 9 principles that are required to fulfil a just transition. Although they recognise that a just transition is needed as a response to climate change, their principles to achieve it are grounded in human rights and social protection, with an emphasis on unionised jobs and collective bargaining.",
+    "Relevant Docs and Articles": [
+      "[A New Lucas Plan](https://docs.google.com/document/d/1kcgGQAfiPVayeAB4vlk_LOMyFSzQjP0cuZGGEHCecTM/edit?usp=sharing)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrRo976FDP6ypyBA)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrPnHM6aozBW24ZL)"
+    ],
+    "Relevant Links": [
+      "[Website](https://lucasplan.org.uk/)",
+      "Social Media: Facebook, X",
+      "https://www.facebook.com/Lucas-Plan-40-193677017719408",
+      "https://twitter.com/lucasplan40"
+    ]
+  },
+  {
+    "id": "PCS Green Reps",
+    "Group Name": "PCS Green Workplaces",
+    "Group Intro": "PCS Green Workplaces is both an internal union group and a PCS campaign to mainstream climate action across the union and affiliated workplaces.",
+    "Key Group Activities": [
+      "Coordinate and promote the role of Green Representatives",
+      "Work to mainstream climate action and adaptation across the union and society as a whole",
+      "Lobby for a National Climate Service",
+      "Engage with and support climate action campaigns across the wider climate movement",
+      "Set up a National Climate Service Working Group in April 2022, which commissioned the Public Services International Research Unit (PSIRU) in March 2023"
+    ],
+    "Additional Info": "PCS Green Workplaces call for a unionised whole-of-society approach in responding to climate change, demanding public ownership and the creation of a National Climate Service. They are involved in many campaigns that go beyond the scope of the trade union itself. The resources they use are often taken from TUC Green Workplaces, meaning they are coherent and coordinated with the wider worker-climate movement. PCS’s declaration of a climate emergency in 2019 sent a strong message that the Green Workplaces group/campaign would be mainstreamed across the union.",
+    "Relevant Docs and Articles": [
+      "[Notes from group’s articles](https://docs.google.com/document/d/1uRMzz540Oevt0gRZODrcWG9wAQ3iDq0oKXvhrrU7S4M/edit?usp=sharing)",
+      "[Link to AirTable folder](https://airtable.com/appS60muYwAqB3S4V/shrRLU5SucZlKLTB1)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shr2aZCoUyDJDCSwr)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.pcs.org.uk/campaigns/green-workplaces)",
+      "Social Media (of PCS): Facebook, Bluesky, Instagram, YouTube, LinkedIn, X",
+      "https://www.facebook.com/PcsUnion",
+      "https://bsky.app/profile/pcsunion.bsky.social",
+      "https://www.instagram.com/pcsunion",
+      "https://www.youtube.com/user/pcstradeunion/videos",
+      "https://www.linkedin.com/company/public-and-commercial-services-union",
+      "https://twitter.com/pcs_union"
+    ]
+  },
+  {
+    "id": "Platform",
+    "Group Name": "Platform",
+    "Group Intro": "Platform is a campaign and investigative group that works in a number of sectors, including North Sea oil and gas. Their focus is a worker-led just transition across food and energy systems.",
+    "Key Group Activities": [
+      "Hosting workshops to understand the demands of offshore workers and hash out a Just Transition plan that enfranchises the voices of North Sea oil and gas workers",
+      "Publishing policy recommendations and briefings for MPs",
+      "Campaigning for an offshore skills passport and an energy skills passport, allowing fossil fuel workers to more easily work in renewables",
+      "Fostering collaboration between fossil fuel workers and environmentalist groups"
+    ],
+    "Additional Info": "The deliberative approach adopted when engaging with workers focuses on giving the workers themselves a voice. The resulting policy package is remarkably progressive, including demands for public ownership of energy assets, jobs guarantee for oil and gas workers, and a windfall tax on energy companies.",
+    "Relevant Docs and Articles": [
+      "[Platform](https://docs.google.com/document/d/1-OZcFJpYLUEqKcX_fAahmKBEWei1AdHsJWi9FUGzLAc/edit?tab=t.0#heading=h.2i1cfojp9n4n)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shr82FG06AnLo8VdY)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrb88TtEW8MTzmKX)"
+    ],
+    "Relevant Links": [
+      "[Website](https://platformlondon.org/)",
+      "Social media: X, Facebook, YouTube",
+      "https://twitter.com/PlatformLondon",
+      "https://www.facebook.com/platformlondon",
+      "https://www.youtube.com/channel/UCWsu8qiqjHjkYPuJxUt8u2g"
+    ]
+  },
+  {
+    "id": "TUCAN",
+    "Group Name": "Trade Union Clean Air Network (TUCAN)",
+    "Group Intro": "TUCAN is a cross-union network campaigning for air pollution, particularly occupational and indoor air pollution, to be recognised and acted on as a workplace health and safety issue. It is hosted by the Greener Jobs Alliance.",
+    "Key Group Activities": [
+      "Producing practical guidance and campaign resources and a Clean Air Charter to help workers, union reps and health and safety reps identify and act on workplace air pollution.",
+      "Supporting workplace air quality monitoring and evidence gathering in a range of sectors.",
+      "Intervening in policy and regulatory processes to push for occupational and indoor air pollution to be recognised in clean air policy, with stronger standards, enforcement, workplace risk assessments and worker/union consultation.",
+      "Organising seminars, events and cross-movement activity that bring together trade unionists, campaigners, academics, public health actors and local/regional authorities around air pollution and climate risks."
+    ],
+    "Additional Info": [
+      "TUCAN appears to be a cross-union network rather than a formal structure of one union.",
+      "It is closely linked to the trade union movement through supporting unions, TUC/TUC regional activity, trades councils, union officers, health and safety reps and green reps.",
+      "It also works closely with the Greener Jobs Alliance and Hazards Campaign, alongside groups such as the Healthy Air Coalition, local authorities, academic researchers and air quality specialists."
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrxxxGZdTbXN3FI1)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrZm2ylnJYmRZI4w)"
+    ],
+    "Relevant Links": [
+      "[Website](https://greenerjobsalliance.co.uk/air-pollution/)",
+      "[Social Media: Facebook](https://www.facebook.com/TUCleanAirNetwork/)"
+    ]
+  },
+  {
+    "id": "Tipping Point",
+    "Group Name": "Tipping Point",
+    "Group Intro": "Tipping Point is an organisation aimed at supporting grassroots groups, across a diversity of sectors and struggles, working towards a “people-powered” climate justice by providing them with access to organising tools and resources, training and networks.",
+    "Key Group Activities": [
+      "Providing access to resources including digital organising tools, grants and training, such as the Workers and Trade Union Engagement and Education Programme",
+      "https://tippingpointuk.org/tech/",
+      "https://tippingpointuk.org/grassroots-action-fund/",
+      "https://tippingpointuk.org/training/",
+      "https://docs.google.com/document/d/1HnMKo_FWjofkts20lPN5juYqHwQo7kRCQ2m0_CM0jHA/edit?tab=t.0",
+      "Sharing information for grassroot groups to connect including a movement map and a movement calendar",
+      "https://tippingpointuk.org/map/",
+      "https://tippingpointuk.org/movement-calendar/",
+      "Support worker-climate networks and campaigns such as Stop Rosebank, Bank Better and Boycott Bloody Insurance",
+      "Supporting, commissioning, coordinating or producing projects such as a documentary, a legal case and several campaigns and networks for climate justice",
+      "https://tippingpointuk.org/leaving-it-better/",
+      "https://tippingpointuk.org/the-peoples-climate-justice-case/"
+    ],
+    "Additional Info": [
+      "The organization is registered as a company.",
+      "[For grassroot organisations to be eligible to be supported by, or collaborate with, them they need to adhere to Tipping Point’s “Organizing Principles”](https://tippingpointuk.org/how-we-organise/)",
+      "[The team is composed of at least 10 co-directors who coordinate different aspects of their work and have backgrounds in grassroot organizing and frontline work for social and environmental justice.](https://tippingpointuk.org/team/)"
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrGDIl7lW8hKxALK)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrlevibM8oUbJYwT)"
+    ],
+    "Relevant Links": [
+      "[Website](https://tippingpointuk.org/)",
+      "[Social Media: X](https://twitter.com/TippingPointorg)"
+    ]
+  },
+  {
+    "id": "Workers Co-op",
+    "Group Name": "Workers Co-op",
+    "Group Intro": "Workers Co-op is a co-operative which was set up in October 2022. The group is made up of more than 55 worker co-op organisations and workers with an annual turnover of £100,000. It has a Board of Directors, but day-to-day management and delivery is sociocratically run by its 35 workers members. Their Own The Future campaign sees democratic worker ownership as key to building caring, ecological and abundant local economies. The campaign is loosely relevant to the worker-climate movement as it supports the establishment of new worker co-ops in pursuit of a worker-led transition.",
+    "Key Group Activities": [
+      "Own The Future campaign - a one year co-op support programme, which started in March 2026, which provides mentoring, training and financial support for 5 selected new worker co-ops.",
+      "Hosting events such as organising weekends away with full schedules of workshops and networking talks",
+      "Sharing resources and best practices on their website"
+    ],
+    "Additional Info": [
+      "Their work is loosely related to the worker-climate movement, but not explicitly. Their Own The Future campaign frames worker co-ops as the way to achieve a successful social and ecological transition, but their focus remains on providing support for workers involved or interested in forming a co-op. The group doesn’t demonstrate any environmental/climate change awareness past their view that worker co-ops are necessary for a sustainable economic future.",
+      "The environment is mentioned briefly in the Worker Co-op’s Code, but only in terms of trying to avoid producing harm to local communities, rather than in acknowledgement of the wider context of climate change and climate action."
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrA0vyPBefnwQ4sr)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrKWRlpXfMmG4vAk)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.workers.coop/)",
+      "Social Media: LinkedIn, Facebook, Mastodon, Bluesky",
+      "https://www.linkedin.com/company/90827563/",
+      "https://www.facebook.com/groups/workercooperatives/",
+      "https://social.coop/@workers_coop",
+      "https://bsky.app/profile/workers-coop.bsky.social"
+    ]
+  },
+  {
+    "id": "Workers Planet",
+    "Group Name": "Workers’ Planet",
+    "Group Intro": "Workers Planet is a group which, since 2025, organises a recurrent fringe festival during the TUC Congress, as well as satellite events “bringing together trade unionism, climate justice & international solidarity” during the year.",
+    "Key Group Activities": [
+      "[Organise a fringe event during the TUC in the shape of a festival of talks and workshops](https://workersplanet.org/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGngbj4UeUAlZ-2VTfSyMb0Q4fLS2yywmdHeKucXkD-PVl1KMybaKo8v6Yn1Vc_aem_WpoV2V2bu_rf91oV4VjbTw)",
+      "Organise satellite events/festivals with other organisations during the year",
+      "[Amplify other climate related events/festivals](https://www.instagram.com/workers_planet/)"
+    ],
+    "Additional Info": "They have co-organised festivals and events with organisations such as UNITE, We are Plan C and Organise Southwest.",
+    "Relevant Docs and Articles": [
+      "[Notes Doc](https://docs.google.com/document/d/1IfM6pKUi3KrXbeNrtvoheed7iRbX3Oul3kx7smU4TpY/edit?tab=t.0)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrnFi6q84agwWALA)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrKl3mMLRwX5WYSe)"
+    ],
+    "Relevant Links": [
+      "[Website](https://workersplanet.org/)",
+      "Social Media: Instagram, Facebook, X",
+      "https://www.instagram.com/workers_planet/",
+      "https://www.facebook.com/profile.php?id=61577409071053",
+      "https://x.com/workersplanet25"
+    ]
+  },
+  {
+    "id": "BFAWU Green Reps",
+    "Group Name": "BFAWU Green Reps",
+    "Group Intro": "In 2021, BFAWU passed a motion which officially recognised BFAWU Green Reps in the union’s rule book, alongside a commitment to source training for them. The BFAWU Green Reps Network Forums were also set up in 2021 to facilitate regular correspondence amongst reps. These forums have strengthened coordination within the network of green reps, leading them to be an identifiable internal union group.",
+    "Key Group Activities": [
+      "Regular forums where all green reps share information about training, updates from specific branches, events and further development",
+      "Resource creation for green reps to use, particularly surveys to audit their workplace and a template workplace agreement on environmental and climate change",
+      "Involved in the Cool it! Campaign since 2008, which was integrated into the Heat Strike movement in 2024",
+      "Involved in the 2025 Year of Trade Union Climate Action",
+      "BFAWU’s ongoing collaboration with Greggs since 2017"
+    ],
+    "Additional Info": [
+      "BFAWU Green Reps emerged as a result of BFAWU passing a motion in 2017. This motion advocated for environmental representation and was initially achieved by adding an environmental element to the existing role of Health and Safety Reps. This role became the foundation for the independent role of Green Reps to be built upon in 2021.",
+      "A few of their resources are based on TUC’s Go Green resources."
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrKC60UcbifLElDB)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrXspfgIahGvg4oC)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.bfawu.org/health-safety-and-environment/environment/green-reps/)",
+      "Social Media: Facebook, X",
+      "https://www.facebook.com/BFAWUGreenstuff",
+      "https://x.com/BfawuS"
+    ]
+  },
+  {
+    "id": "CACCTU",
+    "Group Name": "Campaign Against Climate Change Trade Union Group (CACCTU)",
+    "Group Intro": "Established in 2004, the Trade Union branch of the Campaign Against Climate Change (CACCTU) is a cross-union coalition that aims to bring trade union voices into the environmental and climate justice movement. Their core demands include a Just Transition, climate jobs, and a National Climate Service, with a focus on linking social justice and climate justice together.",
+    "Key Group Activities": [
+      "Raise awareness and call to action that climate change is a workers’ issue",
+      "Provide a network to enable unified trade union action on climate change",
+      "Provide resources for promoting climate justice as a workers’ issue",
+      "Organise and host worker-climate events, including an annual CACCTU conference",
+      "Publish reports and policy proposals",
+      "They are involved in the Year of Trade Union Climate Action",
+      "Involved in lobbying the UK Parliament to stop the Rosebank site from opening",
+      "They are the new hosts of the Global Campaign for Climate Jobs, which was initially an independent group"
+    ],
+    "Additional Info": [
+      "For a union to become an affiliate of the group, they must pay a fee",
+      "CACCTU’s leadership operates as a grassroots, worker-led steering committee of trade unionists across various sectors"
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrSDvXLGEukOZpyE)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrLurAgq0gzcRPkj)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.cacctu.org.uk/)",
+      "Social Media: Facebook, X, Bluesky, Instagram",
+      "https://facebook.com/campaigncc",
+      "https://x.com/campaigncc",
+      "https://bsky.app/profile/campaigncc.bsky.social",
+      "https://instagram.com/campaignagainstclimatechange"
+    ]
+  },
+  {
+    "id": "CJC",
+    "Group Name": "Climate Justice Coalition (CJC)",
+    "Group Intro": "Climate Justice Coalition was established in 2019 by the NGOs War on Want; Friends of the Earth Scotland; and the Global Campaign to Demand Climate Justice. It was initially named ‘COP26 Coalition’ as it was set up ahead of the UNFCCC’s COP26 in Glasgow to bring together groups for coordinated mobilising. It was the first UK-wide coalition to place justice at the centre of the climate movement and its goal was to build long-term capacity for the climate justice movement. Ahead of COP27 in 2022, it was renamed as Climate Justice Coalition, so climate justice groups could continue to convene. Their core demand is for climate change solutions to be equitably achieved through collective action, ensuring economic, racial, gender, social, health justice, and workers’ rights.",
+    "Key Group Activities": [
+      "Network building - connecting organisations across the climate justice movement to strengthen the coalition and facilitate cross-movement working",
+      "Coordination - the national coordination team decides the strategy and direction for the coalition",
+      "Organise and coordinate climate justice movement-related events and actions",
+      "Resource and knowledge sharing of best practices to achieve success",
+      "Key supporter of the GKN Factory Collective and solidarity campaign",
+      "Coordinate a Local Hubs Network to support grassroots movements and bring together individual activists"
+    ],
+    "Additional Info": [
+      "Trade unions can officially affiliate and become members of the coalition by passing CJC’s model motion",
+      "Has two core working groups: fundraising and global solidarity",
+      "Has two core organising groups: the We Make Tomorrow campaign (which organises under the CJC Trade Union Caucus) and the Climate and Migrant Justice campaign"
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shr4YTNYpPQ8Tjh92)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrG8aQmUfWgwPTGd)"
+    ],
+    "Relevant Links": [
+      "[Website](https://climatejustice.uk/)",
+      "Social Media: Facebook, X, Instagram, YouTube",
+      "https://www.facebook.com/climatejusticecoalitionCJC",
+      "https://x.com/CJ_Coalition",
+      "https://www.instagram.com/climatejustice_coalition/",
+      "https://www.youtube.com/channel/UCIj7tALDGaEMowxi8gYKE8A"
+    ],
+    "GKN Solidarity Campaign Info": [
+      "In July 2021, the announced closure of the GKN Driveline factory in Florence led the workers to establish the GKN Factory Collective and take over the factory, with a plan to establish a social cooperative to produce cargo bikes and solar panels.",
+      "Climate Justice Coalition allied with the Collective and helped to raise awareness and fundraise for the campaign by organising events and facilitating the international solidarity movement.",
+      "CJC helped to convene a delegation of trade unionists from the UK to participate in assemblies and protests around the GKN factory in Florence. The delegation included representatives from the RMT, FBU, IWGB, UCU, Safe Landing, Greener Jobs Alliance, and others.",
+      "CJC launched a fundraising campaign to purchase shares in the Workers’ Collective. This campaign was successful, with CJC becoming shareholders in the new workers co-op in October 2024, and continued to expand, with 1,800 participating entities and raising over 1 million euros by July 2026."
+    ]
+  },
+  {
+    "id": "CJCTUC",
+    "Group Name": "Climate Justice Coalition Trade Union Caucus (CJCTUC)",
+    "Group Intro": "The CJCTUC was established to mobilise trade unionists for COP26 as part of the COP26 Coalition in 2021. The group continued its work when the COP26 Coalition evolved into the Climate Justice Coalition in 2022. CJCTUC continues to bring together union representatives, officials and members across the trade union movement to facilitate education and mobilisation for climate justice and a just transition. The group sees workers acting collectively as a means to reshape work and society for the better.",
+    "Key Group Activities": [
+      "[Organised the We Make Tomorrow conferences in 2023 and 2024, bringing together trade unionists to develop a common understanding and potential organising/mobilising plans toward climate justice](https://wccalliance.org/we-make-tomorrow-conference/)",
+      "Facilitate education, networking and mobilisation of trade unionists for climate justice",
+      "Prepare model motions for trade union branches, trade councils, AGMs and conference to commit to climate action",
+      "https://docs.google.com/document/d/1joQzYelQ_o2LTbp5t9wpaoDgxT4gU9t5OaWi5ltwdY8/edit?usp=sharing",
+      "https://docs.google.com/document/d/1jqwr7ptS8JwoQGW9KeNtOk1oSezE9EgRVqOXxARaPEs/edit?usp=sharing",
+      "Amplify and support the work of trade unionists working for climate justice"
+    ],
+    "Additional Info": [
+      "When organising under the COP26 Coalition, CJCTUC mobilised 10,000+ trade unionists in Scotland and across the UK in 2021.",
+      "The group played a similar (though smaller) role for the COP27 mobilisation in London 2023.",
+      "CJCTUC maintains the slogan ‘We Make Tomorrow’ (drawn from their 2023 and 2024 conferences) to strategically emphasise how workers continually shape the economy and society through their work every day",
+      "CJCTUC was involved in the Roots, Resistance, Rebellion Event in 2025, which was organised by War On Want"
+    ],
+    "Relevant Docs and Articles": [
+      "[Notes Doc](https://docs.google.com/document/d/1EvahcQt2Glz5apVnHqtwmqzAkQnBsdmdc9CUjtmbAg8/edit?tab=t.0)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shraB1xmxDtKFNLPJ)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrORcZFzw3xZdrR8)"
+    ],
+    "Relevant Links": [
+      "[Website](https://climatejustice.uk/we-make-tomorrow/)",
+      "Social Media (of parent organisation Climate Justice Coalition): Facebook, X, Instagram, YouTube",
+      "https://www.facebook.com/climatejusticecoalitionCJC",
+      "https://x.com/CJ_Coalition",
+      "https://www.instagram.com/climatejustice_coalition/",
+      "https://www.youtube.com/channel/UCIj7tALDGaEMowxi8gYKE8A"
+    ]
+  },
+  {
+    "id": "Equity for a GND",
+    "Group Name": "Equity for a Green New Deal",
+    "Group Intro": "Equity for a Green New Deal is a network of Equity members organising for climate justice in the performing arts and entertainment industries. The network campaigns around sustainable and accessible workplaces, greening Equity’s own operations, fossil fuel divestment and solidarity with workers fighting for a green and just future.",
+    "Key Group Activities": [
+      "Pension divestment and green finance: Equity for a Green New Deal campaigned for the Equity Pension Scheme to cut ties with fossil fuels, beginning with a 2017 campaign around the pension fund’s fossil fuel exposure. Equity later moved the whole default Equity Pension fund, worth over £130m, into a greener fund with extensive fossil fuel exclusions, and members also called on the Chancellor to unlock green investment through pension reform.",
+      "Green Rider campaign: The group created the Green Rider campaign, including the Green Rider Handshake, a template actors can use at the job-offer stage to raise sustainability demands with productions. Related resources include the Equity Green Rider template and Ten Sustainability Commitments for TV & Film, which cover travel, accommodation, energy use, materials, waste, catering, environmental audits, green skills and training, and reducing emissions across production. The Green Rider has been piloted on BBC and Sky Studios productions and is being negotiated into Equity’s collective agreements with PACT (the producers’ industry body).",
+      "Sustainable theatre/Theatre Green Book work: Equity for a Green New Deal established a sustainable theatre working group and engaged with the Theatre Green Book. Its feedback pushes for stronger worker and union voice in theatre sustainability standards, alongside accessibility, greater ambition, fossil fuel divestment, sustainable investment principles and more practical routes for implementation.",
+      "Heat safety and climate-related working conditions: Equity for a Green New Deal is linked to Equity’s Too Hot to Work organising around unsafe workplace heat during heatwaves. The heatwave briefing was aimed at Equity deputies and activists across live performance and recorded media, helping members stay safe, organise colleagues to demand heat mitigation measures and plan action during the Heat Strike week with wider TUC, Heat Strike and Hazards activity."
+    ],
+    "Additional Info": [
+      "Equity for a Green New Deal appears to be an official Equity member network rather than an external campaign group. Equity’s network page says members can join the Green New Deal Network and that it meets once a month on Zoom.",
+      "The group’s work combines internal union change, industry-facing campaigns, bargaining-related resources, policy demands and cross-movement collaboration. It has worked or interacted with PACT through the Green Rider collective agreement work, the Theatres Trust through the Theatre Green Book process, and wider climate/worker campaigns through Heat Strike, Hazards, the TUC and fossil fuel phaseout campaigning.",
+      "The network also supports a managed phaseout of oil and gas production, large-scale clean job creation, funded retraining and protection of workers’ rights. Equity’s signing of the Fossil Fuel Non-Proliferation Treaty also appears linked to the network’s wider role in mainstreaming climate issues into Equity’s union work and industrial agreements."
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrnBWEvbRzpatruZ)",
+      "[Case studies they are tagged in](https://docs.google.com/document/d/1fvE5VuZLi0IZbt1jAj2kqd0vQ69giqcukPp8ggS0ehw/edit?usp=sharing)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.equity.org.uk/get-involved/networks/green-new-deal-network)",
+      "Social Media: X, Instagram",
+      "https://twitter.com/Equity4GND",
+      "https://www.instagram.com/equitygnd/"
+    ]
+  },
+  {
+    "id": "GJA",
+    "Group Name": "Green Jobs Alliance (GJA)",
+    "Group Intro": "Founded in 2010, the GJA is a coalition of organisations which promotes green skills training and green job creation to grow low carbon sectors with the overall aim of greening the whole economy. The group liaises at a national and local level to raise awareness and build partnerships to achieve policies, investments, and commitments to transition to a low carbon economy.",
+    "Key Group Activities": [
+      "Produce and share resources for campaigns such as the annual Global Day of Climate Action",
+      "Host a blog on their website to raise awareness of ongoing climate impacts and action",
+      "Produce a monthly newsletter containing cross-union updates and advertising upcoming cross-movement worker-climate events",
+      "Host free online courses for trade union members"
+    ],
+    "Additional Info": [
+      "The GJA was initially established as a result of funding from Battersea and Wandsworth TUC",
+      "The group is run by a steering group of trades unionists, campaigners, and activists and is officially supported by the TUC, UCU, PCS, NEU, FoE and Greenpeace UK, among others",
+      "The GJA co-founded TUCAN in February 2019"
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shroFifqffznqtKnp)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrQ8DYG3IpgVxyUK)"
+    ],
+    "Relevant Links": [
+      "[Website](https://greenerjobsalliance.co.uk/)",
+      "Social Media: Instagram, X, Facebook",
+      "https://www.instagram.com/greenerjobsalliance/",
+      "https://twitter.com/GJAlliance",
+      "https://www.facebook.com/profile.php?id=100057637082517&ref=embed_page#"
+    ]
+  },
+  {
+    "id": "GMB GND",
+    "Group Name": "GMB for a Green New Deal (GMB for a GND)",
+    "Group Intro": "This is an internal union group which organises cross-union events related to climate change. They demand a worker-led just transition which ensures gender and racial equality, and call for the government to provide training grants for green jobs. They see their members as having the instrumental skills to bring about a zero-carbon economy.",
+    "Key Group Activities": [
+      "Hosting their own events: fringe meeting at the GMB Congress and Energy for All webinar",
+      "Participating in events organised by other worker-climate groups",
+      "Signed the cross-movement open letter against climate misinformation and the rise of the far right",
+      "Produce an internal mailing list for GMB members"
+    ],
+    "Additional Info": [
+      "Set up by members of GMB in 2020",
+      "Their work seems to focus on internal lobbying of GMB",
+      "Has a broad outlook rather than being sector specific",
+      "They have been tagged as involved in the Year of Trade Union Climate Action campaign, but it’s not clear how exactly"
+    ],
+    "Relevant Docs and Articles": [
+      "[Airtable articles](https://airtable.com/appS60muYwAqB3S4V/shrox4jJvtKs4BMrZ)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrubQbLzw2uLl9OI)"
+    ],
+    "Relevant Links": [
+      "[Website](https://actionnetwork.org/groups/gmb-for-a-green-new-deal-2)",
+      "[Social Media: X](https://x.com/GMB4GND)"
+    ]
+  },
+  {
+    "id": "Green Unison",
+    "Group Name": "Green UNISON (also known as the Year of Green Activity campaign)",
+    "Group Intro": [
+      "According to a UNISON article taken from their website, Green UNISON is an ongoing campaign which was set up in September 2020 and is used as an umbrella term for all UNISON’s green activities. But according to another of their articles (a report of a members survey) Green UNISON is a union network of green activists who have been internally lobbying for green policies within UNISON since 2017.",
+      "Their aims/demands include achieving net zero emissions and a just transition in public services, and their tactics include raising awareness, increasing the number of branch environmental officers, using union structures for engagement on climate change, and showcasing environmental work on branch agendas. The demands of this group were mainstreamed into the union when UNISON passed its green motion in 2022."
+    ],
+    "Key Group Activities": [
+      "Internal lobbying for UNISON to adopt a green motion (which was successful in 2022) and to encourage further climate action across the union",
+      "Produce a newsletter which includes information on training opportunities and events",
+      "Host events to build the Green UNISON network and raise awareness of climate change and environmental issues within the union",
+      "Support the UNISON members surveys on climate change and a just transition",
+      "Collaborate with research institutions to produce reports and policy recommendations for how to decarbonise the public sector",
+      "Create resources such as a model motion to encourage branches to strengthen the role of green reps and engage with UNISON Green Week activities",
+      "Facilitate green rep training and networking sessions"
+    ],
+    "Additional Info": [
+      "The Green UNISON group began as a grassroots movement within the union by local environmental officers and branch reps. Its name is now used synonymously with UNISON’s Year of Green Activity 2026 campaign, which suggests the original movement was successful at campaigning for more green activity within UNISON.",
+      "Though it can’t be clearly attributed to the internal lobbying of Green UNISON, UNISON became the first UK union to sign the Fossil Fuel Non-Proliferation Treaty in 2024.",
+      "There are no publications by Green UNISON specifically, due to the group’s work being officially absorbed into mainstream UNISON activities."
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrqPyddjB3kZveKB)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrMNu7alch6qvH3G)"
+    ],
+    "Relevant Links": [
+      "[Website](https://unison.org.uk/key-issues/year-of-green-activity)",
+      "Social Media (for UNISON): Facebook, Instagram, LinkedIn, YouTube, TikTok, X",
+      "https://www.facebook.com/unisontheunion/",
+      "https://www.instagram.com/unisontheunion/",
+      "https://uk.linkedin.com/company/unison",
+      "https://www.youtube.com/c/unison",
+      "https://www.tiktok.com/@unisontheunion?lang=en",
+      "https://x.com/unisontheunion"
+    ],
+    "Suggested additions": "We are building a network of locally elected branch green reps (one of whom is guaranteed a place on the local branch committee) and regional networks."
+  },
+  {
+    "id": "Heat Strike",
+    "Group Name": "Heat Strike",
+    "Group Intro": "Heat Strike is a grassroots coalition of groups and unions committed to workers' rights and climate justice, operating through the tactic of a heat strike. They have three key demands; a national maximum working temperature, a heat wave furlough scheme and a national climate action plan.",
+    "Key Group Activities": [
+      "Spearheaded the heat strike campaign and are attributed to many other case studies around high working temperatures",
+      "Resource creation to support workers who want to take part in the movement",
+      "Raising awareness and promoting the heat strike movement by encouraging use of social media",
+      "Sharing information and case studies on the heat strike movement",
+      "Produced a model motion for trade unions to use"
+    ],
+    "Additional Info": "The movement was established in September 2024. A lot of unions have motions/activities that support the heat strike movement, but they might be doing that independently from the Heat Strike group itself. However, the movement has been officially backed by BFAWU, FBU, NEU, Equity and Unite. Moreover, CWU, UCU and Society of Radiographers have formally spoken out in support of Heat Strike.",
+    "Relevant Docs and Articles": [
+      "[Airtable articles](https://airtable.com/appS60muYwAqB3S4V/shr4pH0Aro21ZbSGp)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrycMFLAueu2vIQK)"
+    ],
+    "Relevant Links": [
+      "[Website](https://heatstrike.uk/)",
+      "[Social Media: Instagram](https://www.instagram.com/heatstrike.uk/)"
+    ]
+  },
+  {
+    "id": "JTP",
+    "Group Name": "Just Transition Partnership (JTP)",
+    "Group Intro": "The Just Transition Partnership advocates for action to meet climate change targets in ways which protect workers livelihoods and make Scotland more equal and inclusive. It was set up by Friends of the Earth Scotland and the Scottish Trade Union Congress in 2016 and includes collaboration between UNISON, Unite, PCS, University and Colleges Union and the Communication Workers Union; and by WWF Scotland, the New Economics Foundation, Platform and Common Weal.",
+    "Key Group Activities": [
+      "Publication of academic archival research by Dr Ewan Gibbs, University of Glasgow, that identifies past cases of successful workforce transitions",
+      "Scottish Parliament lobbying with their 2021 Manifesto and policy proposal submission to the Just Transition Committee in 2020",
+      "Hosting conferences to enable cross-movement (and international) collaboration towards achieving a just transition"
+    ],
+    "Additional Info": [
+      "They successfully lobbied for a Just Transition Commission, which was established in 2018.",
+      "They expressed support for the offshore workers’s strike action in 2023"
+    ],
+    "Relevant Docs and Articles": [
+      "[Airtable articles](https://airtable.com/appS60muYwAqB3S4V/shrprAWM68ubiW9iN)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrxCrQnNVrIaLk3a)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.jtp.scot/)",
+      "Social Media: N/A?"
+    ]
+  },
+  {
+    "id": "JTW",
+    "Group Name": "Just Transition Wakefield (JTW)",
+    "Group Intro": "Just Transition Wakefield was created in 2019 by Wakefield and District Trades Council in partnership with Wakefield Friends of the Earth, as an alliance between local grass roots and community organisations. Its overarching objective is the achievement of a zero carbon Wakefield, achieved via just, worker-led transition. Its primary focuses are on supporting emissions reduction initiatives, increasing local biodiversity and carbon sinks, and supporting good green jobs, through working directly with Wakefield District Council. Involvement in other key initiatives includes the Campaign Against Drax, and local projects centered on other objectives, such as community wealth building and food sovereignty.",
+    "Key Group Activities": [
+      "Public events, including festivals and conferences. Hosted the Earth Day Festival in 2024, featuring a range of stalls from other local climate groups; affiliated with the ‘Banners Held High’ festival; hosted a conference on community wealth building in partnership with Unite Community (Wakefield branch), also in 2024, with speakers from the Democracy Collaborative, The Carbon Co-op and Spectrum Community Health CIC.",
+      "Support for the Campaign Against Drax - made formal submissions to the Public Accounts Committee on the use of biomass, arguing against the use of biomass and BECCS and the Planning Enquiry on the Drax BECCS expansion.",
+      "Support for the Wakefield Good Food partnership in conjunction with other local groups across Wakefield.",
+      "Have regularly engaged directly with the District Council to refine and support the implementation of their Climate Change Action Plan, meeting regularly to discuss progress, barriers, highlight emerging research/information and lobby for further action."
+    ],
+    "Additional Info": "As of May 2026, control of Wakefield District Council shifted from Labour to Reform UK. This has resulted in the Council rolling back significantly on its pro-climate commitments.",
+    "Relevant Docs and Articles": [
+      "[Note Taking Doc](https://docs.google.com/document/d/1jhjc6IdvQkITL9sTAOLDmGy3FGaFfIXsM3WZlhPgF4s/edit?tab=t.0)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrKs2JV1r6oSIp6H)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrK7G1XJic13xUJt)"
+    ],
+    "Relevant Links": [
+      "[Website](https://justtransitionwakefield.org.uk/)",
+      "Social Media: Facebook, Instagram",
+      "https://www.facebook.com/JustTransitionWakefield/",
+      "https://www.facebook.com/JustTransitionWakefield/",
+      "https://www.instagram.com/justtransition_wakefield/"
+    ]
+  },
+  {
+    "id": "Safe Landing",
+    "Group Name": "Safe Landing",
+    "Group Intro": "Safe Landing advocates for sustainability in the aviation industry and secure futures for employees. Run by a global community of workers across pilots, cabin crew, engineers, air traffic control, airport, airline and factory workers etc., covering over 5 different unions in the UK alone, such as Unite, Prospect and BALPA. They regularly present to unions, aiming to convince them to adopt progressive policies or to perform Workers Assemblies.",
+    "Key Group Activities": [
+      "Safe Landing hosts workshops to discuss the future of the industry. The workshops are framed as Workers’ Assemblies, which is a form of direct democracy that allows participants to deliberate over a course of action. The purpose of the workshops is to create policy recommendations that feed into decision making within trade unions or government.",
+      "Make a number of policy proposals, which they actively present to politicians, industry, the media, and unions, such as the advancement of aviation technology and cleaner/greener aircraft.",
+      "Lobby the government in pursuit of net-zero emissions in aviation"
+    ],
+    "Additional Info": "At one workshop, participants heard from an Airbus representative, alongside a member of the UK Government’s Climate Change Committee. Another workshop was funded by Patagonia. Safe Landing extensively engages with the media and press, making frequent appearances in the press and providing quotes.",
+    "Relevant Docs and Articles": [
+      "[Safe Landing](https://docs.google.com/document/d/1pt0eeDpUpSrjFvUy7hBeg0Zc0nY6Hv5gNuq-LVrC-a4/edit?tab=t.0#heading=h.vf5m91qegyt4)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrRfHZRVrZtI2T8u)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrPn2b1X5gJK5Dc3)"
+    ],
+    "Relevant Links": [
+      "[Website](https://safe-landing.org/)",
+      "Social Media: LinkedIn, Instagram",
+      "https://www.linkedin.com/company/safe-landing-org/",
+      "https://www.instagram.com/safe_landing/"
+    ]
+  },
+  {
+    "id": "Scot E3",
+    "Group Name": "Scot.E3",
+    "Group Intro": "Scot.E3 “Employment, Energy and Environment” is an initiative working towards taking climate action into workplaces and working class communities. It was initiated by trade unionists, particularly in the construction and defense sectors as well as climate activists.",
+    "Key Group Activities": [
+      "Gathering and sharing information, news and ideas about climate action on their website",
+      "Relaying and amplifying the work of other organisations and initiatives acting for a worker-led transition",
+      "Maintain a social media presence through Facebook and Twitter",
+      "Produce an email newsletter and publish monthly blog posts",
+      "Hold regular meetings on climate and workplace organising issues",
+      "Organised three one-day conferences"
+    ],
+    "Additional Info": [
+      "They were initially sponsored by several (15+) trade union groups and climate action groups, with 18 founding members (acting in personal capacity). 8 of them were affiliated to Unite and 3 of them to UCU. They are also part of the Global Climate Job Campaign and participate in the Edinburgh Climate Coalition.",
+      "Their one-day conferences were all sponsored by the Scottish Rank and File Construction Workers Group, as well as some of the Scottish Trade Union Councils, Trade Union Branches and campaign groups including CAAT, Edinburgh CND and the Muslim Women's Association of Edinburgh",
+      "They participated in the publication of Juan Carlos Boué report on the UK’s North Sea oil tax regime in partnership with Platform and the PCS Union in 2020."
+    ],
+    "Relevant Docs and Articles": [
+      "[Notes Doc](https://docs.google.com/document/d/14DPKS1UpZFXxYcEvYfhil2HL99rt5qzytdCOQyciBy8/edit?tab=t.0)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrB6qYxtHsRVXQDj)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrk0z60ekKNiGOrA)"
+    ],
+    "Relevant Links": [
+      "[Website](https://scote3.net/)",
+      "Social Media: X, Facebook",
+      "https://x.com/scot_e3",
+      "https://www.facebook.com/e3.scot/"
+    ]
+  },
+  {
+    "id": "TUED",
+    "Group Name": "Trade Unions for Energy Democracy (TUED)",
+    "Group Intro": [
+      "Trade Unions for Energy Democracy (TUED) was formed as a result of a Global Trade Union Roundtable in 2012, which was organised by the Global Labour Institute",
+      "TUED is an international network of unions calling for public ownership of energy as a means to achieve a just transition",
+      "TUED is critical of existing international environmental and economic governance structures, as these institutions favour profits and neoliberalism over public goods and workers’ rights, or as they call it, “social power”",
+      "They argue that public ownership of energy would both support efforts to protect the climate and improve democratic accountability",
+      "TUED brings together unions from around the world to help create a coherent and coordinated trade union demand for a just transition that is centred around workers and which will require a full socioeconomic transformation to achieve"
+    ],
+    "Key Group Activities": [
+      "Produce regular research reports to disseminate knowledge and help support a unified cross-union understanding of a just transition",
+      "Bi-monthly global forums to build international union networks and strengthen common understanding of just transition demands",
+      "TUED South Platform was launched to specifically support Global South unions",
+      "Their Trade Union Task Force helped to develop the Trade Union Program for a Public Low-Carbon Energy Future, which was launched at COP26 in 2021",
+      "They produce a regular e-bulletin",
+      "They ask affiliated unions to provide funds to the group which helps them support a wide range of campaigns"
+    ],
+    "Additional Info": [
+      "TUED is very international in scope and their demands are very broad and are not specific to national contexts or sectors",
+      "When they discuss public ownership, they are generally referring to energy in particular",
+      "Most of their reports/working papers are produced in collaboration with Cornell University and the Rosa Luxemburg Stiftung NYC",
+      "Sean Sweeney from the City University of New York is the main TUED report author",
+      "They are financed by their affiliated unions",
+      "They have been linked to many case studies that take a conference format",
+      "Affiliated UK unions:",
+      "FBU",
+      "PCS",
+      "ITF (International Transport Workers Federation)",
+      "Unison",
+      "Unite",
+      "TSSA",
+      "STUC"
+    ],
+    "Relevant Docs and Articles": [
+      "[Article Notes document](https://docs.google.com/document/d/1g7tjMNWdBjcBPuziVoOP6xJUpbbdGYfQN1Ump5ZyQqM/edit?usp=sharing)",
+      "[AirTable link to articles](https://airtable.com/appS60muYwAqB3S4V/shr44rd5fpDHQsaCE)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrIRXmKz1OXCTFik)"
+    ],
+    "Relevant Links": [
+      "[Website](https://www.tuedglobal.org/)",
+      "Social Media: YouTube, Instagram, Facebook, X",
+      "https://www.youtube.com/channel/UCAk_T4er2wJMTC8UddYWn_Q/featured",
+      "https://www.instagram.com/tued_global/",
+      "https://www.facebook.com/TUEDGlobal/",
+      "https://twitter.com/tued_global"
+    ]
+  },
+  {
+    "id": "UCU Green Reps",
+    "Group Name": "UCU Green Reps (and Climate and Ecological Emergency Committee (CEEC))",
+    "Group Intro": "The role of UCU Green Reps was established in 2008 alongside the launch of the TUC's Green Workplaces project. The group functions as an official branch of UCU and, as of May 2025, is in the process of forming regular network forums for its reps to share experiences and coordinate their work. In 2022, the UCU National Executive Committee established the Climate and Ecological Emergency Committee (CEEC) to spearhead the UCU's Green New Deal and Just Transition Framework initiatives. The CEEC has also taken on the role of coordinating the Green Reps network to create a unified internal lobbying effort, seeking to embed environmental demands into UCU as a whole.",
+    "Key Group Activities": [
+      "Participate in green bargaining within their branches to pursue the demand for UCU's Green New Deal and Just Transition Framework",
+      "The CEEC produces a quarterly Green Futures Newsletter",
+      "The CEEC organises annual meetings where motions are drafted to be proposed at the UCU Congresses",
+      "Green Reps raise awareness of green issues and promote the signing of a formalised workplace agreement on 'greening the workplace'",
+      "Green Reps often negotiate in collaboration with student groups/unions within universities"
+    ],
+    "Additional Info": [
+      "The group operates as an official UCU structure, with the union developing resources for the green reps to use",
+      "UCU conducted a survey of its green reps to learn how to best support them in their work"
+    ],
+    "Relevant Docs and Articles": [
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shr80Y2q7n5V40h2Q)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shr4vSVzbGYzlstUL)"
+    ],
+    "Relevant Links": [
+      "UCU website & CEEC webpage",
+      "https://www.ucu.org.uk/ClimateEmergency",
+      "https://www.ucu.org.uk/article/12408/Climate-and-ecological-emergency-committee",
+      "Social Media (of UCU): Bluesky, Facebook, Instagram, X",
+      "https://bsky.app/profile/ucu.org.uk",
+      "http://www.facebook.com/ucu.campaigns",
+      "https://www.instagram.com/ucunion/?hl=en",
+      "https://twitter.com/ucu"
+    ]
+  },
+  {
+    "id": "Unite GCJC",
+    "Group Name": "Unite Grassroots Climate Justice Caucus (Unite GCJC)",
+    "Group Intro": "The Unite GCJC is an unofficial group within Unite the Union, it pulls support from across regions and branches. It primarily campaigns for climate justice to be a priority within the union's operations, often holding events and submitting motions.",
+    "Key Group Activities": [
+      "Motion submissions- At the 2023 conference Unite GCJC submitted two motions; the first was a no new fossil fuel motion and the second was a worker assembly motion.",
+      "[https://www.cacctu.org.uk/unite_motions_2023. They have also supported heat strike motions more recently](https://www.cacctu.org.uk/unite_motions_2023)",
+      "Meeting holding- Unite GCJC often hosted fringe meetings both at and outside conferences surrounding the net zero transition and worker assemblies.",
+      "Education- Teaching members how to use Unite structures to promote net zero transition and teaching environmental economics and an approachable way",
+      "[Campaigns – Often campaigns for climate justice in the transition, I.E Port Talbot steel workers. https://actionnetwork.org/events/climate-justice-for-steel-workers](https://actionnetwork.org/events/climate-justice-for-steel-workers)"
+    ],
+    "Additional Info": [
+      "A small pressure group within the Unite structure often pushing the climate agenda against an entrenched opposition. They have had limited success but the continuous pressure helps them push the agenda.",
+      "They often work with other groups, some not being members of Unite  I.E Tipping point.",
+      "They lack a proper website or socials and primarily work through action networks."
+    ],
+    "Relevant Docs and Articles": [
+      "[UGCJC Airtable](https://airtable.com/appS60muYwAqB3S4V/tblKPlwSsCpLYPrIP/viw0OfrcGnd20d7uj?blocks=hide)",
+      "[Case Studies](https://airtable.com/appS60muYwAqB3S4V/tblyttxIhjlMBang4/viw62fmjhWYuN5sEn?blocks=hide)"
+    ],
+    "Relevant Links": [
+      "[Website  (Action Network)](https://actionnetwork.org/groups/unite-grassroot-climate-caucus)",
+      "[Youtube  (Ran by Tipping Point but often hosts Unite GCJC)](https://www.youtube.com/@claraptippingpointvideos6546)"
+    ]
+  },
+  {
+    "id": "WCCA",
+    "Group Name": "Working Class Climate Alliance (WCCA)",
+    "Group Intro": "The WCCA is an international organisation that brings a focus on working class communities in regards to the green transition. They both champaign the social classes ideologies and risks in regards to climate change, somewhat based in a Marxian tradition of class and change.",
+    "Key Group Activities": [
+      "Advocacy - public talks, panel discussions, podcast appearances etc.",
+      "Workshops - so far only 5 workshops have been conducted, but they have largely focused on movement building",
+      "Resource creation - made a communications toolkit",
+      "Heat strike - work with a UK based campaign with various unions to bring a maximum working temperature law and a heat related furlough scheme",
+      "Policy consultation - providing advice to a range of actors about best practise in regards to social inclusion and climate action"
+    ],
+    "Additional Info": "They have only been in operation for a few years (started in 2023) and the speed in which they built movement capacity and institutional recognition is incredible. Made up of individuals who have experience in a range of fields from political activism to climate science, the holistic voice that they provide is crucial to the wider movement. They have a notable connection to Unison, helping launch their campaign “Workers and Community United: Environmental Action From Below” in Yorkshire and the broader North East of England. While they seem to have a UK focus, on the basis that the group started in the UK and have the largest membership group there, they do also have significant outreach internationally and are working to expand it.",
+    "Relevant Docs and Articles": [
+      "[Articles notes document](https://docs.google.com/document/d/1f6nUHL2rOHVG3XkcfGyP7terTQgZRL5KkpN64yL21bs/edit?usp=sharing)",
+      "[Articles on AirTable](https://airtable.com/appS60muYwAqB3S4V/shrlzPykSwCnnYg1R)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrB9FUmvDCpTzvIs)"
+    ],
+    "Relevant Links": [
+      "[Website](https://wccalliance.org/)",
+      "Social Media: X, Bluesky, LinkedIn, YouTube, Instagram",
+      "https://twitter.com/_WCCA",
+      "https://bsky.app/profile/wccalliance.bsky.social",
+      "https://www.linkedin.com/company/the-wcca/",
+      "https://www.youtube.com/channel/UC7PB6KoXIU4IkjRBuB7UymQ",
+      "https://www.instagram.com/the_wcca/"
+    ]
+  },
+  {
+    "id": "XRTU",
+    "Group Name": "Extinction Rebellion Trade Unions (XRTU)",
+    "Group Intro": "This group aims to recruit trade union activists to XR, and more broadly to make the argument that the two movements are natural allies.",
+    "Key Group Activities": [
+      "Meetings"
+    ],
+    "Additional Info": "One document, International Solidarity Meeting, advertises an online event featuring Gail Bradbroke, XR founder, alongside a prominent Nigerian trade-union activist. Further research will determine the fruits of this collaboration.",
+    "Relevant Docs and Articles": [
+      "[XR TU](https://docs.google.com/document/d/1RAfuHbQW2erFQAX1l97gvmNQeGBZI8CiHjSPPdnwhh0/edit?tab=t.0#heading=h.6f0z4rq62sld)",
+      "[Articles](https://airtable.com/appS60muYwAqB3S4V/shrx0YFdu6A3fP6Dd)",
+      "[Case studies](https://airtable.com/appS60muYwAqB3S4V/shrIzu29rxvpz8QvJ)"
+    ],
+    "Relevant Links": [
+      "[Website](https://actionnetwork.org/groups/xr-tu-extinction-rebellion-trade-unionists)",
+      "Social Media: X, Facebook, YouTube",
+      "https://twitter.com/unionsXR",
+      "https://www.facebook.com/XRTradeUnionists",
+      "https://youtu.be/xyddnD0ukQo"
+    ]
+  }
+]
