@@ -4,12 +4,18 @@
 const RECORD_ID = /^rec[A-Za-z0-9]{10,}$/;
 const MARKDOWN_LINK = /^\[([^\]]+)]\((https?:\/\/[^)]+)\)$/;
 const URL_LIKE = /^https?:\/\//i;
-const LONG_TEXT = 160;
+// Cells (including bullet-list columns, counted by total words across all
+// items) longer than this many words collapse behind a "More"/"Less"
+// toggle. Override per column via the `word-limits` attribute, e.g.
+// word-limits='{"Group Intro": 30, "Key Group Activities": 60}'.
+const DEFAULT_WORD_LIMIT = 45;
 
 class DataTable extends HTMLElement {
   async connectedCallback() {
     const src = this.getAttribute("src");
     const label = this.getAttribute("label") || src;
+    this.nameColumn = this.getAttribute("name-column") || null;
+    this.wordLimits = this.parseWordLimits();
     this.innerHTML = `<p class="status">Loading ${label}…</p>`;
 
     try {
@@ -17,6 +23,7 @@ class DataTable extends HTMLElement {
       if (!response.ok) throw new Error(`Request failed (${response.status})`);
       this.records = await response.json();
       this.columns = this.collectColumns(this.records);
+      if (this.nameColumn && !this.columns.includes(this.nameColumn)) this.nameColumn = null;
       this.render(label);
     } catch (error) {
       const message = document.createElement("p");
@@ -24,6 +31,27 @@ class DataTable extends HTMLElement {
       message.textContent = `Could not load ${label}: ${error.message}`;
       this.replaceChildren(message);
     }
+  }
+
+  parseWordLimits() {
+    const raw = this.getAttribute("word-limits");
+    if (!raw) return {};
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      console.warn(`<data-table>: could not parse word-limits attribute: ${raw}`);
+      return {};
+    }
+  }
+
+  wordLimitFor(column) {
+    const limit = this.wordLimits[column];
+    return typeof limit === "number" && limit > 0 ? limit : DEFAULT_WORD_LIMIT;
+  }
+
+  wordCount(text) {
+    return text.trim().split(/\s+/).filter(Boolean).length;
   }
 
   collectColumns(records) {
@@ -59,14 +87,19 @@ class DataTable extends HTMLElement {
   }
 
   render(label) {
+    const restColumns = this.nameColumn
+      ? this.columns.filter((column) => column !== this.nameColumn)
+      : this.columns;
+    this.restColumns = restColumns;
+
     this.innerHTML = `
       <label class="filter">
         <span>Filter ${label}</span>
         <input type="search" placeholder="Search all fields">
       </label>
       <div class="table-scroll">
-        <table>
-          <thead><tr>${this.columns.map((column) => `<th>${this.escape(column)}</th>`).join("")}</tr></thead>
+        <table${this.nameColumn ? ' class="has-name-header"' : ""}>
+          <thead><tr>${restColumns.map((column) => `<th>${this.escape(column)}</th>`).join("")}</tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -86,19 +119,33 @@ class DataTable extends HTMLElement {
       return words.every((word) => searchable.includes(word));
     });
 
-    this.querySelector("tbody").replaceChildren(...rows.map((record) => this.row(record)));
+    this.querySelector("tbody").replaceChildren(...rows.flatMap((record) => this.rowGroup(record)));
     this.querySelector(".empty").hidden = rows.length > 0;
     this.querySelector(".count").textContent =
       `Showing ${rows.length} of ${this.records.length} rows.`;
   }
 
-  row(record) {
+  rowGroup(record) {
+    if (!this.nameColumn) return [this.row(record, this.columns)];
+
+    const nameRow = document.createElement("tr");
+    nameRow.className = "name-row";
+    const th = document.createElement("th");
+    th.scope = "colgroup";
+    th.colSpan = Math.max(this.restColumns.length, 1);
+    th.textContent = record[this.nameColumn] ?? "";
+    nameRow.append(th);
+
+    return [nameRow, this.row(record, this.restColumns)];
+  }
+
+  row(record, columns) {
     const tr = document.createElement("tr");
-    tr.append(...this.columns.map((column) => this.cell(record[column])));
+    tr.append(...columns.map((column) => this.cell(record[column], column)));
     return tr;
   }
 
-  cell(value) {
+  cell(value, column) {
     const td = document.createElement("td");
     if (value === undefined || value === null || value === "") return td;
 
@@ -108,11 +155,14 @@ class DataTable extends HTMLElement {
       return td;
     }
 
+    const limit = this.wordLimitFor(column);
+
     if (Array.isArray(value)) {
       if (!value.length) return td;
       const ul = document.createElement("ul");
       for (const item of value) ul.append(this.listItem(item));
-      td.append(ul);
+      const words = value.map((item) => String(item)).join(" ");
+      td.append(this.wordCount(words) > limit ? this.collapsible(ul) : ul);
       return td;
     }
 
@@ -121,8 +171,8 @@ class DataTable extends HTMLElement {
       td.append(this.link(text, text));
       return td;
     }
-    if (text.length > LONG_TEXT) {
-      td.append(this.moreDetails(text));
+    if (this.wordCount(text) > limit) {
+      td.append(this.collapsible(document.createTextNode(text)));
       return td;
     }
     td.textContent = text;
@@ -153,10 +203,14 @@ class DataTable extends HTMLElement {
   }
 
   moreDetails(text) {
+    return this.collapsible(document.createTextNode(text));
+  }
+
+  collapsible(node) {
     const details = document.createElement("details");
     const summary = document.createElement("summary");
     summary.innerHTML = '<span class="more">More</span><span class="less">Less</span>';
-    details.append(summary, document.createTextNode(text));
+    details.append(summary, node);
     return details;
   }
 

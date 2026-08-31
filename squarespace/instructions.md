@@ -50,8 +50,15 @@ tags only need to be included once.
   fetches the JSON, infers table columns from the union of keys seen across
   all records, hides columns that only ever contain internal Airtable
   record IDs, renders Markdown-style `[text](url)` links and bare URLs as
-  clickable links, truncates long text behind a "More" toggle, and adds a
-  live search box.
+  clickable links, truncates long cells (45 words by default, including the
+  combined word count across all items in bullet-list columns) behind a
+  "More" toggle, and adds a live search box. Two optional attributes:
+  - `name-column="Group Name"` renders that column as a full-width banner
+    row spanning above each record's remaining columns, instead of a normal
+    grid cell — used on the groups table (see
+    `groups-table-snippet.html`).
+  - `word-limits='{"Group Intro": 30}'` overrides the 45-word default
+    per column name; any column not listed keeps using the default.
 - **`copy-link.js`** defines `<copy-link href="...">`. It resolves the given
   path to an absolute URL and renders a readonly input plus a **Copy**
   button (uses the Clipboard API with a `document.execCommand` fallback).
@@ -67,12 +74,16 @@ tags only need to be included once.
 - `data-table.js` has no configuration for hiding/reordering specific
   columns beyond the automatic "record ID only" filtering — if you need a
   curated subset of fields, it's simplest to pre-filter/reshape the JSON in
-  `scripts/cache-airtable.js` before caching, or fork the component.
+  `scripts/cache-airtable.js` before caching, or fork the component. It does
+  support `name-column` and `word-limits` attributes though — see "How it
+  works" above.
 - Copy `public/styles.css` (or the relevant `.filter`, `.table-scroll`,
   `table`, `.copy-link`, `.copy-row` rules from it) into Squarespace's
   custom CSS if you want the embedded table to match the look of
   `public/index.html`; otherwise it'll pick up your Squarespace theme's
-  default table/input/button styles.
+  default table/input/button styles. If you use `name-column`, also copy the
+  `table.has-name-header` rules so the banner row is styled instead of
+  looking like a regular row.
 
 ## Inline "expando" cards (current data shape)
 
