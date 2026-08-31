@@ -54,6 +54,10 @@ class DataTable extends HTMLElement {
     return text.trim().split(/\s+/).filter(Boolean).length;
   }
 
+  words(text) {
+    return text.trim().split(/\s+/).filter(Boolean);
+  }
+
   collectColumns(records) {
     const seen = new Set();
     const order = [];
@@ -159,10 +163,14 @@ class DataTable extends HTMLElement {
 
     if (Array.isArray(value)) {
       if (!value.length) return td;
-      const ul = document.createElement("ul");
-      for (const item of value) ul.append(this.listItem(item));
+      const full = document.createElement("ul");
+      for (const item of value) full.append(this.listItem(item));
       const words = value.map((item) => String(item)).join(" ");
-      td.append(this.wordCount(words) > limit ? this.collapsible(ul) : ul);
+      if (this.wordCount(words) <= limit) {
+        td.append(full);
+        return td;
+      }
+      td.append(this.collapsible(this.listPreview(value, limit), full));
       return td;
     }
 
@@ -172,11 +180,34 @@ class DataTable extends HTMLElement {
       return td;
     }
     if (this.wordCount(text) > limit) {
-      td.append(this.collapsible(document.createTextNode(text)));
+      const preview = document.createTextNode(`${this.words(text).slice(0, limit).join(" ")}…`);
+      td.append(this.collapsible(preview, document.createTextNode(text)));
       return td;
     }
     td.textContent = text;
     return td;
+  }
+
+  // Builds a preview <ul> containing as many whole items as fit within the
+  // word budget (always at least one item), so a truncated list column
+  // still shows real content up-front instead of just "More".
+  listPreview(items, limit) {
+    const ul = document.createElement("ul");
+    let used = 0;
+    for (const item of items) {
+      const words = this.wordCount(String(item));
+      if (ul.childElementCount > 0 && used + words > limit) break;
+      ul.append(this.listItem(item));
+      used += words;
+      if (used >= limit) break;
+    }
+    if (ul.childElementCount < items.length) {
+      const li = document.createElement("li");
+      li.className = "ellipsis";
+      li.textContent = "…";
+      ul.append(li);
+    }
+    return ul;
   }
 
   listItem(item) {
@@ -202,16 +233,36 @@ class DataTable extends HTMLElement {
     return a;
   }
 
-  moreDetails(text) {
-    return this.collapsible(document.createTextNode(text));
-  }
+  // Renders `previewNode` immediately, with a "More" button that swaps it
+  // out for `fullNode` (and back again via "Less"), rather than hiding
+  // everything behind a closed <details> — the preview words are visible
+  // even when not expanded.
+  collapsible(previewNode, fullNode) {
+    const wrapper = document.createElement("span");
+    wrapper.className = "truncated";
 
-  collapsible(node) {
-    const details = document.createElement("details");
-    const summary = document.createElement("summary");
-    summary.innerHTML = '<span class="more">More</span><span class="less">Less</span>';
-    details.append(summary, node);
-    return details;
+    const preview = document.createElement("span");
+    preview.className = "preview";
+    preview.append(previewNode);
+
+    const full = document.createElement("span");
+    full.className = "full";
+    full.hidden = true;
+    full.append(fullNode);
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "toggle";
+    toggle.textContent = "More";
+    toggle.addEventListener("click", () => {
+      const expanding = full.hidden;
+      full.hidden = !expanding;
+      preview.hidden = expanding;
+      toggle.textContent = expanding ? "Less" : "More";
+    });
+
+    wrapper.append(preview, full, toggle);
+    return wrapper;
   }
 
   escape(value) {

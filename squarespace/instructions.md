@@ -51,8 +51,9 @@ tags only need to be included once.
   all records, hides columns that only ever contain internal Airtable
   record IDs, renders Markdown-style `[text](url)` links and bare URLs as
   clickable links, truncates long cells (45 words by default, including the
-  combined word count across all items in bullet-list columns) behind a
-  "More" toggle, and adds a live search box. Two optional attributes:
+  combined word count across all items in bullet-list columns) to a
+  visible preview with a "More" toggle to reveal the rest, and adds a
+  live search box. Two optional attributes:
   - `name-column="Group Name"` renders that column as a full-width banner
     row spanning above each record's remaining columns, instead of a normal
     grid cell — used on the groups table (see

@@ -108,9 +108,9 @@ using two small dependency-free custom elements:
     `public/index.html`/`squarespace/groups-table-snippet.html`).
   - `word-limits='{"Group Intro": 30, "Key Group Activities": 60}'` — a
     JSON object overriding, per column name, how many words (counted across
-    all bullet items for list columns) a cell can hold before it collapses
-    behind a "More"/"Less" toggle. Columns not listed use the default of 45
-    words.
+    all bullet items for list columns) a cell shows before a "More" toggle
+    appears; the first N words remain visible as a preview even when
+    collapsed. Columns not listed use the default of 45 words.
 - **`copy-link.js`** — `<copy-link href="articles.json">` renders a readonly
   input with the file's absolute URL plus a **Copy** button, so you can
   paste the direct link into another site.

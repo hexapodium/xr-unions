@@ -192,15 +192,26 @@ ul {
   padding-left: 1.2rem;
 }
 
-a, summary { color: #36c; }
+a { color: #36c; }
 
-summary {
-  cursor: pointer;
+.truncated .full[hidden],
+.truncated .preview[hidden] { display: none; }
+
+.truncated .toggle {
+  display: inline-block;
+  margin-left: .35rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #36c;
+  font: inherit;
   font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.less, details[open] .more { display: none; }
-details[open] .less { display: inline; }
+li.ellipsis { list-style: none; margin-left: -1.2rem; color: #72777d; }
+
 .error { color: #b32424; }
 
 @media (max-width: 600px) {
