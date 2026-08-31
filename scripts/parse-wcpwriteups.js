@@ -52,6 +52,12 @@ const EXCLUDED_KEYS = new Set(["writtenBy", "missingInfo"]);
 // (internal working docs, not meant for public consumption).
 const NOTETAKING_DOC = /notetaking/i;
 
+// Matches a raw link to an Airtable view (e.g. the "Airtable articles"/"Case
+// studies" filter-view links in the docx). These aren't useful to a reader
+// on their own; once expanded via the Airtable API into the actual case
+// studies/articles they point to, the raw view link itself is dropped.
+const AIRTABLE_VIEW_LINK = /^https:\/\/airtable\.com\//i;
+
 function listDocxFiles(dir) {
   return readdirSync(dir)
     .filter((f) => f.toLowerCase().endsWith(".docx") && !f.startsWith("~$"))
@@ -448,7 +454,13 @@ async function main() {
           : group.relevantDocsAndArticles
             ? [group.relevantDocsAndArticles]
             : [];
-        group.relevantDocsAndArticles = [...existing, ...extraBlocks];
+        // Drop the raw "Airtable articles"/"Case studies" filter-view
+        // links now that we have the actual results they point to — a
+        // link a reader can't do anything useful with is just clutter.
+        const withoutViewLinks = existing.filter(
+          (block) => !block.links.some((link) => AIRTABLE_VIEW_LINK.test(link))
+        );
+        group.relevantDocsAndArticles = [...withoutViewLinks, ...extraBlocks];
       }
       console.log("Expanded Relevant Docs and Articles via the Airtable API");
     } catch (err) {
