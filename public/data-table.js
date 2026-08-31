@@ -25,7 +25,13 @@ class DataTable extends HTMLElement {
       if (!response.ok) throw new Error(`Request failed (${response.status})`);
       this.records = await response.json();
       this.columns = this.collectColumns(this.records);
-      if (this.nameColumn && !this.columns.includes(this.nameColumn)) this.nameColumn = null;
+      // Validate name-column against the raw record keys, not the
+      // (possibly `columns`-allowlist-narrowed) display columns — the name
+      // column is rendered separately as its own header row by
+      // `rowGroup`/`render` and isn't expected to appear in `columns`.
+      if (this.nameColumn && !this.records.some((record) => this.nameColumn in record)) {
+        this.nameColumn = null;
+      }
       this.render(label);
     } catch (error) {
       const message = document.createElement("p");
