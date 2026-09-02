@@ -332,7 +332,7 @@ group-grid {
   color: #54595d;
 }
 
-.group-detail p { margin: 0; }
+.group-detail p { margin: 0; font-size: .7rem;}
 
 .group-detail ul {
   margin: 0;
