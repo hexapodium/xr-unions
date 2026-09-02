@@ -93,6 +93,15 @@ queries) instead of a table row:
   as `data-table.js`) — every other Airtable column is dropped from the
   view entirely, and clicking again collapses it.
 - Includes the same live search box as `data-table.js`.
+- Automatically keeps its Squarespace Code Block sized to fit all its
+  content. Squarespace renders a code block containing a `<script>` inside
+  a same-origin iframe sized once from the initial (pre-fetch) content —
+  without this, the block would stay stuck at whatever tiny height it had
+  while showing just "Loading groups…", clipping the grid. `group-grid.js`
+  watches the page's content height (via `ResizeObserver`) and keeps the
+  host iframe's height in sync as records load, the grid is filtered, and
+  tiles are expanded/collapsed. This is a no-op when not embedded in an
+  iframe (e.g. on `public/index.html` directly).
 
 To add real icons: cache image files under `public/icons/` in this repo,
 then add entries to the `ICONS` map at the top of `group-grid.js` (keyed by

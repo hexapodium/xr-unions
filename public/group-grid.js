@@ -21,11 +21,11 @@ const ICONS = {
 // Ordered list of sections to render in the expanded summary, each a
 // [heading, sourceColumn] pair. Anything not listed here is never shown.
 const SUMMARY_SECTIONS = [
-  ["Relevant docs", "Relevant Docs and Articles"],
-  ["Relevant links", "Relevant Links"],
   ["Group intro", "Group Intro"],
   ["Key group activities", "Key Group Activities"],
   ["Additional info", "Additional Info"],
+  ["Relevant docs", "Relevant Docs and Articles"],
+  ["Relevant links", "Relevant Links"],
 ];
 
 class GroupGrid extends HTMLElement {
@@ -35,6 +35,7 @@ class GroupGrid extends HTMLElement {
     this.nameColumn = this.getAttribute("name-column") || "Group Name";
     this.icons = this.parseIcons();
     this.innerHTML = `<p class="status">Loading ${label}…</p>`;
+    setUpHostFrameAutosize();
 
     try {
       const response = await fetch(src);
@@ -67,11 +68,11 @@ class GroupGrid extends HTMLElement {
 
   render(label) {
     this.innerHTML = `
+      <div class="group-grid"></div>
       <label class="filter">
         <span>Filter ${label}</span>
         <input type="search" placeholder="Search all fields">
       </label>
-      <div class="group-grid"></div>
       <p class="empty" hidden>No matching groups.</p>
       <p class="count"></p>
     `;
@@ -201,3 +202,41 @@ class GroupGrid extends HTMLElement {
 }
 
 customElements.define("group-grid", GroupGrid);
+
+// Squarespace Code Blocks that contain a <script> render their content
+// inside a same-origin iframe, which Squarespace sizes once from the
+// content's height at initial load — before this element's async fetch
+// has populated any tiles. Left alone, that means the block is stuck at
+// whatever (tiny) height it happened to be when "Loading groups…" was the
+// only content, and everything rendered after is clipped.
+//
+// Since the iframe is same-origin, `window.frameElement` is reachable from
+// inside it, so we can keep the iframe's own height in sync with the
+// document's actual content height ourselves, using a ResizeObserver to
+// catch every later change (records loading in, search filtering the
+// grid, a tile expanding/collapsing, fonts/icons loading, etc). This is a
+// no-op (and harmless) when the element isn't inside an iframe, e.g. on
+// public/index.html directly.
+let hostFrameAutosizeInstalled = false;
+function setUpHostFrameAutosize() {
+  if (hostFrameAutosizeInstalled) return;
+  hostFrameAutosizeInstalled = true;
+
+  const resize = () => {
+    try {
+      const frame = window.frameElement;
+      if (!frame) return;
+      const height = document.documentElement.scrollHeight;
+      if (height > 0) frame.style.height = `${height}px`;
+    } catch {
+      // Cross-origin or otherwise inaccessible — nothing we can do.
+    }
+  };
+
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(resize).observe(document.documentElement);
+  }
+  window.addEventListener("load", resize);
+  setTimeout(resize, 0);
+}
+
