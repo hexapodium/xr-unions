@@ -43,6 +43,17 @@ const SUMMARY_SECTIONS = [
 // no-op (and harmless) when the element isn't inside an iframe, e.g. on
 // public/index.html directly.
 //
+// Resizing the iframe itself isn't enough on its own, though: Squarespace
+// also wraps that iframe in one or more container/spacer elements sized
+// (and sometimes `overflow: hidden`-clipped) to match the iframe's
+// *original* tiny height, reserving just enough space for "Loading
+// groups…". If those wrappers don't grow too, the taller iframe just
+// overflows past them instead of the page reflowing to fit it — which is
+// what makes the grid appear to render past the bottom of the page rather
+// than pushing the footer down. So alongside the iframe itself, walk up
+// its ancestor chain in the *outer* document and clear any inline height/
+// max-height/overflow constraints blocking it from growing in flow.
+//
 // Declared (and hoisted) above the class so it's safe to call from
 // `connectedCallback`, which can fire synchronously during
 // `customElements.define` below if a <group-grid> element is already
@@ -52,12 +63,30 @@ function setUpHostFrameAutosize() {
   if (hostFrameAutosizeInstalled) return;
   hostFrameAutosizeInstalled = true;
 
+  const unclampAncestors = (frame) => {
+    let node = frame.parentElement;
+    const stopAt = frame.ownerDocument.body;
+    while (node && node !== stopAt) {
+      const inline = node.style;
+      if (inline.height) inline.height = "auto";
+      if (inline.maxHeight) inline.maxHeight = "none";
+      if (getComputedStyle(node).overflow !== "visible") {
+        inline.overflow = "visible";
+      }
+      node = node.parentElement;
+    }
+  };
+
   const resize = () => {
     try {
       const frame = window.frameElement;
       if (!frame) return;
       const height = document.documentElement.scrollHeight;
-      if (height > 0) frame.style.height = `${height}px`;
+      if (height <= 0) return;
+      frame.style.height = `${height}px`;
+      frame.style.maxHeight = "none";
+      frame.style.overflow = "visible";
+      unclampAncestors(frame);
     } catch {
       // Cross-origin or otherwise inaccessible — nothing we can do.
     }
