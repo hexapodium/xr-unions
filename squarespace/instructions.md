@@ -5,8 +5,10 @@ The current cached data lives in `public/articles.json`,
 dumps — see the repo README's "Movement Assessment Sources Database"
 section), and `public/groups-table.json` (a curated, flattened view of the
 WCP26 group write-ups — see `scripts/parse-wcpwriteups.js`). `public/index.html`
-browses all four using two small custom elements, `data-table.js` and
-`copy-link.js`, and this is the recommended way to embed them elsewhere too.
+browses the first three with `data-table.js`, and the groups table with a
+dedicated 4-across icon grid, `group-grid.js` — plus `copy-link.js` for the
+direct/CORS links — and this is the recommended way to embed them
+elsewhere too.
 
 ## Quick start
 
@@ -17,7 +19,9 @@ provided for each table:
 - `articles-table-snippet.html` → `articles.json`
 - `case-studies-table-snippet.html` → `case-studies.json`
 - `sources-table-snippet.html` → `sources.json`
-- `groups-table-snippet.html` → `groups-table.json` (WCP26 group write-ups)
+- `groups-table-snippet.html` → `groups-table.json` (WCP26 group write-ups,
+  rendered as a 4-across icon grid via `group-grid.js` rather than
+  `data-table.js` — see "Icon grid for groups" below)
 
 1. Open the snippet file for the table you want.
 2. Copy its full contents into a Squarespace Code Block.
@@ -70,6 +74,32 @@ tags only need to be included once.
   with permissive CORS headers by default. If you host the JSON somewhere
   else, make sure `Access-Control-Allow-Origin` is set.
 
+## Icon grid for groups
+
+`group-grid.js` defines `<group-grid src="..." label="..." name-column="Group
+Name">`. It fetches `groups-table.json` and renders every record as a tile in
+a 4-across grid (fewer columns on narrower embeds, via CSS container
+queries) instead of a table row:
+
+- Each tile shows either a manually-cached icon (looked up by the record's
+  `id` field in an `ICONS` map maintained in `group-grid.js`, overridable/
+  extendable per-embed via an `icons='{"FoE":"https://.../foe.svg"}'`
+  attribute) or, if no icon is set, a placeholder circle with the group
+  name's first letter.
+- Clicking a tile expands a summary panel beneath it showing only **Group
+  name, Relevant docs, Relevant links, Group intro, Key group activities,
+  Additional info** (`Relevant Docs and Articles`/`Relevant Links` render
+  Markdown-style `[text](url)` links and bare URLs as clickable links, same
+  as `data-table.js`) — every other Airtable column is dropped from the
+  view entirely, and clicking again collapses it.
+- Includes the same live search box as `data-table.js`.
+
+To add real icons: cache image files under `public/icons/` in this repo,
+then add entries to the `ICONS` map at the top of `group-grid.js` (keyed by
+each group's `id`, e.g. `"FoE": "icons/foe.svg"`) — or, for a one-off
+Squarespace embed without editing the repo, pass absolute icon URLs via the
+`icons` attribute on the `<group-grid>` tag instead.
+
 ## Customizing columns/styling
 
 - `data-table.js` has no configuration for hiding/reordering specific
@@ -85,6 +115,11 @@ tags only need to be included once.
   default table/input/button styles. If you use `name-column`, also copy the
   `table.has-name-header` rules so the banner row is styled instead of
   looking like a regular row.
+- Copy the `group-grid`, `.group-grid`, `.group-tile`, `.group-icon`,
+  `.group-name`, and `.group-detail` rules from `public/styles.css` if you
+  want an embedded `<group-grid>` to match the look of `public/index.html`;
+  otherwise it'll pick up your Squarespace theme's default button/link
+  styles instead of the tile/card layout.
 
 ## Inline "expando" cards (current data shape)
 

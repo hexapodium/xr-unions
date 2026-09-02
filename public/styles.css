@@ -233,6 +233,123 @@ li.ellipsis { list-style: none; margin-left: -1.2rem; color: #72777d; }
 
 .error { color: #b32424; }
 
+/*
+ * group-grid: a 4-across icon grid (like data-table, sized against its own
+ * container rather than the viewport, so it works inside narrow embeds).
+ */
+group-grid {
+  display: block;
+  container-type: inline-size;
+  container-name: group-grid;
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.group-tile {
+  display: grid;
+  justify-items: center;
+  gap: .5rem;
+  padding: 1rem .5rem;
+  border: 1px solid #d5d9de;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.group-tile:hover { background: #eef4ff; }
+
+.group-tile:focus-visible {
+  outline: 2px solid #36c;
+  outline-offset: 2px;
+}
+
+.group-tile.is-open {
+  border-color: #36c;
+  background: #eef4ff;
+}
+
+.group-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.group-icon--placeholder {
+  display: grid;
+  place-items: center;
+  background: #36c;
+  color: white;
+  font: 700 1.4rem Georgia, serif;
+}
+
+.group-name {
+  font-size: .85rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.group-detail {
+  grid-column: 1 / -1;
+  background: white;
+  border: 1px solid #d5d9de;
+  border-top: 3px solid #36c;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+
+.group-detail h3 {
+  margin: 0 0 .75rem;
+  font: 1.3rem Georgia, serif;
+  color: #202122;
+}
+
+.group-detail section {
+  margin-top: 1rem;
+}
+
+.group-detail section:first-of-type {
+  margin-top: 0;
+}
+
+.group-detail h4 {
+  margin: 0 0 .35rem;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: #54595d;
+}
+
+.group-detail p { margin: 0; }
+
+.group-detail ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+@container group-grid (max-width: 720px) {
+  .group-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@container group-grid (max-width: 520px) {
+  .group-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@container group-grid (max-width: 320px) {
+  .group-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 600px) {
   main { padding: 1.5rem .75rem; }
 }
