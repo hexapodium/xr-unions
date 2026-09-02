@@ -28,6 +28,48 @@ const SUMMARY_SECTIONS = [
   ["Relevant links", "Relevant Links"],
 ];
 
+// Squarespace Code Blocks that contain a <script> render their content
+// inside a same-origin iframe, which Squarespace sizes once from the
+// content's height at initial load — before this element's async fetch
+// has populated any tiles. Left alone, that means the block is stuck at
+// whatever (tiny) height it happened to be when "Loading groups…" was the
+// only content, and everything rendered after is clipped.
+//
+// Since the iframe is same-origin, `window.frameElement` is reachable from
+// inside it, so we can keep the iframe's own height in sync with the
+// document's actual content height ourselves, using a ResizeObserver to
+// catch every later change (records loading in, search filtering the
+// grid, a tile expanding/collapsing, fonts/icons loading, etc). This is a
+// no-op (and harmless) when the element isn't inside an iframe, e.g. on
+// public/index.html directly.
+//
+// Declared (and hoisted) above the class so it's safe to call from
+// `connectedCallback`, which can fire synchronously during
+// `customElements.define` below if a <group-grid> element is already
+// present in the DOM by the time this module finishes evaluating.
+let hostFrameAutosizeInstalled = false;
+function setUpHostFrameAutosize() {
+  if (hostFrameAutosizeInstalled) return;
+  hostFrameAutosizeInstalled = true;
+
+  const resize = () => {
+    try {
+      const frame = window.frameElement;
+      if (!frame) return;
+      const height = document.documentElement.scrollHeight;
+      if (height > 0) frame.style.height = `${height}px`;
+    } catch {
+      // Cross-origin or otherwise inaccessible — nothing we can do.
+    }
+  };
+
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(resize).observe(document.documentElement);
+  }
+  window.addEventListener("load", resize);
+  setTimeout(resize, 0);
+}
+
 class GroupGrid extends HTMLElement {
   async connectedCallback() {
     const src = this.getAttribute("src");
@@ -202,41 +244,3 @@ class GroupGrid extends HTMLElement {
 }
 
 customElements.define("group-grid", GroupGrid);
-
-// Squarespace Code Blocks that contain a <script> render their content
-// inside a same-origin iframe, which Squarespace sizes once from the
-// content's height at initial load — before this element's async fetch
-// has populated any tiles. Left alone, that means the block is stuck at
-// whatever (tiny) height it happened to be when "Loading groups…" was the
-// only content, and everything rendered after is clipped.
-//
-// Since the iframe is same-origin, `window.frameElement` is reachable from
-// inside it, so we can keep the iframe's own height in sync with the
-// document's actual content height ourselves, using a ResizeObserver to
-// catch every later change (records loading in, search filtering the
-// grid, a tile expanding/collapsing, fonts/icons loading, etc). This is a
-// no-op (and harmless) when the element isn't inside an iframe, e.g. on
-// public/index.html directly.
-let hostFrameAutosizeInstalled = false;
-function setUpHostFrameAutosize() {
-  if (hostFrameAutosizeInstalled) return;
-  hostFrameAutosizeInstalled = true;
-
-  const resize = () => {
-    try {
-      const frame = window.frameElement;
-      if (!frame) return;
-      const height = document.documentElement.scrollHeight;
-      if (height > 0) frame.style.height = `${height}px`;
-    } catch {
-      // Cross-origin or otherwise inaccessible — nothing we can do.
-    }
-  };
-
-  if ("ResizeObserver" in window) {
-    new ResizeObserver(resize).observe(document.documentElement);
-  }
-  window.addEventListener("load", resize);
-  setTimeout(resize, 0);
-}
-
