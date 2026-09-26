@@ -102,6 +102,15 @@ queries) instead of a table row:
   host iframe's height in sync as records load, the grid is filtered, and
   tiles are expanded/collapsed. This is a no-op when not embedded in an
   iframe (e.g. on `public/index.html` directly).
+- The autosize is deliberately **disabled inside the Squarespace editor**.
+  The editor renders the page inside its own UI and manages block heights
+  itself; resizing the iframe there fights the editor's layout engine and
+  breaks the editing canvas. `group-grid.js` detects the editor (via the
+  `/config` path on `window.top` and the `sqs-edit-mode` body class) and
+  skips the resizing in that context, so the block may look clipped while
+  editing but renders at full height on the live, published page. This is
+  the standard community-recommended approach for script-in-code-block
+  embeds.
 
 To add real icons: cache image files under `public/icons/` in this repo,
 then add entries to the `ICONS` map at the top of `group-grid.js` (keyed by

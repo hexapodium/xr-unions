@@ -1,67 +1,107 @@
-// A 4-across icon grid for browsing the cached "groups" (WCP26 write-up)
-// records, in place of the generic <data-table> row layout. Each tile is
-// either an icon image (looked up in the `icons` map below, keyed by the
-// record's `id`) or a placeholder letter-on-circle built from the group's
-// name. Clicking a tile expands a full-width summary panel directly under
-// its row, showing only the handful of headers editors actually want
-// readers to see; every other Airtable column is dropped from the
-// rendered view.
-const MARKDOWN_LINK = /^\[([^\]]+)]\((https?:\/\/[^)]+)\)$/;
-const URL_LIKE = /^https?:\/\//i;
-
-// Manually maintained: map a record's `id` (the short group code used in
-// groups-table.json, e.g. "FoE", "TUCAN") to an icon file cached under
-// public/icons/. Groups with no entry here fall back to a placeholder
-// circle showing the group's first initial. Add entries as icons are
-// sourced/cropped into public/icons/.
-const ICONS = {
-  // "FoE": "icons/foe.svg",
-};
-
-// Ordered list of sections to render in the expanded summary, each a
-// [heading, sourceColumn] pair. Anything not listed here is never shown.
-const SUMMARY_SECTIONS = [
-  ["Group intro", "Group Intro"],
-  ["Key group activities", "Key Group Activities"],
-  ["Additional info", "Additional Info"],
-  ["Relevant docs", "Relevant Docs and Articles"],
-  ["Relevant links", "Relevant Links"],
-];
-
+// A 4-across icon grid for browsing the WCP26 group write-ups, in place of
+// the generic <data-table> row layout. The content is defined *inline* in
+// the embedding page (e.g. a Squarespace Code Block) as Markdown passed in
+// the `groups` attribute — nothing is fetched from an external JSON file,
+// so editors can add or update groups by editing the code block directly
+// without touching this file or risking the tech set-up.
+//
+//   <group-grid label="groups" groups="
+//     ## Union networks
+//     ### GMB GND
+//     icon: https://example.com/gmb.svg
+//     GMB's [Green New Deal](https://example.com) campaign...
+//     - First activity
+//     - Second activity
+//     +++ Relevant docs
+//     - [Some report](https://example.com/report.pdf)
+//     +++ Links
+//     - [Website](https://example.com)
+//   "></group-grid>
+//
+// Markdown format (parsed by this file, no external dependencies):
+//   ##  heading      starts a new *section* of the grid (groups are shown
+//                    under their section heading, in the order written)
+//   ### heading      starts a new *group* (one tile in the grid)
+//   icon: URL        optional, first line under a ### heading — the tile's
+//                    icon image (otherwise a letter-on-circle placeholder)
+//   +++ heading      starts a *collapsible* block (rendered as a closed-by-
+//                    default <details> dropdown) — use for "Relevant docs"
+//                    and "Links" so they don't overwhelm the page
+//   - item           bullet list item
+//   [text](url)      inline link (works anywhere, like a Google Doc)
+//   **bold** / *italic* / `code`
+//   anything else    a paragraph; blank lines separate paragraphs
+//
+// Clicking a tile expands a full-width panel directly under its row showing
+// that group's rendered Markdown; clicking again collapses it.
+//
 // Squarespace Code Blocks that contain a <script> render their content
 // inside a same-origin iframe, which Squarespace sizes once from the
-// content's height at initial load — before this element's async fetch
-// has populated any tiles. Left alone, that means the block is stuck at
-// whatever (tiny) height it happened to be when "Loading groups…" was the
-// only content, and everything rendered after is clipped.
+// content's height at initial load. Left alone, that means the block is
+// stuck at whatever (tiny) height it happened to be when first rendered,
+// and everything after is clipped.
 //
 // Since the iframe is same-origin, `window.frameElement` is reachable from
 // inside it, so we can keep the iframe's own height in sync with the
 // document's actual content height ourselves, using a ResizeObserver to
-// catch every later change (records loading in, search filtering the
-// grid, a tile expanding/collapsing, fonts/icons loading, etc). This is a
-// no-op (and harmless) when the element isn't inside an iframe, e.g. on
+// catch every later change (search filtering the grid, a tile or dropdown
+// expanding/collapsing, fonts/icons loading, etc). This is a no-op (and
+// harmless) when the element isn't inside an iframe, e.g. on
 // public/index.html directly.
 //
 // Resizing the iframe itself isn't enough on its own, though: Squarespace
 // also wraps that iframe in one or more container/spacer elements sized
 // (and sometimes `overflow: hidden`-clipped) to match the iframe's
-// *original* tiny height, reserving just enough space for "Loading
-// groups…". If those wrappers don't grow too, the taller iframe just
-// overflows past them instead of the page reflowing to fit it — which is
-// what makes the grid appear to render past the bottom of the page rather
-// than pushing the footer down. So alongside the iframe itself, walk up
-// its ancestor chain in the *outer* document and clear any inline height/
-// max-height/overflow constraints blocking it from growing in flow.
+// *original* tiny height. If those wrappers don't grow too, the taller
+// iframe just overflows past them instead of the page reflowing to fit it.
+// So alongside the iframe itself, walk up its ancestor chain in the *outer*
+// document and clear any inline height/max-height/overflow constraints
+// blocking it from growing in flow.
 //
 // Declared (and hoisted) above the class so it's safe to call from
 // `connectedCallback`, which can fire synchronously during
 // `customElements.define` below if a <group-grid> element is already
 // present in the DOM by the time this module finishes evaluating.
 let hostFrameAutosizeInstalled = false;
+let hostFrameResizeObserver = null;
+
+// Detects whether this page is currently being viewed inside the
+// Squarespace *editor* (as opposed to the live, published site). The
+// editor renders the page inside its own UI and manages block heights
+// itself; running the iframe-resizing hack there fights the editor's
+// layout engine and breaks the editing canvas, so we skip it in that
+// context. On the live site (no editor chrome) the autosize still runs.
+//
+// Detection uses the well-established community signals:
+//  - the editor UI lives under the `/config` path, so when the page is
+//    framed by the editor, `window.top.location.pathname` starts with
+//    `/config` (same-origin, so readable);
+//  - Squarespace adds an `sqs-edit-mode` class to the <body> of the page
+//    being edited (a few ms after load, so we also re-check on a delay).
+function isSquarespaceEditor() {
+  try {
+    if (window.self !== window.top) {
+      const topPath = window.top.location.pathname || "";
+      if (topPath.startsWith("/config")) return true;
+    }
+  } catch {
+    // Cross-origin parent — can't inspect; fall through to other checks.
+  }
+  return document.body && document.body.classList.contains("sqs-edit-mode");
+}
+
 function setUpHostFrameAutosize() {
   if (hostFrameAutosizeInstalled) return;
   hostFrameAutosizeInstalled = true;
+
+  // Don't fight the Squarespace editor's own layout engine — it manages
+  // block heights itself and our resizing breaks the editing canvas.
+  if (isSquarespaceEditor()) return;
+  // `sqs-edit-mode` is added a few ms after load, so re-check shortly
+  // after and bail out then if we've landed in the editor after all.
+  setTimeout(() => {
+    if (isSquarespaceEditor()) teardownHostFrameAutosize();
+  }, 500);
 
   const unclampAncestors = (frame) => {
     let node = frame.parentElement;
@@ -78,6 +118,7 @@ function setUpHostFrameAutosize() {
   };
 
   const resize = () => {
+    if (isSquarespaceEditor()) return;
     try {
       const frame = window.frameElement;
       if (!frame) return;
@@ -93,57 +134,187 @@ function setUpHostFrameAutosize() {
   };
 
   if ("ResizeObserver" in window) {
-    new ResizeObserver(resize).observe(document.documentElement);
+    hostFrameResizeObserver = new ResizeObserver(resize);
+    hostFrameResizeObserver.observe(document.documentElement);
   }
   window.addEventListener("load", resize);
   setTimeout(resize, 0);
 }
 
-class GroupGrid extends HTMLElement {
-  async connectedCallback() {
-    const src = this.getAttribute("src");
-    const label = this.getAttribute("label") || src;
-    this.nameColumn = this.getAttribute("name-column") || "Group Name";
-    this.icons = this.parseIcons();
-    this.innerHTML = `<p class="status">Loading ${label}…</p>`;
-    setUpHostFrameAutosize();
+function teardownHostFrameAutosize() {
+  if (hostFrameResizeObserver) {
+    hostFrameResizeObserver.disconnect();
+    hostFrameResizeObserver = null;
+  }
+}
 
-    try {
-      const response = await fetch(src);
-      if (!response.ok) throw new Error(`Request failed (${response.status})`);
-      this.records = await response.json();
-      this.render(label);
-    } catch (error) {
-      const message = document.createElement("p");
-      message.className = "error";
-      message.textContent = `Could not load ${label}: ${error.message}`;
-      this.replaceChildren(message);
+// ---------------------------------------------------------------------------
+// Minimal Markdown parsing (block + inline), dependency-free.
+// ---------------------------------------------------------------------------
+
+// Parses the `groups` attribute into an ordered list of sections:
+//   [{ name: "Union networks", groups: [{ name, icon, blocks }] }]
+// where `blocks` is the group body as block-level Markdown nodes:
+//   { type: "paragraph", text } | { type: "list", items: [text] } |
+//   { type: "details", heading, blocks: [...] }
+// Inline formatting ([text](url), **bold**, *italic*, `code`) is kept as
+// raw text in the nodes and rendered by `inlineNodes` below.
+function parseGroups(markdown) {
+  const sections = [];
+  let section = null;
+  let group = null;
+  let details = null;
+  let list = null;
+  let paragraph = [];
+
+  const flushParagraph = () => {
+    if (!paragraph.length) return;
+    const target = details ? details.blocks : group ? group.blocks : null;
+    if (target) target.push({ type: "paragraph", text: paragraph.join(" ") });
+    paragraph = [];
+  };
+  const flushList = () => {
+    if (!list) return;
+    const target = details ? details.blocks : group ? group.blocks : null;
+    if (target) target.push(list);
+    list = null;
+  };
+  const flushDetails = () => {
+    flushList();
+    flushParagraph();
+    if (details && group) group.blocks.push(details);
+    details = null;
+  };
+  const flushGroup = () => {
+    flushDetails();
+    if (group && section) section.groups.push(group);
+    group = null;
+  };
+  const flushSection = () => {
+    flushGroup();
+    if (section) sections.push(section);
+    section = null;
+  };
+
+  for (const rawLine of markdown.split("\n")) {
+    const line = rawLine.trim();
+
+    const h2 = line.match(/^##\s+(.+)$/);
+    const h3 = line.match(/^###\s+(.+)$/);
+    const detailsStart = line.match(/^\+\+\+\s*(.*)$/);
+    const icon = line.match(/^icon:\s*(\S+)\s*$/i);
+    const bullet = line.match(/^[-*]\s+(.+)$/);
+
+    if (h3) {
+      flushGroup();
+      if (!section) {
+        // Groups written before any ## heading land in an untitled section.
+        section = { name: "", groups: [] };
+      }
+      group = { name: h3[1].trim(), icon: null, blocks: [] };
+    } else if (h2) {
+      flushSection();
+      section = { name: h2[1].trim(), groups: [] };
+    } else if (detailsStart) {
+      flushDetails();
+      if (group) details = { type: "details", heading: detailsStart[1].trim(), blocks: [] };
+    } else if (icon && group && !details && !group.blocks.length && !paragraph.length && !list) {
+      group.icon = icon[1];
+    } else if (bullet) {
+      flushParagraph();
+      if (!list) list = { type: "list", items: [] };
+      list.items.push(bullet[1]);
+    } else if (line === "") {
+      flushList();
+      flushParagraph();
+    } else {
+      flushList();
+      paragraph.push(line);
     }
   }
+  flushSection();
+  return sections;
+}
 
-  // Reads an optional `icons` attribute — a JSON object mapping a record's
-  // `id` to an icon path — letting a snippet override/extend the
-  // manually-maintained ICONS map above without editing this file.
-  parseIcons() {
-    const raw = this.getAttribute("icons");
-    const merged = { ...ICONS };
-    if (!raw) return merged;
-    try {
-      const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed === "object") Object.assign(merged, parsed);
-    } catch {
-      console.warn(`<group-grid>: could not parse icons attribute: ${raw}`);
+// Renders inline Markdown (`[text](url)`, bare URLs, **bold**, *italic*,
+// `code`) in a string to an array of DOM nodes. Links open in a new tab.
+function inlineNodes(text) {
+  const nodes = [];
+  // Order matters: links first, then code/bold/italic.
+  const pattern =
+    /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)|(https?:\/\/[^\s<]+)|`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  let last = 0;
+  let match;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > last) nodes.push(document.createTextNode(text.slice(last, match.index)));
+    const [, linkText, linkHref, bareUrl, code, bold, italic] = match;
+    if (linkHref) {
+      nodes.push(makeLink(linkText, linkHref));
+    } else if (bareUrl) {
+      // Strip trailing punctuation that's almost certainly not part of the URL.
+      const cleaned = bareUrl.replace(/[.,;:!?]+$/, "");
+      nodes.push(makeLink(cleaned, cleaned));
+      if (cleaned.length < bareUrl.length) {
+        nodes.push(document.createTextNode(bareUrl.slice(cleaned.length)));
+      }
+    } else if (code) {
+      const el = document.createElement("code");
+      el.textContent = code;
+      nodes.push(el);
+    } else if (bold) {
+      const el = document.createElement("strong");
+      el.append(...inlineNodes(bold));
+      nodes.push(el);
+    } else if (italic) {
+      const el = document.createElement("em");
+      el.append(...inlineNodes(italic));
+      nodes.push(el);
     }
-    return merged;
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) nodes.push(document.createTextNode(text.slice(last)));
+  return nodes;
+}
+
+function makeLink(text, href) {
+  const a = document.createElement("a");
+  a.textContent = text;
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noreferrer";
+  return a;
+}
+
+// ---------------------------------------------------------------------------
+// <group-grid>
+// ---------------------------------------------------------------------------
+
+class GroupGrid extends HTMLElement {
+  connectedCallback() {
+    const label = this.getAttribute("label") || "groups";
+    const markdown = this.getAttribute("groups") || "";
+    this.sections = parseGroups(markdown);
+    this.totalGroups = this.sections.reduce((n, s) => n + s.groups.length, 0);
+    setUpHostFrameAutosize();
+
+    if (!this.totalGroups) {
+      const message = document.createElement("p");
+      message.className = "error";
+      message.textContent =
+        "No groups defined. Add them to the `groups` attribute of the <group-grid> tag (### per group).";
+      this.replaceChildren(message);
+      return;
+    }
+    this.render(label);
   }
 
   render(label) {
     this.innerHTML = `
-      <div class="group-grid"></div>
       <label class="filter">
         <span>Filter ${label}</span>
-        <input type="search" placeholder="Search all fields">
+        <input type="search" placeholder="Search all groups">
       </label>
+      <div class="group-sections"></div>
       <p class="empty" hidden>No matching groups.</p>
       <p class="count"></p>
     `;
@@ -155,48 +326,70 @@ class GroupGrid extends HTMLElement {
 
   renderTiles(query) {
     const words = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-    const rows = this.records.filter((record) => {
-      const searchable = Object.values(record).flat(Infinity).join(" ").toLocaleLowerCase();
-      return words.every((word) => searchable.includes(word));
-    });
+    const container = this.querySelector(".group-sections");
+    container.replaceChildren();
+    let shown = 0;
 
-    const grid = this.querySelector(".group-grid");
-    grid.replaceChildren(...rows.flatMap((record) => this.tileGroup(record)));
-    this.querySelector(".empty").hidden = rows.length > 0;
+    for (const section of this.sections) {
+      const matches = section.groups.filter((group) => {
+        const searchable = [
+          section.name,
+          group.name,
+          ...group.blocks.map(blockText),
+        ].join(" ").toLocaleLowerCase();
+        return words.every((word) => searchable.includes(word));
+      });
+      if (!matches.length) continue;
+      shown += matches.length;
+
+      const wrapper = document.createElement("section");
+      wrapper.className = "group-section";
+      if (section.name) {
+        const h2 = document.createElement("h2");
+        h2.className = "group-section-heading";
+        h2.textContent = section.name;
+        wrapper.append(h2);
+      }
+      const grid = document.createElement("div");
+      grid.className = "group-grid";
+      for (const group of matches) grid.append(...this.tileGroup(group));
+      wrapper.append(grid);
+      container.append(wrapper);
+    }
+
+    this.querySelector(".empty").hidden = shown > 0;
     this.querySelector(".count").textContent =
-      `Showing ${rows.length} of ${this.records.length} groups.`;
+      `Showing ${shown} of ${this.totalGroups} groups.`;
   }
 
   // Returns [tile, detail] — the tile is always a grid item; the detail
   // panel sits right after it in document order but stays `hidden` (so it
   // doesn't occupy grid space) until the tile is activated, at which point
   // it spans the full grid width on its own row.
-  tileGroup(record) {
-    const name = String(record[this.nameColumn] ?? "");
+  tileGroup(group) {
     const tile = document.createElement("button");
     tile.type = "button";
     tile.className = "group-tile";
 
-    const icon = this.icons[record.id];
-    if (icon) {
+    if (group.icon) {
       const img = document.createElement("img");
-      img.src = icon;
+      img.src = group.icon;
       img.alt = "";
       img.className = "group-icon";
       tile.append(img);
     } else {
       const circle = document.createElement("span");
       circle.className = "group-icon group-icon--placeholder";
-      circle.textContent = name.trim().charAt(0).toUpperCase() || "?";
+      circle.textContent = group.name.trim().charAt(0).toUpperCase() || "?";
       tile.append(circle);
     }
 
     const caption = document.createElement("span");
     caption.className = "group-name";
-    caption.textContent = name;
+    caption.textContent = group.name;
     tile.append(caption);
 
-    const detail = this.detailPanel(record, name);
+    const detail = this.detailPanel(group);
     detail.hidden = true;
 
     tile.setAttribute("aria-expanded", "false");
@@ -210,66 +403,51 @@ class GroupGrid extends HTMLElement {
     return [tile, detail];
   }
 
-  detailPanel(record, name) {
+  detailPanel(group) {
     const panel = document.createElement("div");
     panel.className = "group-detail";
 
     const header = document.createElement("h3");
-    header.textContent = name;
+    header.textContent = group.name;
     panel.append(header);
 
-    for (const [heading, column] of SUMMARY_SECTIONS) {
-      const value = record[column];
-      if (value === undefined || value === null || value === "") continue;
-      const section = document.createElement("section");
-      const h4 = document.createElement("h4");
-      h4.textContent = heading;
-      section.append(h4);
-      section.append(this.field(value));
-      panel.append(section);
-    }
-
+    for (const block of group.blocks) panel.append(this.blockElement(block));
     return panel;
   }
 
-  field(value) {
-    if (Array.isArray(value)) {
+  blockElement(block) {
+    if (block.type === "list") {
       const ul = document.createElement("ul");
-      for (const item of value) ul.append(this.listItem(item));
+      for (const item of block.items) {
+        const li = document.createElement("li");
+        li.append(...inlineNodes(item));
+        ul.append(li);
+      }
       return ul;
     }
-    const p = document.createElement("p");
-    const text = String(value);
-    if (URL_LIKE.test(text)) {
-      p.append(this.link(text, text));
-    } else {
-      p.textContent = text;
+    if (block.type === "details") {
+      // Collapsible dropdown, closed by default — used for "Relevant docs"
+      // and "Links" so that info is available but not overwhelming.
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.textContent = block.heading || "More";
+      details.append(summary);
+      for (const child of block.blocks) details.append(this.blockElement(child));
+      return details;
     }
+    const p = document.createElement("p");
+    p.append(...inlineNodes(block.text));
     return p;
   }
+}
 
-  listItem(item) {
-    const li = document.createElement("li");
-    const text = String(item);
-    const match = text.match(MARKDOWN_LINK);
-    if (match) {
-      li.append(this.link(match[1], match[2]));
-    } else if (URL_LIKE.test(text)) {
-      li.append(this.link(text, text));
-    } else {
-      li.textContent = text;
-    }
-    return li;
+// Plain-text version of a block, for search matching.
+function blockText(block) {
+  if (block.type === "list") return block.items.join(" ");
+  if (block.type === "details") {
+    return `${block.heading} ${block.blocks.map(blockText).join(" ")}`;
   }
-
-  link(text, href) {
-    const a = document.createElement("a");
-    a.textContent = text;
-    a.href = href;
-    a.target = "_blank";
-    a.rel = "noreferrer";
-    return a;
-  }
+  return block.text;
 }
 
 customElements.define("group-grid", GroupGrid);

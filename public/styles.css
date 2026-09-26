@@ -281,8 +281,8 @@ group-grid {
 .group-icon {
   width: 3.5rem;
   height: 3.5rem;
-  border-radius: 50%;
-  object-fit: cover;
+  border-radius: 20%;
+  object-fit: contain;
 }
 
 .group-icon--placeholder {
@@ -332,11 +332,52 @@ group-grid {
   color: #54595d;
 }
 
-.group-detail p { margin: 0; font-size: .7rem;}
+.group-detail p { margin: 0; font-size: .95rem;}
+
+.group-detail p + p { margin-top: .5rem; }
 
 .group-detail ul {
   margin: 0;
   padding-left: 1.2rem;
+}
+
+.group-section {
+  margin-top: 2rem;
+}
+
+.group-section:first-child {
+  margin-top: 0;
+}
+
+.group-section-heading {
+  margin: 0 0 1rem;
+  border-bottom: 1px solid #a2a9b1;
+  font: 1.4rem Georgia, serif;
+}
+
+.group-detail details {
+  margin-top: .75rem;
+  border: 1px solid #e2e5e9;
+  border-radius: 6px;
+  background: #f8f9fb;
+  padding: .5rem .75rem;
+}
+
+.group-detail details[open] {
+  padding-bottom: .75rem;
+}
+
+.group-detail summary {
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: #54595d;
+}
+
+.group-detail details > *:not(summary) {
+  margin-top: .5rem;
 }
 
 @container group-grid (max-width: 720px) {
