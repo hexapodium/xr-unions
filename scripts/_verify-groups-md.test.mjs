@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
 const source = readFileSync(new URL("../public/group-grid.js", import.meta.url), "utf8");
@@ -16,10 +16,15 @@ test("embedded Markdown renders sections, icons, lists, and dropdowns", () => {
   assert.ok(markdown, "Squarespace snippet needs inline Markdown");
   const sections = parseGroups(markdown);
   const groups = sections.flatMap((section) => section.groups);
-  assert.ok(sections.length > 1);
-  assert.ok(groups.length > 1);
+  assert.equal(sections.length, 4);
+  assert.equal(groups.length, 29);
   assert.ok(groups.every((group) => group.blocks.length));
   assert.ok(groups.some((group) => group.icon?.endsWith("/icons/PCS.jpg")));
   assert.ok(groups.some((group) => group.blocks.some((block) => block.type === "details")));
   assert.ok(groups.some((group) => group.blocks.some((block) => block.type === "list")));
+});
+
+test("only grid assets and preview are published", () => {
+  const files = readdirSync(new URL("../public/", import.meta.url)).sort();
+  assert.deepEqual(files, ["group-grid.js", "icons", "index.html"]);
 });

@@ -5,8 +5,29 @@
 <title>Group grid preview</title>
 <style>body { max-width: 72rem; margin: 2rem auto; padding: 0 1rem; font: 16px/1.5 system-ui, sans-serif; }</style>
 <h1>Group grid preview</h1>
-<p>Edit the Markdown in <code>squarespace/group-grid-snippet.html</code> for the Squarespace Code Block. This page previews the grid component.</p>
+<p>Preview <code>squarespace/group-grid-snippet.html</code> or a Markdown draft by selecting it below. The default shows two example groups.</p>
+<label>Choose a local snippet or Markdown draft <input type="file" accept=".html,.md"></label>
+<output role="status"></output>
 <script type="module" src="group-grid.js"></script>
+<script>
+document.querySelector('input[type="file"]').addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  const text = await file.text();
+  const markdown = file.name.endsWith(".html")
+    ? text.match(/<group-grid[^>]*\bgroups="([\s\S]*?)"/)?.[1]
+    : text.replace(/^<!--[\s\S]*?-->\s*/, "");
+  const status = document.querySelector("output");
+  if (!markdown?.trim()) {
+    status.textContent = "No group Markdown found in this file.";
+    return;
+  }
+  status.textContent = "";
+  const grid = document.querySelector("group-grid").cloneNode(false);
+  grid.setAttribute("groups", markdown);
+  document.querySelector("group-grid").replaceWith(grid);
+});
+</script>
 <group-grid label="groups" groups="
 ## Union green groups & networks
 ### PCS Green Workplaces
