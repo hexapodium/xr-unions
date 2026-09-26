@@ -1,11 +1,6 @@
-// Converts public/groups-table.json (the flattened WCP26 group write-ups
-// produced by scripts/parse-wcpwriteups.js) into the Markdown format that
-// <group-grid groups="..."> now expects, ready for hand-editing.
+// Converts locally parsed WCP26 .docx write-ups into Markdown for hand-editing.
 //
-// The output is written to public/groups.md and is meant to be pasted into
-// the `groups` attribute of a <group-grid> tag (see
-// squarespace/groups-table-snippet.html) and then maintained by hand — the
-// JSON is no longer the source of truth for the groups grid.
+// The output is kept outside public/ and is not automatically published.
 //
 // Formatting choices favour human readability/editability over density:
 //   - one ## section per broad grouping (edit the SECTIONS map below to
@@ -21,8 +16,8 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 
-const INPUT = join(process.cwd(), "public", "groups-table.json");
-const OUTPUT = join(process.cwd(), "public", "groups.md");
+const INPUT = join(process.cwd(), ".generated", "groups-table.json");
+const OUTPUT = join(process.cwd(), ".generated", "groups.md");
 
 // ---------------------------------------------------------------------------
 // Section grouping. Maps each record `id` to a section heading, in the order
@@ -153,7 +148,7 @@ function main() {
   out.push("");
   out.push("  Paste the content below (without this comment block) into the");
   out.push('  groups="..." attribute of a <group-grid> tag. See');
-  out.push("  squarespace/groups-table-snippet.html for the format.");
+  out.push("  squarespace/group-grid-snippet.html for the format.");
   out.push("");
   out.push("  Reminder: the content lives inside a double-quoted HTML");
   out.push('  attribute, so use single quotes (\') not double quotes (") in');

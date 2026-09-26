@@ -1,5 +1,5 @@
-// One-off parser: reads all "Groups Index Doc" .docx files in wcpwriteups/
-// and transcribes their text content into a single public/groups.json file.
+// Reads exported "Groups Index Doc" .docx files in wcpwriteups/
+// and transcribes their text into a local intermediate JSON file.
 //
 // This is a *transcription* tool, not a content generator: it walks the
 // docx XML directly and copies out paragraph text, bullet points and
@@ -12,12 +12,10 @@ import { readdirSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join, basename } from "node:path";
 import AdmZip from "adm-zip";
 import { XMLParser } from "fast-xml-parser";
-import Airtable from "airtable";
-import { ARTICLE_TITLE_FIELD, ARTICLE_LINK_FIELD } from "./airtable-fields.js";
 
 const SOURCE_DIR = join(process.cwd(), "wcpwriteups");
-const OUTPUT_PATH = join(process.cwd(), "public", "groups.json");
-const TABLE_OUTPUT_PATH = join(process.cwd(), "public", "groups-table.json");
+const OUTPUT_DIR = join(process.cwd(), ".generated");
+const TABLE_OUTPUT_PATH = join(OUTPUT_DIR, "groups-table.json");
 
 const W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 const R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
@@ -53,11 +51,6 @@ const EXCLUDED_KEYS = new Set(["writtenBy", "missingInfo"]);
 // (internal working docs, not meant for public consumption).
 const NOTETAKING_DOC = /notetaking/i;
 
-// Matches a raw link to an Airtable view (e.g. the "Airtable articles"/"Case
-// studies" filter-view links in the docx). These aren't useful to a reader
-// on their own; once expanded via the Airtable API into the actual case
-// studies/articles they point to, the raw view link itself is dropped.
-const AIRTABLE_VIEW_LINK = /^https:\/\/airtable\.com\//i;
 
 function listDocxFiles(dir) {
   return readdirSync(dir)
@@ -257,101 +250,7 @@ function deriveGroupId(fileName) {
     .trim();
 }
 
-// --- Airtable expansion of "Relevant Docs and Articles" -----------------
-//
-// Each group's docx links to an Airtable *filter view* ("Airtable
-// articles"/"Case studies") rather than listing the underlying records.
-// Those views are filtered by a `Group: <name>` option in the Case
-// Studies table's "Tags" field (see airtable-schema.json), and each case
-// study links on to the Articles that support it. Rather than trying to
-// resolve the opaque shared-view URL (shrXXXX ids aren't accessible via
-// the regular records API), we recreate the same filter directly: fetch
-// every Case Study + Article once, then for each group pull out the case
-// studies tagged for it and the articles they reference.
-
-const CASE_STUDIES_TABLE = "Case Studies";
-const ARTICLES_TABLE = "Articles";
-
-// A group's docx name is usually "Full Name (ABBR)"; Airtable's `Group:`
-// tags sometimes use the full name and sometimes the abbreviation, so try
-// both when matching.
-function groupTagCandidates(groupName) {
-  if (!groupName) return [];
-  const candidates = new Set([groupName.trim()]);
-  const match = groupName.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
-  if (match) {
-    candidates.add(match[1].trim());
-    candidates.add(match[2].trim());
-  }
-  return [...candidates].filter(Boolean);
-}
-
-async function fetchAirtableDocsIndex({ apiKey, baseId }) {
-  const base = new Airtable({ apiKey }).base(baseId);
-
-  // Only ever select the reader-facing title + link fields — never
-  // "Article Doc Link" (an internal Google Doc working link) — matching
-  // the same restriction applied to the public JSON dump in
-  // cache-airtable.js (see ./airtable-fields.js).
-  const articleRecords = await base(ARTICLES_TABLE)
-    .select({ fields: [ARTICLE_TITLE_FIELD, ARTICLE_LINK_FIELD] })
-    .all();
-  const articlesById = new Map(
-    articleRecords.map((record) => [
-      record.id,
-      {
-        text: String(record.get(ARTICLE_TITLE_FIELD) ?? "").trim(),
-        link: String(record.get(ARTICLE_LINK_FIELD) ?? "").trim(),
-      },
-    ])
-  );
-
-  const caseStudyRecords = await base(CASE_STUDIES_TABLE)
-    .select({ fields: ["Name", "Tags", "Articles"] })
-    .all();
-
-  return { articlesById, caseStudyRecords };
-}
-
-// Given the pre-fetched index, returns extra `relevantDocsAndArticles`
-// blocks (in the same `{ text, bullet, links }` shape produced by the docx
-// parser) for a single group, by matching `Group: <name>` tags.
-function expandGroupDocs(groupName, { articlesById, caseStudyRecords }) {
-  const candidates = groupTagCandidates(groupName).map(
-    (name) => `group: ${name.toLowerCase()}`
-  );
-  if (!candidates.length) return [];
-
-  const blocks = [];
-  const seenArticleIds = new Set();
-
-  for (const record of caseStudyRecords) {
-    const tags = record.get("Tags") || [];
-    const isMatch = tags.some((tag) => candidates.includes(String(tag).toLowerCase()));
-    if (!isMatch) continue;
-
-    const name = String(record.get("Name") ?? "").trim();
-    if (name) blocks.push({ text: `Case study: ${name}`, bullet: true, links: [] });
-
-    for (const articleId of record.get("Articles") || []) {
-      if (seenArticleIds.has(articleId)) continue;
-      seenArticleIds.add(articleId);
-      const article = articlesById.get(articleId);
-      if (!article || !article.text) continue;
-      blocks.push({
-        text: article.text,
-        bullet: true,
-        links: article.link ? [article.link] : [],
-      });
-    }
-  }
-
-  return blocks;
-}
-
-// Human-friendly column headings for the flattened table view, in display
-// order. Anything in `extraFields` gets its own column, appended after
-// these using its original (verbatim) header text.
+// Column headings for the intermediate JSON used by the Markdown converter.
 const TABLE_COLUMNS = [
   ["groupName", "Group Name"],
   ["groupIntro", "Group Intro"],
@@ -361,10 +260,7 @@ const TABLE_COLUMNS = [
   ["relevantLinks", "Relevant Links"],
 ];
 
-// Turns a simplified field value (string | {text,links} | block[]) into a
-// value the generic `<data-table>` component knows how to render: a plain
-// string, or an array of strings where a `[text](url)` entry renders as a
-// link. This only reshapes the same transcribed content, it doesn't alter it.
+// Flattens transcribed blocks into strings and Markdown links for conversion.
 function toTableValue(value) {
   if (value === undefined) return undefined;
   if (typeof value === "string") return value;
@@ -399,101 +295,46 @@ function toTableRow(group) {
   return row;
 }
 
-async function main() {
+function main() {
   const files = listDocxFiles(SOURCE_DIR);
+  if (!files.length) throw new Error(`No .docx files found in ${SOURCE_DIR}`);
   const groups = [];
 
   for (const file of files) {
     const filePath = join(SOURCE_DIR, file);
-    try {
-      const { title, fields, extraFields } = parseDocx(filePath);
+    const { fields, extraFields } = parseDocx(filePath);
 
-      // Drop internal working-doc links (e.g. "Notetaking Google Doc")
-      // from the public output; they're not meant for external readers.
-      if (fields.relevantDocsAndArticles) {
-        fields.relevantDocsAndArticles = fields.relevantDocsAndArticles.filter(
-          (block) => !NOTETAKING_DOC.test(block.text)
-        );
-      }
-
-      const group = {
-        id: deriveGroupId(file),
-        title,
-      };
-
-      for (const key of new Set(Object.values(FIELD_MAP))) {
-        if (EXCLUDED_KEYS.has(key)) continue;
-        const simplified = simplifyField(fields[key]);
-        if (simplified !== undefined) group[key] = simplified;
-      }
-
-      if (Object.keys(extraFields).length) {
-        group.extraFields = {};
-        for (const [key, blocks] of Object.entries(extraFields)) {
-          const simplified = simplifyField(blocks);
-          if (simplified !== undefined) group.extraFields[key] = simplified;
-        }
-      }
-
-      groups.push(group);
-      console.log(`Parsed: ${file}`);
-    } catch (err) {
-      console.error(`Failed to parse ${file}:`, err.message);
+    // Internal working-doc links aren't part of the reader-facing draft.
+    if (fields.relevantDocsAndArticles) {
+      fields.relevantDocsAndArticles = fields.relevantDocsAndArticles.filter(
+        (block) => !NOTETAKING_DOC.test(block.text)
+      );
     }
+
+    const group = { id: deriveGroupId(file) };
+
+    for (const key of new Set(Object.values(FIELD_MAP))) {
+      if (EXCLUDED_KEYS.has(key)) continue;
+      const simplified = simplifyField(fields[key]);
+      if (simplified !== undefined) group[key] = simplified;
+    }
+
+    if (Object.keys(extraFields).length) {
+      group.extraFields = {};
+      for (const [key, blocks] of Object.entries(extraFields)) {
+        const simplified = simplifyField(blocks);
+        if (simplified !== undefined) group.extraFields[key] = simplified;
+      }
+    }
+
+    groups.push(group);
+    console.log(`Parsed: ${file}`);
   }
 
-  // Expand each group's "Relevant Docs and Articles" filter-view links into
-  // the actual case studies/articles they point to, via the Airtable API.
-  // Requires AIRTABLE_API_KEY + (AIRTABLE_MA_BASE_ID or AIRTABLE_BASE_ID);
-  // skipped (leaving the docx-only links intact) if not configured.
-  const { AIRTABLE_API_KEY, AIRTABLE_MA_BASE_ID, AIRTABLE_BASE_ID } = process.env;
-  const baseId = AIRTABLE_MA_BASE_ID || AIRTABLE_BASE_ID;
-  if (AIRTABLE_API_KEY && baseId) {
-    try {
-      const index = await fetchAirtableDocsIndex({ apiKey: AIRTABLE_API_KEY, baseId });
-      for (const group of groups) {
-        const extraBlocks = expandGroupDocs(group.groupName, index);
-        if (!extraBlocks.length) continue;
-        const existing = Array.isArray(group.relevantDocsAndArticles)
-          ? group.relevantDocsAndArticles
-          : group.relevantDocsAndArticles
-            ? [group.relevantDocsAndArticles]
-            : [];
-        // Drop the raw "Airtable articles"/"Case studies" filter-view
-        // links now that we have the actual results they point to — a
-        // link a reader can't do anything useful with is just clutter.
-        const withoutViewLinks = existing.filter(
-          (block) => !block.links.some((link) => AIRTABLE_VIEW_LINK.test(link))
-        );
-        group.relevantDocsAndArticles = [...withoutViewLinks, ...extraBlocks];
-      }
-      console.log("Expanded Relevant Docs and Articles via the Airtable API");
-    } catch (err) {
-      console.warn(`Skipping Airtable expansion of docs/articles: ${err.message}`);
-    }
-  } else {
-    console.log(
-      "Skipping Airtable expansion of docs/articles (AIRTABLE_API_KEY/AIRTABLE_MA_BASE_ID or AIRTABLE_BASE_ID not set)"
-    );
-  }
-
-  const output = {
-    generatedAt: new Date().toISOString(),
-    sourceDir: "wcpwriteups",
-    groupCount: groups.length,
-    groups,
-  };
-
-  mkdirSync(join(process.cwd(), "public"), { recursive: true });
-  writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), "utf-8");
-  console.log(`\nWrote ${groups.length} groups to ${OUTPUT_PATH}`);
-
+  mkdirSync(OUTPUT_DIR, { recursive: true });
   const tableRows = groups.map(toTableRow);
   writeFileSync(TABLE_OUTPUT_PATH, JSON.stringify(tableRows, null, 2), "utf-8");
   console.log(`Wrote ${tableRows.length} rows to ${TABLE_OUTPUT_PATH}`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exitCode = 1;
-});
+main();
