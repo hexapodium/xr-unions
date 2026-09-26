@@ -5,3 +5,5 @@ schema.txt
 wcpwriteups/*
 groups.json
 .generated/
+
+drafts/*
