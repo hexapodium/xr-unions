@@ -1,9 +1,5 @@
-// A 4-across icon grid for browsing the WCP26 group write-ups, in place of
-// the generic <data-table> row layout. The content is defined *inline* in
-// the embedding page (e.g. a Squarespace Code Block) as Markdown passed in
-// the `groups` attribute — nothing is fetched from an external JSON file,
-// so editors can add or update groups by editing the code block directly
-// without touching this file or risking the tech set-up.
+// A 4-across icon grid for browsing the WCP26 group write-ups. Content is
+// supplied inline in the embedding page's `groups` attribute; no data is fetched.
 //
 //   <group-grid label="groups" groups="
 //     ## Union networks
@@ -450,4 +446,125 @@ function blockText(block) {
   return block.text;
 }
 
+const style = document.createElement("style");
+style.textContent = `
+group-grid {
+  display: block;
+  container-type: inline-size;
+  color: #202122;
+  font: 16px/1.55 system-ui, sans-serif;
+}
+group-grid *, group-grid *::before, group-grid *::after { box-sizing: border-box; }
+group-grid .filter {
+  display: grid;
+  gap: .35rem;
+  max-width: 32rem;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+group-grid input {
+  padding: .65rem .75rem;
+  border: 1px solid #c3c8ce;
+  border-radius: 6px;
+  font: inherit;
+  background: white;
+}
+group-grid input:focus { outline: 2px solid #36c; outline-offset: 1px; }
+group-grid .count { margin-top: .5rem; color: #54595d; font-size: .85rem; }
+group-grid .empty { color: #54595d; }
+group-grid .error { color: #b32424; }
+group-grid a { color: #36c; }
+group-grid .group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+group-grid .group-tile {
+  display: grid;
+  justify-items: center;
+  gap: .5rem;
+  padding: 1rem .5rem;
+  border: 1px solid #d5d9de;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+group-grid .group-tile:hover { background: #eef4ff; }
+group-grid .group-tile:focus-visible { outline: 2px solid #36c; outline-offset: 2px; }
+group-grid .group-tile.is-open { border-color: #36c; background: #eef4ff; }
+group-grid .group-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 20%;
+  object-fit: contain;
+}
+group-grid .group-icon--placeholder {
+  display: grid;
+  place-items: center;
+  background: #36c;
+  color: white;
+  font: 700 1.4rem Georgia, serif;
+}
+group-grid .group-name {
+  font-size: .85rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+}
+group-grid .group-detail {
+  grid-column: 1 / -1;
+  background: white;
+  border: 1px solid #d5d9de;
+  border-top: 3px solid #36c;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+group-grid .group-detail h3 {
+  margin: 0 0 .75rem;
+  font: 1.3rem Georgia, serif;
+  color: #202122;
+}
+group-grid .group-detail p { margin: 0; font-size: .95rem; }
+group-grid .group-detail p + p { margin-top: .5rem; }
+group-grid .group-detail ul { margin: 0; padding-left: 1.2rem; }
+group-grid .group-section { margin-top: 2rem; }
+group-grid .group-section:first-child { margin-top: 0; }
+group-grid .group-section-heading {
+  margin: 0 0 1rem;
+  border-bottom: 1px solid #a2a9b1;
+  font: 1.4rem Georgia, serif;
+}
+group-grid .group-detail details {
+  margin-top: .75rem;
+  border: 1px solid #e2e5e9;
+  border-radius: 6px;
+  background: #f8f9fb;
+  padding: .5rem .75rem;
+}
+group-grid .group-detail details[open] { padding-bottom: .75rem; }
+group-grid .group-detail summary {
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: #54595d;
+}
+group-grid .group-detail details > *:not(summary) { margin-top: .5rem; }
+@container (max-width: 720px) {
+  group-grid .group-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@container (max-width: 520px) {
+  group-grid .group-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@container (max-width: 320px) {
+  group-grid .group-grid { grid-template-columns: 1fr; }
+}
+`;
+document.head.append(style);
 customElements.define("group-grid", GroupGrid);
