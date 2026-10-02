@@ -50,3 +50,9 @@ server; the preview page can load either Squarespace snippet or a Markdown
 draft without publishing any of them. GitHub Pages publishes `public/` from
 `main` on push; this `group-grid` branch does not change the live site until
 merged. The `expandos` branch retains the previous Airtable/expando experiments.
+
+**GitHub Pages setup:** Before publishing, a repository administrator must
+select **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+If Pages has been disabled or unpublished, enable it there again and re-run
+the publish workflow. The workflow uses `GITHUB_TOKEN` to deploy to an existing
+Pages site; it cannot automatically enable Pages, even with `pages: write`.
