@@ -161,6 +161,7 @@ function parseGroups(markdown) {
   let group = null;
   let details = null;
   let list = null;
+  let listStack = [];
   let paragraph = [];
 
   const flushParagraph = () => {
@@ -218,8 +219,22 @@ function parseGroups(markdown) {
       group.icon = icon[1];
     } else if (bullet) {
       flushParagraph();
-      if (!list) list = { type: "list", items: [] };
-      list.items.push(bullet[1]);
+      const indent = rawLine.match(/^[ \t]*/)[0].replace(/\t/g, "    ").length;
+      if (!list) {
+        list = { type: "list", items: [] };
+        listStack = [{ indent, items: list.items }];
+      }
+      while (listStack.length > 1 && indent < listStack[listStack.length - 1].indent) {
+        listStack.pop();
+      }
+      let top = listStack[listStack.length - 1];
+      if (indent > top.indent && top.items.length) {
+        const parent = top.items[top.items.length - 1];
+        parent.children = [];
+        top = { indent, items: parent.children };
+        listStack.push(top);
+      }
+      top.items.push({ text: bullet[1], children: [] });
     } else if (line === "") {
       flushList();
       flushParagraph();
@@ -421,13 +436,7 @@ class GroupGrid extends HTMLElement {
 
   blockElement(block) {
     if (block.type === "list") {
-      const ul = document.createElement("ul");
-      for (const item of block.items) {
-        const li = document.createElement("li");
-        li.append(...inlineNodes(item));
-        ul.append(li);
-      }
-      return ul;
+      return listElement(block.items);
     }
     if (block.type === "details") {
       // Collapsible dropdown, closed by default — used for "Relevant docs"
@@ -445,9 +454,24 @@ class GroupGrid extends HTMLElement {
   }
 }
 
+function listElement(items) {
+  const ul = document.createElement("ul");
+  for (const item of items) {
+    const li = document.createElement("li");
+    li.append(...inlineNodes(item.text));
+    if (item.children && item.children.length) li.append(listElement(item.children));
+    ul.append(li);
+  }
+  return ul;
+}
+
+function itemsText(items) {
+  return items.map((i) => `${i.text} ${i.children ? itemsText(i.children) : ""}`).join(" ");
+}
+
 // Plain-text version of a block, for search matching.
 function blockText(block) {
-  if (block.type === "list") return block.items.join(" ");
+  if (block.type === "list") return itemsText(block.items);
   if (block.type === "details") {
     return `${block.heading} ${block.blocks.map(blockText).join(" ")}`;
   }
