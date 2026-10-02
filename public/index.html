@@ -10,13 +10,34 @@
 <output role="status"></output>
 <script type="module" src="group-grid.js"></script>
 <script>
+// Pulls the authored Markdown out of a snippet file. The *last*
+// <group-grid groups="..."> wins, because the generated self-contained
+// snippet (squarespace/group-grid-inline.html) inlines group-grid.js,
+// whose header comment contains a miniature example of the same tag.
+function groupsFromSnippet(html) {
+  let markdown = null;
+  for (const match of html.matchAll(/<group-grid[^>]*\bgroups="([\s\S]*?)"\s*>/g)) {
+    markdown = match[1];
+  }
+  // The attribute is HTML-escaped in the file; decode it back to Markdown.
+  if (markdown === null) return null;
+  const decoder = document.createElement("textarea");
+  decoder.innerHTML = markdown;
+  return decoder.value;
+}
+
+// Strips a leading HTML comment banner from a Markdown draft. Built via
+// RegExp rather than a literal so the "<!--" / "-->" sequences never appear
+// verbatim inside this inline <script>, where they'd confuse HTML parsers.
+const LEADING_HTML_COMMENT = new RegExp(`^<!${"--"}[\\s\\S]*?${"--"}>\\s*`);
+
 document.querySelector('input[type="file"]').addEventListener("change", async (event) => {
   const file = event.target.files[0];
   if (!file) return;
   const text = await file.text();
   const markdown = file.name.endsWith(".html")
-    ? text.match(/<group-grid[^>]*\bgroups="([\s\S]*?)"/)?.[1]
-    : text.replace(/^<!--[\s\S]*?-->\s*/, "");
+    ? groupsFromSnippet(text)
+    : text.replace(LEADING_HTML_COMMENT, "");
   const status = document.querySelector("output");
   if (!markdown?.trim()) {
     status.textContent = "No group Markdown found in this file.";

@@ -367,17 +367,25 @@ class GroupGrid extends HTMLElement {
     tile.type = "button";
     tile.className = "group-tile";
 
+    const placeholder = () => {
+      const circle = document.createElement("span");
+      circle.className = "group-icon group-icon--placeholder";
+      circle.textContent = group.name.trim().charAt(0).toUpperCase() || "?";
+      return circle;
+    };
+
     if (group.icon) {
       const img = document.createElement("img");
       img.src = group.icon;
       img.alt = "";
       img.className = "group-icon";
+      // Icons are hosted separately from this snippet, so a missing or
+      // unreachable image shouldn't leave a broken-image box in the tile —
+      // fall back to the same letter-on-circle used when no icon is given.
+      img.addEventListener("error", () => img.replaceWith(placeholder()), { once: true });
       tile.append(img);
     } else {
-      const circle = document.createElement("span");
-      circle.className = "group-icon group-icon--placeholder";
-      circle.textContent = group.name.trim().charAt(0).toUpperCase() || "?";
-      tile.append(circle);
+      tile.append(placeholder());
     }
 
     const caption = document.createElement("span");

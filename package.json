@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "parse-wcpwriteups": "node scripts/parse-wcpwriteups.js && node scripts/groups-table-to-markdown.js",
+    "build:inline": "node scripts/build-inline-snippet.js",
+    "fix:social-links": "node scripts/rewrite-social-links.js --write",
     "test": "node --test"
   },
   "devDependencies": {
