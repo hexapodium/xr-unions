@@ -25,7 +25,11 @@ const DEFAULT_SRC = "https://hexapodium.github.io/xr-unions/data/case-studies.js
 const HIDDEN_BY_DEFAULT = new Set(["multipleRecordLinks"]);
 const MAX_TAGS = 6; // tags shown per row before collapsing into a "+(n)" button
 
+const MAX_CLOUD_ROWS = 4; // rows of tags in the picker before collapsing into "+n more"
+
 const STYLE = `
+.tag[hidden] { display:none; }
+.morebtn { font-size:.85rem; border-radius:999px; padding:.1rem .6rem; }
 :host { display:block; font:15px/1.45 system-ui,sans-serif; color:#222; }
 * { box-sizing:border-box; }
 .bar { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; margin-bottom:.75rem; }
@@ -263,6 +267,7 @@ class CaseStudyBrowser extends HTMLElement {
         this.#renderTable(rows),
       ].filter(Boolean),
     );
+    this.#collapseCloud();
     if (hadFocus) {
       const input = root.querySelector("input[type=search]");
       input.focus();
@@ -336,6 +341,33 @@ class CaseStudyBrowser extends HTMLElement {
     return details;
   }
   #pickerOpen = false;
+  #cloudExpanded = false;
+
+  // Collapse the tag cloud to MAX_CLOUD_ROWS rows with a "+n more" button.
+  #collapseCloud() {
+    const cloud = this.shadowRoot.querySelector(".cloud");
+    if (!cloud || !cloud.isConnected) return;
+    const tags = [...cloud.querySelectorAll(".tag")];
+    const rowTops = [...new Set(tags.map((t) => t.offsetTop))].sort((a, b) => a - b);
+    if (rowTops.length <= MAX_CLOUD_ROWS) return;
+    if (this.#cloudExpanded) {
+      cloud.append(h("button", { class: "morebtn", onclick: () => ((this.#cloudExpanded = false), this.#render()) }, "Show fewer"));
+      return;
+    }
+    const limit = rowTops[MAX_CLOUD_ROWS - 1];
+    const hide = (t) => (t.hidden = true);
+    tags.filter((t) => t.offsetTop > limit && !t.classList.contains("on")).forEach(hide);
+    const more = h("button", { class: "morebtn", onclick: () => ((this.#cloudExpanded = true), this.#render()) });
+    cloud.append(more);
+    const update = () => (more.textContent = `+${tags.filter((t) => t.hidden).length} more`);
+    update();
+    // Make sure the button itself fits on the last visible row.
+    const candidates = tags.filter((t) => !t.hidden && !t.classList.contains("on"));
+    while (more.offsetTop > limit && candidates.length) {
+      hide(candidates.pop());
+      update();
+    }
+  }
 
   #renderCloud() {
     // Counts reflect the current search + other selected tags.
