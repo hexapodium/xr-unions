@@ -80,6 +80,44 @@ function textOf(value) {
   return String(value);
 }
 
+// Squarespace renders Code Blocks with scripts inside a same-origin iframe
+// sized once at load. Keep the iframe (and its clamping ancestors) as tall as
+// the content so expanding the tag browser doesn't get cut off.
+// Skipped inside the Squarespace editor, which manages block heights itself.
+let frameAutosizeInstalled = false;
+function isSquarespaceEditor() {
+  try {
+    if (window.self !== window.top && (window.top.location.pathname || "").startsWith("/config")) return true;
+  } catch {}
+  return !!document.body?.classList.contains("sqs-edit-mode");
+}
+function setUpFrameAutosize() {
+  if (frameAutosizeInstalled) return;
+  frameAutosizeInstalled = true;
+  const resize = () => {
+    if (isSquarespaceEditor()) return;
+    try {
+      const frame = window.frameElement;
+      if (!frame) return;
+      const height = document.documentElement.scrollHeight;
+      if (height <= 0) return;
+      frame.style.height = `${height}px`;
+      frame.style.maxHeight = "none";
+      frame.style.overflow = "visible";
+      let node = frame.parentElement;
+      while (node && node !== frame.ownerDocument.body) {
+        if (node.style.height) node.style.height = "auto";
+        if (node.style.maxHeight) node.style.maxHeight = "none";
+        if (getComputedStyle(node).overflow !== "visible") node.style.overflow = "visible";
+        node = node.parentElement;
+      }
+    } catch {}
+  };
+  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(document.documentElement);
+  window.addEventListener("load", resize);
+  setTimeout(resize, 0);
+}
+
 class CaseStudyBrowser extends HTMLElement {
   static observedAttributes = ["src", "columns", "tag-field", "sort", "no-picker"];
 
@@ -98,6 +136,7 @@ class CaseStudyBrowser extends HTMLElement {
   }
 
   connectedCallback() {
+    setUpFrameAutosize();
     this.#load();
   }
 
