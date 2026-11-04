@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
 const source = readFileSync(new URL("../public/group-grid.js", import.meta.url), "utf8");
@@ -25,6 +25,16 @@ test("embedded Markdown renders sections, icons, lists, and dropdowns", () => {
 });
 
 test("only grid assets, preview and instructions markdown are published", () => {
-  const files = readdirSync(new URL("../public/", import.meta.url)).sort();
-  assert.deepEqual(files, ["group-grid.js", "icons", "index.html", "instructions.md"]);
+  const files = readdirSync(new URL("../public/", import.meta.url)).filter((f) => f !== "data").sort();
+  assert.deepEqual(files, [
+    "case-studies-playground.html",
+    "case-studies.js",
+    "group-grid.js",
+    "icons",
+    "index.html",
+    "instructions.md",
+  ]);
+  // data/ only ever holds the generated (git-ignored) case-studies dump.
+  const dataUrl = new URL("../public/data/", import.meta.url);
+  if (existsSync(dataUrl)) assert.deepEqual(readdirSync(dataUrl), ["case-studies.json"]);
 });
