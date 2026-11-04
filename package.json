@@ -4,6 +4,9 @@
   "type": "module",
   "scripts": {
     "parse-wcpwriteups": "node scripts/parse-wcpwriteups.js && node scripts/groups-table-to-markdown.js",
+    "list-views": "node scripts/list-airtable-views.js",
+    "dump:case-studies": "node scripts/dump-case-studies.js",
+    "serve": "node scripts/serve.js",
     "build:inline": "node scripts/build-inline-snippet.js",
     "fix:social-links": "node scripts/rewrite-social-links.js --write",
     "test": "node --test"
@@ -11,5 +14,8 @@
   "devDependencies": {
     "adm-zip": "^0.6.0",
     "fast-xml-parser": "^5.11.1"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9"
   }
 }

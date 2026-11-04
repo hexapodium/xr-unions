@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case study browser — playground</title>
+  <style>
+    body { font: 15px/1.45 system-ui, sans-serif; margin: 0; padding: 1rem 1.5rem; max-width: 1400px; }
+    fieldset { margin: 0 0 1rem; border: 1px solid #ccc; border-radius: 6px; }
+    .row { display: flex; gap: .5rem; align-items: center; margin: .3rem 0; }
+    .row label { width: 7rem; font-weight: 600; }
+    .row input[type=text] { flex: 1; padding: .3rem .5rem; font: inherit; }
+    pre { background: #f4f4f4; padding: .6rem; overflow-x: auto; }
+    button { font: inherit; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Case study browser — playground</h1>
+  <p>Edit the attributes below; the element updates live. Serve with <code>npm run serve</code> and open
+     <code>http://localhost:8080/case-studies-playground.html</code>.</p>
+
+  <fieldset>
+    <legend>Attributes</legend>
+    <div class="row"><label for="src">src</label><input type="text" id="src" value="data/case-studies.json"></div>
+    <div class="row"><label for="columns">columns</label><input type="text" id="columns" value="Name,Date of case study,Tags,Quotes from articles"></div>
+    <div class="row"><label for="tag-field">tag-field</label><input type="text" id="tag-field" value="Tags"></div>
+    <div class="row"><label for="sort">sort</label><input type="text" id="sort" value="Name" placeholder='e.g. "Name" or "-ID"'></div>
+    <div class="row"><label></label><span><input type="checkbox" id="no-picker"> <label for="no-picker" style="width:auto;font-weight:normal">no-picker</label></span>
+      <button id="reset">Clear saved column choice</button></div>
+  </fieldset>
+
+  <pre id="snippet"></pre>
+
+  <case-study-browser id="cs"></case-study-browser>
+
+  <script type="module" src="case-studies.js"></script>
+  <script type="module">
+    const el = document.getElementById("cs");
+    const ids = ["src", "columns", "tag-field", "sort"];
+    const snippet = document.getElementById("snippet");
+
+    const apply = () => {
+      for (const id of ids) {
+        const v = document.getElementById(id).value.trim();
+        v ? el.setAttribute(id, v) : el.removeAttribute(id);
+      }
+      el.toggleAttribute("no-picker", document.getElementById("no-picker").checked);
+      snippet.textContent = el.outerHTML.replace(/ id="cs"/, "").replace(/ (\S+=)/g, "\n  $1").replace(/><\/case/, "\n></case");
+    };
+
+    for (const id of [...ids, "no-picker"]) document.getElementById(id).addEventListener("input", apply);
+    document.getElementById("reset").addEventListener("click", () => {
+      Object.keys(localStorage).filter((k) => k.startsWith("case-study-browser:")).forEach((k) => localStorage.removeItem(k));
+      document.getElementById("columns").value = "";
+      apply();
+    });
+    apply();
+  </script>
+</body>
+</html>

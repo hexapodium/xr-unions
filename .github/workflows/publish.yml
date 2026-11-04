@@ -3,6 +3,9 @@ name: Publish group grid
 on:
   push:
     branches: [main]
+  schedule:
+    # Refresh the Airtable case-study JSON every 24 hours (06:17 UTC).
+    - cron: "17 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -25,7 +28,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+      - run: npm ci
       - run: npm test
+      - name: Dump case studies from Airtable
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+        run: npm run dump:case-studies
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

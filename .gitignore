@@ -6,4 +6,7 @@ wcpwriteups/*
 groups.json
 .generated/
 
+# Regenerated from Airtable by CI (and `npm run dump:case-studies` locally)
+public/data/case-studies.json
+
 drafts/*
