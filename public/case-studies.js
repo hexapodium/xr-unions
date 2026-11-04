@@ -26,6 +26,8 @@ const HIDDEN_BY_DEFAULT = new Set(["multipleRecordLinks"]);
 const MAX_TAGS = 6; // tags shown per row before collapsing into a "+(n)" button
 
 const MAX_CLOUD_ROWS = 4; // rows of tags in the picker before collapsing into "+n more"
+const ARTICLE_LOOKUP_FIELD = "Article (from Articles)";
+const ARTICLE_LINK_FIELD = "Articles";
 
 const STYLE = `
 .tag[hidden] { display:none; }
@@ -451,17 +453,30 @@ class CaseStudyBrowser extends HTMLElement {
         h(
           "tbody",
           {},
-          rows.map(({ record }) => h("tr", {}, this.#columns.map((n) => h("td", {}, this.#cell(n, record.fields[n]))))),
+          rows.map(({ record }) => h("tr", {}, this.#columns.map((n) => h("td", {}, this.#cell(n, record.fields[n], record))))),
         ),
       ),
     );
   }
 
-  #cell(name, value) {
+  #cell(name, value, record) {
     const type = this.#field(name)?.type;
     if (value == null || value === "") return "";
     if (type === "checkbox") return value ? "✓" : "";
     if (type === "multipleRecordLinks") return `${value.length} linked`;
+    if (name === ARTICLE_LOOKUP_FIELD && Array.isArray(value)) {
+      // Lookup values are parallel to the linked Articles record ids.
+      const ids = record?.fields?.[ARTICLE_LINK_FIELD] ?? [];
+      const urls = this.#data?.articles ?? {};
+      const out = [];
+      value.forEach((v, i) => {
+        const text = textOf(v);
+        const url = urls[ids[i]];
+        if (i) out.push(h("br"));
+        out.push(url ? h("a", { href: url, target: "_blank", rel: "noopener noreferrer" }, text) : text);
+      });
+      return h("div", {}, ...out);
+    }
     if (name === this.#tagField && Array.isArray(value)) {
       const chips = h("div", { class: "chips" });
       const tagButton = (t) => {

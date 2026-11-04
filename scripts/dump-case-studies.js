@@ -48,8 +48,29 @@ const fields = table.fields
   .filter((f) => used.has(f.name))
   .map((f) => ({ id: f.id, name: f.name, type: f.type }));
 
+// Article URLs, keyed by Articles record id, so the viewer can link the
+// "Article (from Articles)" lookup back to its sources.
+const ARTICLES_TABLE_ID = "tblKPlwSsCpLYPrIP";
+const articles = {};
+try {
+  let articleOffset;
+  do {
+    const params = new URLSearchParams({ pageSize: "100", "fields[]": "Article Link" });
+    if (articleOffset) params.set("offset", articleOffset);
+    const data = await get(`https://api.airtable.com/v0/${BASE_ID}/${ARTICLES_TABLE_ID}?${params}`);
+    for (const r of data.records) {
+      const link = String(r.fields["Article Link"] ?? "").trim();
+      if (/^https?:\/\//i.test(link)) articles[r.id] = link;
+    }
+    articleOffset = data.offset;
+  } while (articleOffset);
+} catch (error) {
+  console.warn(`Could not fetch article links: ${error.message}`);
+}
+
 const output = {
   generatedAt: new Date().toISOString(),
+  articles,
   base: BASE_ID,
   table: { id: table.id, name: table.name },
   view: { id: view.id, name: view.name },
