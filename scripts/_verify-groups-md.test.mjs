@@ -24,7 +24,7 @@ test("embedded Markdown renders sections, icons, lists, and dropdowns", () => {
   assert.ok(groups.some((group) => group.blocks.some((block) => block.type === "list")));
 });
 
-test("only grid assets and preview are published", () => {
+test("only grid assets, preview and instructions markdown are published", () => {
   const files = readdirSync(new URL("../public/", import.meta.url)).sort();
-  assert.deepEqual(files, ["group-grid.js", "icons", "index.html"]);
+  assert.deepEqual(files, ["group-grid.js", "icons", "index.html", "instructions.md"]);
 });
