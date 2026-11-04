@@ -11,5 +11,4 @@ public/data/case-studies.json
 
 drafts/*
 squarespace/group-grid-inline.html
-scripts/_verify-groups-md.test.mjs
-scripts/_verify-publish-workflow.test.mjs
+
