@@ -16,10 +16,10 @@
 //   columns    Comma-separated field names to show, in order.
 //   tag-field  Multi-select field used for the tag cloud (default "Tags").
 //   sort       Field to sort by initially; prefix with "-" for descending.
-//   no-picker  Hide the on-page column picker.
+//   show-picker  Show the on-page column picker (hidden by default).
 //
 // Runtime: the "Columns" panel lets visitors show/hide and reorder columns;
-// the choice is kept in localStorage. JS API: el.columns = [...], el.columns.
+// the choice is not saved between visits. JS API: el.columns = [...], el.columns.
 
 const DEFAULT_SRC = "https://hexapodium.github.io/xr-unions/data/case-studies.json";
 const HIDDEN_BY_DEFAULT = new Set(["multipleRecordLinks"]);
@@ -30,7 +30,7 @@ const MAX_CLOUD_ROWS = 4; // rows of tags in the picker before collapsing into "
 const ARTICLE_LOOKUP_FIELD = "Article (from Articles)";
 const ARTICLE_LINK_FIELD = "Articles";
 // Columns offered to visitors (matches the Airtable "Web View"), in order.
-const WEB_VIEW_FIELDS = ["Name", "Date of case study", "Quotes from articles", ARTICLE_LOOKUP_FIELD, "Tags"];
+const WEB_VIEW_FIELDS = ["Name", "Date of case study", ARTICLE_LOOKUP_FIELD, "Quotes from articles", "Tags"];
 const labelOf = (name) => (name === ARTICLE_LOOKUP_FIELD ? "Articles" : name);
 
 const STYLE = `
@@ -132,7 +132,7 @@ function setUpFrameAutosize() {
 }
 
 class CaseStudyBrowser extends HTMLElement {
-  static observedAttributes = ["src", "columns", "tag-field", "sort", "no-picker"];
+  static observedAttributes = ["src", "columns", "tag-field", "sort", "show-picker"];
 
   #data = null;
   #columns = [];
@@ -214,10 +214,6 @@ class CaseStudyBrowser extends HTMLElement {
     const names = this.#fieldNames();
     const attr = this.getAttribute("columns");
     if (attr) return attr.split(",").map(trim).filter((c) => names.includes(c));
-    try {
-      const saved = JSON.parse(localStorage.getItem(this.#storageKey) || "null");
-      if (Array.isArray(saved)) return saved.filter((c) => names.includes(c));
-    } catch {}
     return WEB_VIEW_FIELDS.filter((c) => names.includes(c));
   }
 
@@ -228,9 +224,7 @@ class CaseStudyBrowser extends HTMLElement {
   }
 
   #saveColumns() {
-    try {
-      localStorage.setItem(this.#storageKey, JSON.stringify(this.#columns));
-    } catch {}
+    // Column choices are deliberately not persisted; every visit starts with all columns shown.
   }
 
   #tagsOf(record) {
@@ -272,7 +266,7 @@ class CaseStudyBrowser extends HTMLElement {
         h("style", {}, STYLE),
         this.#renderBar(rows.length),
         this.#renderViewing(),
-        this.hasAttribute("no-picker") ? null : this.#renderPicker(),
+        this.hasAttribute("show-picker") ? this.#renderPicker() : null,
         this.#renderCloud(),
         this.#renderTable(rows),
       ].filter(Boolean),

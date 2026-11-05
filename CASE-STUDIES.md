@@ -86,18 +86,18 @@ All attributes are optional.
 | `columns`   | Comma-separated field names, in display order                        |
 | `tag-field` | Multi-select field behind the tag cloud (default `Tags`)             |
 | `sort`      | Initial sort field; prefix with `-` for descending, e.g. `-ID`       |
-| `no-picker` | Hide the visitor-facing column picker                                |
+| `show-picker` | Show the visitor-facing "Information Displayed" picker (hidden by default) |
 
-Field names must match Airtable exactly. Visitors can also show/hide and
-reorder columns from the **Columns** panel; their choice is remembered in their
-browser, but an explicit `columns` attribute always wins. To lock the layout,
-set `columns` and add `no-picker`:
+Field names must match Airtable exactly. By default all five columns (Name,
+Date, Articles, Quotes, Tags) are shown and the picker is hidden. Add
+`show-picker` to let visitors show/hide columns (choices are not saved). An
+explicit `columns` attribute sets the starting columns:
 
 ```html
 <case-study-browser
   src="https://hexapodium.github.io/xr-unions/data/case-studies.json"
   columns="Name,Tags,Article summary"
-  no-picker
+  show-picker
 ></case-study-browser>
 ```
 

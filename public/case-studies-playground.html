@@ -22,10 +22,10 @@
   <fieldset>
     <legend>Attributes</legend>
     <div class="row"><label for="src">src</label><input type="text" id="src" value="data/case-studies.json"></div>
-    <div class="row"><label for="columns">columns</label><input type="text" id="columns" value="Name,Date of case study,Tags,Quotes from articles"></div>
+    <div class="row"><label for="columns">columns</label><input type="text" id="columns" value="" placeholder="blank = default (all 5)"></div>
     <div class="row"><label for="tag-field">tag-field</label><input type="text" id="tag-field" value="Tags"></div>
     <div class="row"><label for="sort">sort</label><input type="text" id="sort" value="Name" placeholder='e.g. "Name" or "-ID"'></div>
-    <div class="row"><label></label><span><input type="checkbox" id="no-picker"> <label for="no-picker" style="width:auto;font-weight:normal">no-picker</label></span>
+    <div class="row"><label></label><span><input type="checkbox" id="show-picker"> <label for="show-picker" style="width:auto;font-weight:normal">show-picker</label></span>
       <button id="reset">Clear saved column choice</button></div>
   </fieldset>
 
@@ -44,11 +44,11 @@
         const v = document.getElementById(id).value.trim();
         v ? el.setAttribute(id, v) : el.removeAttribute(id);
       }
-      el.toggleAttribute("no-picker", document.getElementById("no-picker").checked);
+      el.toggleAttribute("show-picker", document.getElementById("show-picker").checked);
       snippet.textContent = el.outerHTML.replace(/ id="cs"/, "").replace(/ (\S+=)/g, "\n  $1").replace(/><\/case/, "\n></case");
     };
 
-    for (const id of [...ids, "no-picker"]) document.getElementById(id).addEventListener("input", apply);
+    for (const id of [...ids, "show-picker"]) document.getElementById(id).addEventListener("input", apply);
     document.getElementById("reset").addEventListener("click", () => {
       Object.keys(localStorage).filter((k) => k.startsWith("case-study-browser:")).forEach((k) => localStorage.removeItem(k));
       document.getElementById("columns").value = "";
