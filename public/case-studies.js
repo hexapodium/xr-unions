@@ -24,10 +24,14 @@
 const DEFAULT_SRC = "https://hexapodium.github.io/xr-unions/data/case-studies.json";
 const HIDDEN_BY_DEFAULT = new Set(["multipleRecordLinks"]);
 const MAX_TAGS = 6; // tags shown per row before collapsing into a "+(n)" button
+const PAGE_SIZE = 8; // case studies shown before "Show all"
 
 const MAX_CLOUD_ROWS = 4; // rows of tags in the picker before collapsing into "+n more"
 const ARTICLE_LOOKUP_FIELD = "Article (from Articles)";
 const ARTICLE_LINK_FIELD = "Articles";
+// Columns offered to visitors (matches the Airtable "Web View"), in order.
+const WEB_VIEW_FIELDS = ["Name", "Date of case study", "Quotes from articles", ARTICLE_LOOKUP_FIELD, "Tags"];
+const labelOf = (name) => (name === ARTICLE_LOOKUP_FIELD ? "Articles" : name);
 
 const STYLE = `
 .tag[hidden] { display:none; }
@@ -39,6 +43,8 @@ input[type=search] { flex:1 1 16rem; padding:.55rem .75rem; border:1px solid #99
 button { font:inherit; cursor:pointer; border:1px solid #999; background:#fff; border-radius:6px; padding:.3rem .7rem; }
 button:hover { background:#f0f0f0; }
 .count { color:#555; }
+.viewing { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; margin-bottom:.75rem; }
+.showall { margin:.75rem 0; }
 details.cols { margin-bottom:.75rem; border:1px solid #ccc; border-radius:6px; padding:.4rem .75rem; }
 details.cols summary { cursor:pointer; font-weight:600; }
 .collist { list-style:none; margin:.5rem 0 0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); gap:.25rem .75rem; }
@@ -59,6 +65,7 @@ th { position:sticky; top:0; background:#fafafa; cursor:pointer; user-select:non
 tr:hover td { background:#fcfcf4; }
 td .clamp { max-height:6.5em; overflow:hidden; white-space:pre-wrap; cursor:zoom-in; }
 td .clamp.open { max-height:none; cursor:zoom-out; }
+td .moretext { border:0; background:none; padding:0; margin-top:.2rem; color:#1d6b3a; text-decoration:underline; font-size:.85rem; }
 td .chips { display:flex; flex-wrap:wrap; gap:.2rem; }
 mark { background:#ffe58a; }
 .empty, .status { padding:1rem; color:#555; }
@@ -160,7 +167,7 @@ class CaseStudyBrowser extends HTMLElement {
     return [...this.#columns];
   }
   set columns(list) {
-    this.#columns = list.filter((c) => this.#fieldNames().includes(c));
+    this.#columns = list.filter((c) => WEB_VIEW_FIELDS.includes(c) && this.#fieldNames().includes(c));
     this.#saveColumns();
     this.#render();
   }
@@ -211,7 +218,7 @@ class CaseStudyBrowser extends HTMLElement {
       const saved = JSON.parse(localStorage.getItem(this.#storageKey) || "null");
       if (Array.isArray(saved)) return saved.filter((c) => names.includes(c));
     } catch {}
-    return this.#data.fields.filter((f) => !HIDDEN_BY_DEFAULT.has(f.type)).slice(0, 5).map((f) => f.name);
+    return WEB_VIEW_FIELDS.filter((c) => names.includes(c));
   }
 
   #initialSort() {
@@ -264,6 +271,7 @@ class CaseStudyBrowser extends HTMLElement {
       ...[
         h("style", {}, STYLE),
         this.#renderBar(rows.length),
+        this.#renderViewing(),
         this.hasAttribute("no-picker") ? null : this.#renderPicker(),
         this.#renderCloud(),
         this.#renderTable(rows),
@@ -283,7 +291,7 @@ class CaseStudyBrowser extends HTMLElement {
       { class: "bar" },
       h("input", {
         type: "search",
-        placeholder: "Search case studies…",
+        placeholder: this.#tags.size ? `Search case studies with ${[...this.#tags].join(", ")}` : "Search case studies…",
         value: this.#query,
         "aria-label": "Search case studies",
         oninput: (e) => {
@@ -292,7 +300,7 @@ class CaseStudyBrowser extends HTMLElement {
         },
       }),
       h("span", { class: "count" }, `${count} of ${this.#rows.length}`),
-      this.#tags.size || this.#query
+      this.#query && !this.#tags.size
         ? h(
             "button",
             {
@@ -308,19 +316,35 @@ class CaseStudyBrowser extends HTMLElement {
     );
   }
 
+  #renderViewing() {
+    if (!this.#tags.size) return null;
+    return h(
+      "div",
+      { class: "viewing" },
+      h("span", {}, "You are currently viewing:"),
+      [...this.#tags].map((t) =>
+        h("button", { class: "tag on", title: `Remove ${t}`, onclick: () => (this.#tags.delete(t), this.#render()) }, `${t} ×`),
+      ),
+      h(
+        "button",
+        {
+          onclick: () => {
+            this.#tags.clear();
+            this.#query = "";
+            this.#render();
+          },
+        },
+        "Clear filters",
+      ),
+    );
+  }
+
   #renderPicker() {
-    const names = this.#fieldNames();
+    const names = WEB_VIEW_FIELDS.filter((n) => this.#fieldNames().includes(n));
     const hidden = names.filter((n) => !this.#columns.includes(n));
-    const move = (name, delta) => {
-      const i = this.#columns.indexOf(name);
-      const j = i + delta;
-      if (i < 0 || j < 0 || j >= this.#columns.length) return;
-      [this.#columns[i], this.#columns[j]] = [this.#columns[j], this.#columns[i]];
-      this.#saveColumns();
-      this.#render();
-    };
     const toggle = (name, on) => {
-      this.#columns = on ? [...this.#columns, name] : this.#columns.filter((c) => c !== name);
+      const next = on ? [...this.#columns, name] : this.#columns.filter((c) => c !== name);
+      this.#columns = WEB_VIEW_FIELDS.filter((c) => next.includes(c));
       this.#saveColumns();
       this.#render();
     };
@@ -328,14 +352,12 @@ class CaseStudyBrowser extends HTMLElement {
       h(
         "li",
         {},
-        h("label", {}, h("input", { type: "checkbox", checked: on, onchange: (e) => toggle(name, e.target.checked) }), " ", name),
-        on ? h("button", { title: "Move left", "aria-label": `Move ${name} left`, onclick: () => move(name, -1) }, "←") : null,
-        on ? h("button", { title: "Move right", "aria-label": `Move ${name} right`, onclick: () => move(name, 1) }, "→") : null,
+        h("label", {}, h("input", { type: "checkbox", checked: on, onchange: (e) => toggle(name, e.target.checked) }), " ", labelOf(name)),
       );
     const details = h(
       "details",
       { class: "cols" },
-      h("summary", {}, `Columns (${this.#columns.length} shown)`),
+      h("summary", {}, `Information Displayed (${this.#columns.length} shown)`),
       h("ul", { class: "collist" }, this.#columns.map((n) => item(n, true)), hidden.map((n) => item(n, false))),
     );
     if (this.#pickerOpen) details.open = true;
@@ -390,9 +412,8 @@ class CaseStudyBrowser extends HTMLElement {
         ? h(
             "div",
             { class: "cloudgroups" },
-            h("button", { class: `groupbtn${this.#group ? "" : " on"}`, onclick: () => ((this.#group = ""), this.#render()) }, "All tags"),
             groups.map((g) =>
-              h("button", { class: `groupbtn${this.#group === g ? " on" : ""}`, onclick: () => ((this.#group = g), this.#render()) }, g),
+              h("button", { class: `groupbtn${this.#group === g ? " on" : ""}`, onclick: () => ((this.#group = this.#group === g ? "" : g), this.#render()) }, g),
             ),
           )
         : null,
@@ -445,7 +466,7 @@ class CaseStudyBrowser extends HTMLElement {
                     this.#render();
                   },
                 },
-                n + sortMark(n),
+                labelOf(n) + sortMark(n),
               ),
             ),
           ),
@@ -453,11 +474,15 @@ class CaseStudyBrowser extends HTMLElement {
         h(
           "tbody",
           {},
-          rows.map(({ record }) => h("tr", {}, this.#columns.map((n) => h("td", {}, this.#cell(n, record.fields[n], record))))),
+          rows.slice(0, this.#showAll ? rows.length : PAGE_SIZE).map(({ record }) => h("tr", {}, this.#columns.map((n) => h("td", {}, this.#cell(n, record.fields[n], record))))),
         ),
       ),
+      !this.#showAll && rows.length > PAGE_SIZE
+        ? h("button", { class: "showall", onclick: () => ((this.#showAll = true), this.#render()) }, `Show all ${rows.length}`)
+        : null,
     );
   }
+  #showAll = false;
 
   #cell(name, value, record) {
     const type = this.#field(name)?.type;
@@ -512,8 +537,26 @@ class CaseStudyBrowser extends HTMLElement {
     const text = textOf(value);
     if (text.length > 160) {
       const box = h("div", { class: "clamp", title: "Click to expand" }, text);
-      box.addEventListener("click", () => box.classList.toggle("open"));
-      return box;
+      const btn = h("button", { class: "moretext", "aria-expanded": "false", hidden: true }, "more");
+      const toggle = () => {
+        const open = box.classList.toggle("open");
+        btn.textContent = open ? "less" : "more";
+        btn.setAttribute("aria-expanded", String(open));
+      };
+      box.addEventListener("click", toggle);
+      btn.addEventListener("click", toggle);
+      // Only offer "more" when the text is actually cut off (needs layout, so check after render).
+      const check = () => {
+        if (!box.isConnected || box.classList.contains("open")) return;
+        const clipped = box.scrollHeight > box.clientHeight + 1;
+        btn.hidden = !clipped;
+        box.style.cursor = clipped ? "" : "auto";
+        if (clipped) box.title = "Click to expand";
+        else box.removeAttribute("title");
+      };
+      requestAnimationFrame(check);
+      if ("ResizeObserver" in window) new ResizeObserver(check).observe(box);
+      return h("div", {}, box, btn);
     }
     return text;
   }
